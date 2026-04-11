@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Name — Favour</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #ffffff;
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 500;
+            transition: color var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Project Hero */
+        .project-hero {
+            padding: 12rem 5% 6rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .project-category {
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .project-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .project-description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Project Overview */
+        .project-overview {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            padding: 3rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .overview-item h4 {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+        }
+
+        .overview-item p {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
+        }
+
+        .content-section p {
+            font-size: 1.15rem;
+            line-height: 1.9;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+        }
+
+        .column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Visual Showcase */
+        .visual-showcase {
+            padding: 6rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .showcase-image-wrapper {
+            aspect-ratio: 4/3;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--bg-card);
+        }
+
+        .showcase-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            transition: all var(--transition);
+        }
+
+        .showcase-image-wrapper:hover .showcase-image {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .full-width-image {
+            width: 100%;
+            max-width: 1600px;
+            margin: 3rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .full-width-image img {
+            width: 100%;
+            filter: grayscale(100%);
+            transition: filter var(--transition);
+        }
+
+        .full-width-image:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Results Section */
+        .results-section {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.3), rgba(10, 10, 10, 0.3));
+        }
+
+        .results-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .result-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #888888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Next Project */
+        .next-project {
+            padding: 8rem 5%;
+            text-align: center;
+        }
+
+        .next-project h3 {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+        }
+
+        .next-project-link {
+            display: inline-block;
+            text-decoration: none;
+            transition: transform var(--transition);
+        }
+
+        .next-project-link:hover {
+            transform: translateX(10px);
+        }
+
+        .next-project-title {
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .next-project-category {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-cta {
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--text-primary);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .project-hero {
+                padding: 10rem 5% 4rem;
+            }
+
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .overview-grid {
+                padding: 2rem;
+            }
+
+            .results-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Favour</a>
+        <a href="index.html" class="back-link">
+            <span>←</span> Back to Home
+        </a>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-category">Graphic Design</div>
+        <h1 class="project-title">Brand Identity System</h1>
+        <p class="project-description">A complete visual identity transformation for a tech startup looking to disrupt their industry with bold, modern design.</p>
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-overview">
+        <div class="overview-grid fade-in">
+            <div class="overview-item">
+                <h4>Client</h4>
+                <p>TechFlow Inc.</p>
+            </div>
+            <div class="overview-item">
+                <h4>Timeline</h4>
+                <p>6 Weeks</p>
+            </div>
+            <div class="overview-item">
+                <h4>Deliverables</h4>
+                <p>Logo, Brand Guidelines, Marketing Assets</p>
+            </div>
+            <div class="overview-item">
+                <h4>Year</h4>
+                <p>2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution -->
+    <section class="content-section">
+        <div class="two-column fade-in">
+            <div class="column">
+                <h3>The Challenge</h3>
+                <p>The client needed to stand out in a crowded market. Their existing identity felt generic and failed to communicate their innovative approach to technology solutions.</p>
+                <p>The brand needed to feel premium, trustworthy, and forward-thinking while maintaining approachability for their diverse client base.</p>
+            </div>
+            <div class="column">
+                <h3>The Solution</h3>
+                <p>We developed a complete visual system built on principles of clarity, precision, and movement. The logo combines geometric strength with fluid motion.</p>
+                <p>The color palette uses deep blacks and bright whites with strategic accent colors that bring energy without overwhelming. Every element works together to tell a cohesive story.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Showcase -->
+    <section class="visual-showcase">
+        <h2 class="fade-in" style="text-align: center; margin-bottom: 4rem; font-size: clamp(2rem, 4vw, 3rem);">Visual System</h2>
+        
+        <div class="full-width-image fade-in">
+            <img src="https://placehold.co/1600x900/1a1a1a/666666?text=Logo+System" alt="Logo System">
+        </div>
+
+        <div class="showcase-grid">
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Brand+Guidelines" alt="Brand Guidelines" class="showcase-image">
+            </div>
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Color+Palette" alt="Color Palette" class="showcase-image">
+            </div>
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Typography" alt="Typography" class="showcase-image">
+            </div>
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Applications" alt="Applications" class="showcase-image">
+            </div>
+        </div>
+
+        <div class="full-width-image fade-in" style="margin-top: 3rem;">
+            <img src="https://placehold.co/1600x900/1a1a1a/666666?text=Marketing+Collateral" alt="Marketing Collateral">
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results-section">
+        <div class="results-content">
+            <h2 class="fade-in" style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem;">The Impact</h2>
+            <p class="fade-in" style="font-size: 1.15rem; color: var(--text-secondary); max-width: 700px;">The new identity transformed how the company presents itself and how clients perceive them. Results speak louder than words.</p>
+            
+            <div class="results-grid">
+                <div class="result-stat fade-in">
+                    <div class="stat-number">250%</div>
+                    <div class="stat-label">Increase in Brand Recognition</div>
+                </div>
+                <div class="result-stat fade-in">
+                    <div class="stat-number">180%</div>
+                    <div class="stat-label">Growth in Client Inquiries</div>
+                </div>
+                <div class="result-stat fade-in">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Client Satisfaction Score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Next Project -->
+    <section class="next-project">
+        <h3 class="fade-in">Next Project</h3>
+        <a href="project-detail.html" class="next-project-link fade-in">
+            <div class="next-project-title">E-commerce Redesign →</div>
+            <div class="next-project-category">Web Design</div>
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-cta">
+                <a href="#book-a-call" class="cta-button">Let's Work Together</a>
+            </div>
+            <div class="logo" style="margin-bottom: 1rem;">Favour</div>
+            <div class="copyright">© 2026 Favour. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
