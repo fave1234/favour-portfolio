@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Favour Onasanya TL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #080808;
+            --bg-gradient: linear-gradient(135deg, #080808 0%, #111111 100%);
+            --bg-card: #0f0f0f;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent-orange: #FF6B00;
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1.25rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(8, 8, 8, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .profile-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .cta-button {
+            padding: 0.75rem 1.75rem;
+            background: var(--text-primary);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-orange);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 73px;
+            left: 0;
+            right: 0;
+            background: rgba(8, 8, 8, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 2rem 5%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Hero Section */
+        .about-hero {
+            padding: 12rem 5% 6rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .about-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Bento Grid Section */
+        .bento-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .bento-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all var(--transition);
+        }
+
+        .bento-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .bento-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* CV Card */
+        .cv-card {
+            grid-column: span 2;
+            grid-row: span 1;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.1), transparent);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--text-primary);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all var(--transition-fast);
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+
+        .download-btn:hover {
+            background: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        /* Experience Card */
+        .experience-card {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .experience-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .experience-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .experience-year {
+            font-size: 0.85rem;
+            color: var(--accent-orange);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-role {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .experience-company {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Tools Card */
+        .tools-card {
+            grid-column: span 2;
+        }
+
+        .tools-grid {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all var(--transition);
+            opacity: 0.6;
+        }
+
+        .tool-item:hover {
+            opacity: 1;
+            transform: translateY(-5px);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            filter: grayscale(100%);
+            transition: filter var(--transition);
+        }
+
+        .tool-item:hover .tool-icon {
+            filter: grayscale(0%);
+        }
+
+        .tool-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* Skills Card */
+        .skills-card {
+            grid-column: span 2;
+        }
+
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.65rem 1.5rem;
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-orange);
+            background: rgba(255, 107, 0, 0.1);
+        }
+
+        /* Spotify Card */
+        .spotify-card {
+            grid-column: span 4;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .spotify-ticker {
+            display: flex;
+            gap: 2rem;
+            animation: spotifyScroll 40s linear infinite;
+            margin-top: 1.5rem;
+        }
+
+        .spotify-embed {
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        @keyframes spotifyScroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Social Links */
+        .social-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-section h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all var(--transition-fast);
+        }
+
+        .social-btn:hover {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 5%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .footer-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: flex-end;
+        }
+
+        .social-links a {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all var(--transition-fast);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            grid-column: 1 / -1;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .cv-card,
+            .experience-card,
+            .tools-card,
+            .skills-card,
+            .spotify-card {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .about-hero {
+                padding: 10rem 5% 4rem;
+            }
+
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cv-card,
+            .experience-card,
+            .tools-card,
+            .skills-card,
+            .spotify-card {
+                grid-column: span 1;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .social-links {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="nav-brand">
+            <div class="profile-circle">
+                <img src="https://i.ibb.co/RTNrcK5/profile.jpg" alt="Favour Onasanya TL" onerror="this.src='https://placehold.co/80x80/0f0f0f/ffffff?text=F'">
+            </div>
+            <span class="brand-name">Favour</span>
+        </a>
+        
+        <ul class="nav-links">
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
+        </ul>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="index.html#work">Work</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <h1>The Mind Behind the Work</h1>
+        <p>I'm Favour Onasanya TL — a creative professional who believes design is more than aesthetics. It's transformation. Every project is an opportunity to breathe life into ideas and create experiences that resonate.</p>
+    </section>
+
+    <!-- Bento Grid Section -->
+    <section class="bento-section">
+        <div class="bento-grid">
+            <!-- CV Card -->
+            <div class="bento-card cv-card fade-in">
+                <div>
+                    <h3>My CV</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.7;">Everything you need to know about my journey, experience, and expertise — packaged in one document.</p>
+                </div>
+                <a href="#download-cv" class="download-btn">
+                    <span>📄</span>
+                    Download CV
+                </a>
+            </div>
+
+            <!-- Tools Card -->
+            <div class="bento-card tools-card fade-in">
+                <h3>Tools I Use</h3>
+                <div class="tools-grid">
+                    <div class="tool-item">
+                        <div class="tool-icon">🎨</div>
+                        <div class="tool-name">Figma</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">🖼️</div>
+                        <div class="tool-name">Photoshop</div>
+                    </div>
+                    <div class="tool-item">
+                        <div class="tool-icon">✂️</div>
+                        <div class="tool-name">CapCut</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Card -->
+            <div class="bento-card experience-card fade-in">
+                <h3>Experience</h3>
+                <div class="experience-item">
+                    <div class="experience-year">2024 — Present</div>
+                    <div class="experience-role">Senior Creative Designer</div>
+                    <div class="experience-company">Freelance</div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-year">2022 — 2024</div>
+                    <div class="experience-role">Brand & Motion Designer</div>
+                    <div class="experience-company">Creative Agency Co.</div>
+                </div>
+                <div class="experience-item">
+                    <div class="experience-year">2020 — 2022</div>
+                    <div class="experience-role">Graphic Designer</div>
+                    <div class="experience-company">Digital Studio Inc.</div>
+                </div>
+            </div>
+
+            <!-- Skills Card -->
+            <div class="bento-card skills-card fade-in">
+                <h3>Skills</h3>
+                <div class="skills-wrapper">
+                    <div class="skill-tag">Brand Identity</div>
+                    <div class="skill-tag">UI/UX Design</div>
+                    <div class="skill-tag">Video Production</div>
+                    <div class="skill-tag">Social Media Design</div>
+                    <div class="skill-tag">Creative Thinking</div>
+                    <div class="skill-tag">Website Copywriting</div>
+                </div>
+            </div>
+
+            <!-- Spotify Card -->
+            <div class="bento-card spotify-card fade-in">
+                <h3>Vibe While Working</h3>
+                <div class="spotify-ticker" id="spotifyTicker">
+                    <!-- First Set -->
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/6KTGgGVSD60XZFBPAQrLtH?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/4KtT8dN9QaCPNwxtJwhKmB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5fZ2VfuNsBtbhoNhYjXErB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <!-- Duplicate Set for Seamless Loop -->
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/6KTGgGVSD60XZFBPAQrLtH?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/4KtT8dN9QaCPNwxtJwhKmB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5fZ2VfuNsBtbhoNhYjXErB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Links -->
+    <section class="social-section fade-in">
+        <h3>Let's Connect</h3>
+        <div class="social-buttons">
+            <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="social-btn">
+                <span>📷</span> Instagram
+            </a>
+            <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="social-btn">
+                <span>💼</span> LinkedIn
+            </a>
+            <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="social-btn">
+                <span>💬</span> WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">Favour</div>
+            <ul class="footer-links">
+                <li><a href="index.html#work">Work</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+                <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" aria-label="LinkedIn">💼</a>
+                <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+            </div>
+            <div class="copyright">© 2026 Favour Onasanya TL. All rights reserved.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>

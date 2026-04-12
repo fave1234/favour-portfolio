@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favour — World Class Design. Every Time.</title>
+    <title>Favour Onasanya TL — World Class Design. Every Time.</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -16,24 +16,42 @@
         }
 
         :root {
-            --bg-dark: #0a0a0a;
-            --bg-card: #141414;
+            --bg-dark: #080808;
+            --bg-gradient: linear-gradient(135deg, #080808 0%, #111111 100%);
+            --bg-card: #0f0f0f;
             --text-primary: #ffffff;
             --text-secondary: #a0a0a0;
-            --accent: #ffffff;
+            --accent-orange: #FF6B00;
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-fast: 0.3s ease;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--bg-dark);
+            background: var(--bg-gradient);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            position: relative;
         }
 
-        h1, h2, h3 {
-            font-family: 'Space Grotesk', sans-serif;
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Syne', sans-serif;
             font-weight: 700;
             line-height: 1.2;
         }
@@ -44,18 +62,40 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            padding: 1.5rem 5%;
+            padding: 1.25rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(8, 8, 8, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.5rem;
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .profile-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.25rem;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
@@ -72,7 +112,7 @@
             text-decoration: none;
             font-size: 0.95rem;
             font-weight: 500;
-            transition: color var(--transition);
+            transition: color var(--transition-fast);
         }
 
         .nav-links a:hover {
@@ -87,13 +127,63 @@
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all var(--transition);
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            transition: all var(--transition-fast);
+            border: none;
+            cursor: pointer;
         }
 
         .cta-button:hover {
+            background: var(--accent-orange);
+            color: var(--bg-dark);
             transform: translateY(-2px);
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Mobile Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 73px;
+            left: 0;
+            right: 0;
+            background: rgba(8, 8, 8, 0.98);
+            backdrop-filter: blur(20px);
+            padding: 2rem 5%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .mobile-menu a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
         /* Hero Section */
@@ -115,33 +205,32 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(40, 40, 40, 0.4) 0%, var(--bg-dark) 70%);
-            z-index: -1;
+            z-index: 0;
         }
 
-        .particles {
+        .gradient-mesh {
             position: absolute;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            background: radial-gradient(ellipse at 30% 50%, rgba(80, 80, 80, 0.15) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(60, 60, 60, 0.1) 0%, transparent 50%);
+            animation: meshMove 20s ease-in-out infinite;
         }
 
-        .particle {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 50%;
-            animation: float 20s infinite;
+        @keyframes meshMove {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(30px, -30px); }
+            50% { transform: translate(-20px, 20px); }
+            75% { transform: translate(20px, 30px); }
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); }
-            25% { transform: translateY(-100px) translateX(50px); }
-            50% { transform: translateY(-50px) translateX(-50px); }
-            75% { transform: translateY(-150px) translateX(30px); }
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-size: clamp(2.5rem, 8vw, 6rem);
             margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
             opacity: 0;
@@ -149,12 +238,13 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.3rem);
+            font-size: clamp(1rem, 2vw, 1.4rem);
             color: var(--text-secondary);
-            max-width: 600px;
-            margin-bottom: 3rem;
+            max-width: 650px;
+            margin: 0 auto 3rem;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.4s;
+            line-height: 1.7;
         }
 
         .hero-ctas {
@@ -162,32 +252,36 @@
             gap: 1.5rem;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.6s;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn-primary, .btn-secondary {
-            padding: 1rem 2.5rem;
+            padding: 1.1rem 2.75rem;
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
-            transition: all var(--transition);
+            transition: all var(--transition-fast);
             display: inline-block;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-primary {
             background: var(--text-primary);
             color: var(--bg-dark);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
         }
 
         .btn-primary:hover {
+            background: var(--accent-orange);
             transform: translateY(-3px);
-            box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
         }
 
         .btn-secondary {
             border: 2px solid rgba(255, 255, 255, 0.2);
             color: var(--text-primary);
+            background: transparent;
         }
 
         .btn-secondary:hover {
@@ -206,57 +300,108 @@
             }
         }
 
+        /* Skills Ticker */
+        .skills-ticker {
+            padding: 3rem 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        .ticker-item {
+            padding: 0.75rem 1.75rem;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            margin-right: 1.5rem;
+            white-space: nowrap;
+            font-weight: 500;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
         /* Section Styles */
         section {
             padding: 8rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.5rem, 5vw, 4rem);
             margin-bottom: 4rem;
             text-align: center;
             letter-spacing: -0.02em;
         }
 
-        /* Services Section */
-        .services-grid {
+        /* Services Bento Grid */
+        .services-bento {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .service-card {
             background: var(--bg-card);
             padding: 3rem 2.5rem;
-            border-radius: 16px;
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all var(--transition);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:nth-child(1) {
+            grid-column: span 2;
         }
 
         .service-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 107, 0, 0.05), transparent);
+            opacity: 0;
+            transition: opacity var(--transition);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
         }
 
         .service-icon {
-            width: 60px;
-            height: 60px;
-            margin-bottom: 2rem;
-            filter: grayscale(100%);
-            transition: filter var(--transition);
             font-size: 3rem;
-        }
-
-        .service-card:hover .service-icon {
-            filter: grayscale(0%);
+            margin-bottom: 2rem;
+            display: block;
         }
 
         .service-card h3 {
-            font-size: 1.75rem;
+            font-size: 1.85rem;
             margin-bottom: 1rem;
         }
 
@@ -266,20 +411,31 @@
             line-height: 1.7;
         }
 
-        /* Work Section */
-        .work-grid {
+        /* Work Bento Grid */
+        .work-bento {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
         }
 
         .work-item {
             aspect-ratio: 4/3;
-            border-radius: 12px;
+            border-radius: 16px;
             overflow: hidden;
             position: relative;
             cursor: pointer;
             background: var(--bg-card);
+        }
+
+        .work-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .work-item:nth-child(4) {
+            grid-column: span 2;
         }
 
         .work-image {
@@ -287,11 +443,13 @@
             height: 100%;
             object-fit: cover;
             filter: grayscale(100%);
+            opacity: 0.6;
             transition: all var(--transition);
         }
 
         .work-item:hover .work-image {
             filter: grayscale(0%);
+            opacity: 1;
             transform: scale(1.05);
         }
 
@@ -301,7 +459,7 @@
             left: 0;
             right: 0;
             padding: 2rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
             opacity: 0;
             transition: opacity var(--transition);
         }
@@ -323,18 +481,64 @@
             font-weight: 600;
         }
 
-        /* Testimonials */
-        .testimonials-grid {
+        /* Logo Ticker */
+        .logo-ticker-section {
+            padding: 6rem 5%;
+            overflow: hidden;
+        }
+
+        .logo-ticker-wrapper {
+            display: flex;
+            animation: scroll 40s linear infinite;
+        }
+
+        .logo-item {
+            padding: 2rem 3rem;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            margin-right: 2rem;
+            flex-shrink: 0;
+            opacity: 0.4;
+            transition: opacity var(--transition-fast);
+        }
+
+        .logo-item:hover {
+            opacity: 1;
+        }
+
+        .logo-placeholder {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            white-space: nowrap;
+        }
+
+        /* Testimonials Bento */
+        .testimonials-bento {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
         .testimonial-card {
             background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: 16px;
+            padding: 2.75rem;
+            border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all var(--transition);
+        }
+
+        .testimonial-card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-card:nth-child(2) {
+            grid-row: span 1;
+            background: linear-gradient(135deg, rgba(255, 107, 0, 0.05), transparent);
         }
 
         .testimonial-quote {
@@ -355,59 +559,54 @@
             color: var(--text-secondary);
         }
 
-        /* About Section */
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-content p {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-
         /* CTA Section */
         .cta-section {
             text-align: center;
             padding: 10rem 5%;
-            background: linear-gradient(135deg, rgba(30, 30, 30, 0.5), rgba(10, 10, 10, 0.5));
+            background: linear-gradient(135deg, rgba(30, 30, 30, 0.3), rgba(10, 10, 10, 0.3));
             position: relative;
         }
 
         .cta-section h2 {
-            font-size: clamp(2rem, 5vw, 4rem);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
             margin-bottom: 3rem;
+            letter-spacing: -0.02em;
         }
 
         /* Footer */
         footer {
             padding: 4rem 5%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 1;
         }
 
         .footer-content {
             max-width: 1400px;
             margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .footer-brand {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
         .footer-links {
             display: flex;
-            gap: 2rem;
+            flex-direction: column;
+            gap: 1rem;
             list-style: none;
         }
 
         .footer-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            transition: color var(--transition);
+            transition: color var(--transition-fast);
         }
 
         .footer-links a:hover {
@@ -417,24 +616,38 @@
         .social-links {
             display: flex;
             gap: 1.5rem;
+            justify-content: flex-end;
         }
 
         .social-links a {
-            color: var(--text-secondary);
-            font-size: 1.25rem;
-            transition: color var(--transition);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all var(--transition-fast);
         }
 
         .social-links a:hover {
-            color: var(--text-primary);
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            transform: translateY(-3px);
         }
 
         .copyright {
             width: 100%;
             text-align: center;
-            margin-top: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
             color: var(--text-secondary);
             font-size: 0.9rem;
+            grid-column: 1 / -1;
         }
 
         /* Scroll Animations */
@@ -450,22 +663,41 @@
         }
 
         /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .services-bento,
+            .work-bento,
+            .testimonials-bento {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card:nth-child(1),
+            .work-item:nth-child(1),
+            .work-item:nth-child(4) {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .social-links {
+                justify-content: flex-start;
+            }
+        }
+
         @media (max-width: 768px) {
-            nav {
-                padding: 1rem 5%;
-            }
-
             .nav-links {
-                gap: 1.5rem;
+                display: none;
             }
 
-            .nav-links a {
-                font-size: 0.85rem;
+            .hamburger {
+                display: flex;
             }
 
-            .cta-button {
-                padding: 0.6rem 1.25rem;
-                font-size: 0.85rem;
+            section {
+                padding: 5rem 5%;
             }
 
             .hero-ctas {
@@ -477,110 +709,143 @@
                 width: 100%;
                 text-align: center;
             }
-
-            section {
-                padding: 5rem 5%;
-            }
-
-            .work-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .mobile-hide {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav>
-        <div class="logo">Favour</div>
+        <a href="index.html" class="nav-brand">
+            <div class="profile-circle">
+                <img src="https://i.ibb.co/RTNrcK5/profile.jpg" alt="Favour Onasanya TL" onerror="this.src='https://placehold.co/80x80/0f0f0f/ffffff?text=F'">
+            </div>
+            <span class="brand-name">Favour</span>
+        </a>
+        
         <ul class="nav-links">
             <li><a href="#work">Work</a></li>
             <li><a href="#services">Services</a></li>
-            <li><a href="#about">About</a></li>
-            <li class="mobile-hide"><a href="#contact">Contact</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#contact">Contact</a></li>
             <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
         </ul>
+
+        <div class="hamburger" onclick="toggleMobileMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="#work" onclick="toggleMobileMenu()">Work</a></li>
+            <li><a href="#services" onclick="toggleMobileMenu()">Services</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
+            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-background">
-            <div class="particles" id="particles"></div>
+            <div class="gradient-mesh"></div>
         </div>
-        <h1>World Class Design.<br>Every Time.</h1>
-        <p class="hero-subtitle">Bringing brands to life through design, motion, and vision. Where creativity meets precision.</p>
-        <div class="hero-ctas">
-            <a href="#work" class="btn-primary">See My Work</a>
-            <a href="#book-a-call" class="btn-secondary">Book a Call</a>
+        <div class="hero-content">
+            <h1>World Class Design.<br>Every Time.</h1>
+            <p class="hero-subtitle">Bringing brands to life through design, motion, and vision. Where creativity breathes purpose into every pixel.</p>
+            <div class="hero-ctas">
+                <a href="#work" class="btn-primary">See My Work</a>
+                <a href="#book-a-call" class="btn-secondary">Book a Call</a>
+            </div>
         </div>
     </section>
+
+    <!-- Skills Ticker -->
+    <div class="skills-ticker">
+        <div class="ticker-wrapper" id="skillsTicker">
+            <!-- First set -->
+            <div class="ticker-item">Brand Identity</div>
+            <div class="ticker-item">UI/UX Design</div>
+            <div class="ticker-item">Video Production</div>
+            <div class="ticker-item">Social Media Design</div>
+            <div class="ticker-item">Creative Thinking</div>
+            <div class="ticker-item">Website Copywriting</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="ticker-item">Brand Identity</div>
+            <div class="ticker-item">UI/UX Design</div>
+            <div class="ticker-item">Video Production</div>
+            <div class="ticker-item">Social Media Design</div>
+            <div class="ticker-item">Creative Thinking</div>
+            <div class="ticker-item">Website Copywriting</div>
+        </div>
+    </div>
 
     <!-- Services Section -->
     <section id="services">
         <h2 class="section-title fade-in">Services</h2>
-        <div class="services-grid">
+        <div class="services-bento">
             <div class="service-card fade-in">
-                <div class="service-icon">🎨</div>
+                <span class="service-icon">🎨</span>
                 <h3>Graphic Design</h3>
-                <p>Visual identities that command attention. From brand systems to marketing collateral, every pixel serves a purpose.</p>
+                <p>Visual identities that command attention. From brand systems to marketing collateral, every pixel serves a purpose. Clean, bold, unforgettable.</p>
             </div>
             <div class="service-card fade-in">
-                <div class="service-icon">🎬</div>
+                <span class="service-icon">🎬</span>
                 <h3>Video Editing</h3>
-                <p>Motion that moves people. Cinematic storytelling, commercial cuts, and content that stops the scroll.</p>
+                <p>Motion that moves people. Cinematic storytelling and content that stops the scroll.</p>
             </div>
             <div class="service-card fade-in">
-                <div class="service-icon">💻</div>
+                <span class="service-icon">💻</span>
                 <h3>Web Design</h3>
-                <p>Digital experiences that convert. Clean interfaces, smooth interactions, and design that drives results.</p>
+                <p>Digital experiences that convert. Interfaces that feel intuitive and drive results.</p>
             </div>
         </div>
     </section>
 
     <!-- Work Section -->
     <section id="work">
-        <h2 class="section-title fade-in">Selected Work</h2>
-        <div class="work-grid">
+        <h2 class="section-title fade-in">The Work Speaks</h2>
+        <div class="work-bento">
             <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Project+1" alt="Project 1" class="work-image">
+                <img src="https://placehold.co/1200x900/0f0f0f/666666?text=Featured+Project" alt="Project 1" class="work-image">
                 <div class="work-overlay">
                     <div class="work-category">Graphic Design</div>
                     <div class="work-title">Brand Identity System</div>
                 </div>
             </a>
             <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Project+2" alt="Project 2" class="work-image">
+                <img src="https://placehold.co/800x600/0f0f0f/666666?text=Project+2" alt="Project 2" class="work-image">
                 <div class="work-overlay">
                     <div class="work-category">Video Editing</div>
                     <div class="work-title">Commercial Campaign</div>
                 </div>
             </a>
             <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Project+3" alt="Project 3" class="work-image">
+                <img src="https://placehold.co/800x600/0f0f0f/666666?text=Project+3" alt="Project 3" class="work-image">
                 <div class="work-overlay">
                     <div class="work-category">Web Design</div>
-                    <div class="work-title">SaaS Platform Redesign</div>
+                    <div class="work-title">SaaS Platform</div>
                 </div>
             </a>
             <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Project+4" alt="Project 4" class="work-image">
+                <img src="https://placehold.co/1200x600/0f0f0f/666666?text=Project+4" alt="Project 4" class="work-image">
                 <div class="work-overlay">
                     <div class="work-category">Graphic Design</div>
                     <div class="work-title">Marketing Suite</div>
                 </div>
             </a>
             <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Project+5" alt="Project 5" class="work-image">
+                <img src="https://placehold.co/800x600/0f0f0f/666666?text=Project+5" alt="Project 5" class="work-image">
                 <div class="work-overlay">
                     <div class="work-category">Video Editing</div>
-                    <div class="work-title">Product Launch Video</div>
+                    <div class="work-title">Product Launch</div>
                 </div>
             </a>
             <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/1a1a1a/666666?text=Project+6" alt="Project 6" class="work-image">
+                <img src="https://placehold.co/800x600/0f0f0f/666666?text=Project+6" alt="Project 6" class="work-image">
                 <div class="work-overlay">
                     <div class="work-category">Web Design</div>
                     <div class="work-title">E-commerce Experience</div>
@@ -589,10 +854,31 @@
         </div>
     </section>
 
+    <!-- Logo Ticker -->
+    <section class="logo-ticker-section">
+        <h2 class="section-title fade-in">Brands I've Worked With</h2>
+        <div class="logo-ticker-wrapper" id="logoTicker">
+            <!-- First set -->
+            <div class="logo-item"><div class="logo-placeholder">Client 1</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 2</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 3</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 4</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 5</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 6</div></div>
+            <!-- Duplicate for seamless loop -->
+            <div class="logo-item"><div class="logo-placeholder">Client 1</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 2</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 3</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 4</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 5</div></div>
+            <div class="logo-item"><div class="logo-placeholder">Client 6</div></div>
+        </div>
+    </section>
+
     <!-- Testimonials Section -->
     <section id="testimonials">
         <h2 class="section-title fade-in">What Clients Say</h2>
-        <div class="testimonials-grid">
+        <div class="testimonials-bento">
             <div class="testimonial-card fade-in">
                 <p class="testimonial-quote">"Working with Favour was transformative. He took our vision and elevated it beyond what we imagined. True world-class work."</p>
                 <div class="testimonial-author">Sarah Mitchell</div>
@@ -611,16 +897,6 @@
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title fade-in">The Philosophy</h2>
-        <div class="about-content fade-in">
-            <p>Design isn't decoration. It's transformation.</p>
-            <p>Every brand has a story waiting to be told. Every product has potential waiting to be unlocked. My work breathes life into ideas—turning vision into reality with precision, creativity, and purpose.</p>
-            <p>This is where craft meets strategy. Where aesthetics drive results.</p>
-        </div>
-    </section>
-
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
         <h2 class="fade-in">Ready to bring your vision to life?</h2>
@@ -630,42 +906,27 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="logo">Favour</div>
+            <div class="footer-brand">Favour</div>
             <ul class="footer-links">
                 <li><a href="#work">Work</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="about.html">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="social-links">
-                <a href="#" aria-label="Instagram">📷</a>
-                <a href="#" aria-label="Twitter">🐦</a>
-                <a href="#" aria-label="LinkedIn">💼</a>
-                <a href="#" aria-label="Behance">🎨</a>
+                <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+                <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" aria-label="LinkedIn">💼</a>
+                <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
             </div>
-            <div class="copyright">© 2026 Favour. All rights reserved.</div>
+            <div class="copyright">© 2026 Favour Onasanya TL. All rights reserved.</div>
         </div>
     </footer>
 
     <script>
-        // Particle animation
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 20;
-
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 100 + 50;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 20}s`;
-                particle.style.animationDuration = `${Math.random() * 20 + 15}s`;
-                
-                particlesContainer.appendChild(particle);
-            }
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
         }
 
         // Intersection Observer for scroll animations
@@ -684,8 +945,6 @@
 
         // Observe all fade-in elements
         document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(el => observer.observe(el));
         });
