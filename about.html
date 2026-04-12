@@ -1,877 +1,936 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Favour TL</title>
-    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-darkest: #080B0F;
-            --bg-card: #111820;
-            --border-color: #1E242C;
-            --text-white: #FFFFFF;
-            --text-muted: rgba(255, 255, 255, 0.4);
-            --glow-color: rgba(255, 255, 255, 0.15);
-            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-fast: 0.3s ease;
-        }
-
-        body {
-            font-family: 'Satoshi', sans-serif;
-            background: var(--bg-darkest);
-            color: var(--text-white);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-darkest);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-white);
-        }
-
-        .profile-circle {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--border-color);
-        }
-
-        .profile-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .brand-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color var(--transition-fast);
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--text-white);
-        }
-
-        /* Primary CTA Button */
-        .btn-primary {
-            position: relative;
-            padding: 0.75rem 1.75rem;
-            background: var(--text-white);
-            color: var(--bg-darkest);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-            transition: all var(--transition-fast);
-            animation: glow-pulse 3s ease-in-out infinite;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 50%;
-            height: 200%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.8), 
-                transparent
-            );
-            animation: gleam 3s linear infinite;
-            transform: skewX(-20deg);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
-        }
-
-        .btn-primary:hover::before {
-            animation: gleam 1.5s linear infinite;
-        }
-
-        @keyframes gleam {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 200%;
-            }
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            }
-        }
-
-        /* Secondary Button */
-        .btn-secondary {
-            padding: 0.75rem 1.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-white);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all var(--transition-fast);
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .btn-secondary:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Mobile Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .hamburger span {
-            width: 26px;
-            height: 2.5px;
-            background: var(--text-white);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(8, 11, 15, 0.98);
-            backdrop-filter: blur(20px);
-            padding: 6rem 5% 2rem;
-            z-index: 999;
-        }
-
-        .mobile-menu.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .mobile-menu a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-
-        /* About Hero */
-        .about-hero {
-            padding: 12rem 5% 4rem;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .about-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            margin-bottom: 3rem;
-            letter-spacing: -0.03em;
-        }
-
-        /* Intro Bento Card */
-        .intro-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 3rem;
-            margin: 0 auto 4rem;
-            max-width: 1200px;
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .intro-text h2 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .intro-text p {
-            color: var(--text-muted);
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        .intro-image {
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .intro-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: all var(--transition);
-        }
-
-        .intro-image:hover img {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-
-        /* Bento Grid Section */
-        .bento-section {
-            padding: 2rem 5% 6rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1.5rem;
-        }
-
-        .bento-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2.5rem;
-            transition: all var(--transition);
-        }
-
-        .bento-card:hover {
-            box-shadow: 0 0 30px var(--glow-color);
-            transform: translateY(-5px);
-        }
-
-        .bento-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .bento-card p {
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        /* CV Card */
-        .cv-card {
-            grid-column: span 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        /* Experience Card */
-        .experience-card {
-            grid-column: span 2;
-            grid-row: span 2;
-        }
-
-        .experience-item {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .experience-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .experience-year {
-            font-size: 0.8rem;
-            color: var(--text-white);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-        }
-
-        .experience-role {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .experience-company {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        /* Tools Card */
-        .tools-card {
-            grid-column: span 2;
-        }
-
-        .tools-grid {
-            display: flex;
-            gap: 2rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tool-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all var(--transition);
-            opacity: 0.6;
-            cursor: pointer;
-        }
-
-        .tool-item:hover {
-            opacity: 1;
-            transform: translateY(-5px);
-        }
-
-        .tool-icon {
-            width: 48px;
-            height: 48px;
-            font-size: 3rem;
-        }
-
-        .tool-name {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .tool-item:hover .tool-name {
-            color: var(--text-white);
-        }
-
-        /* Skills Card */
-        .skills-card {
-            grid-column: span 2;
-            overflow: hidden;
-        }
-
-        .skills-ticker-wrapper {
-            margin-top: 1.5rem;
-            overflow: hidden;
-            -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-        }
-
-        .skills-ticker {
-            display: flex;
-            animation: scroll 40s linear infinite;
-        }
-
-        .skill-tag {
-            padding: 0.6rem 1.4rem;
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--text-muted);
-            white-space: nowrap;
-            margin-right: 0.75rem;
-            flex-shrink: 0;
-        }
-
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* Spotify Card */
-        .spotify-card {
-            grid-column: span 4;
-            overflow: hidden;
-        }
-
-        .spotify-container {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-            overflow-x: auto;
-            padding-bottom: 1rem;
-            scrollbar-width: thin;
-            scrollbar-color: var(--border-color) transparent;
-        }
-
-        .spotify-container::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .spotify-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .spotify-container::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 10px;
-        }
-
-        .spotify-embed {
-            flex-shrink: 0;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        /* Social Section */
-        .social-section {
-            padding: 4rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .social-section h3 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-buttons {
-            display: flex;
-            gap: 1.25rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50px;
-            color: var(--text-white);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all var(--transition-fast);
-        }
-
-        .social-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--text-white);
-        }
-
-        .social-btn:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 5%;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.25rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            transition: all var(--transition-fast);
-        }
-
-        .social-links a svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--text-white);
-        }
-
-        .social-links a:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .back-to-top {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color var(--transition-fast);
-        }
-
-        .back-to-top:hover {
-            color: var(--text-white);
-        }
-
-        .copyright {
-            width: 100%;
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .intro-card {
-                grid-template-columns: 1fr;
-            }
-
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .cv-card,
-            .experience-card,
-            .tools-card,
-            .skills-card,
-            .spotify-card {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .about-hero {
-                padding: 10rem 5% 4rem;
-            }
-
-            .intro-card {
-                padding: 2rem;
-            }
-
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cv-card,
-            .experience-card,
-            .tools-card,
-            .skills-card,
-            .spotify-card {
-                grid-column: span 1;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Favour TL</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080B0F;
+    --card: #111820;
+    --border: #1E242C;
+    --text: #FFFFFF;
+    --muted: rgba(255,255,255,0.4);
+    --glow: rgba(255,255,255,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 999px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255,255,255,0.25);
+    animation: glowPulse 3s ease-in-out infinite;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+    animation: gleam 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 40px rgba(255,255,255,0.5);
+    transform: translateY(-1px);
+  }
+
+  @keyframes gleam {
+    0% { left: -75%; }
+    100% { left: 125%; }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.25); }
+    50% { box-shadow: 0 0 35px rgba(255,255,255,0.45); }
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-1px);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: #fff; }
+  .nav-cta { flex-shrink: 0; }
+  .nav-cta .btn-primary { padding: 10px 22px; font-size: 0.875rem; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: #fff;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu.open { display: flex; opacity: 1; }
+
+  .mobile-menu a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-menu a:hover { color: #fff; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    display: inline-block;
+    border: 1px dashed rgba(255,255,255,0.25);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  /* ── LAYOUT ── */
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+
+  /* ── HERO ── */
+  .about-hero {
+    padding: 100px 40px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    max-width: 700px;
+  }
+
+  /* ── INTRO BENTO ── */
+  .intro-bento {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .intro-text {
+    padding: 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .intro-text h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+
+  .intro-text p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .intro-image {
+    position: relative;
+    overflow: hidden;
+    border-left: 1px solid var(--border);
+    min-height: 400px;
+  }
+
+  .intro-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) opacity(60%);
+    transition: filter 0.4s ease;
+    display: block;
+  }
+
+  .intro-image:hover img {
+    filter: grayscale(0%) opacity(100%);
+  }
+
+  /* ── BENTO GRID ── */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: auto;
+    gap: 16px;
+  }
+
+  .bento-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .bento-card:hover {
+    box-shadow: 0 0 30px rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+
+  .bento-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.8rem;
+  }
+
+  /* CV Card */
+  .cv-card {
+    grid-column: span 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+  }
+
+  .cv-card .cv-headline {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  /* Experience Card */
+  .exp-card { grid-column: span 8; }
+
+  .timeline-entry {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .timeline-entry:last-child { border-bottom: none; padding-bottom: 0; }
+  .timeline-entry:first-of-type { padding-top: 0; }
+
+  .timeline-year {
+    font-size: 0.8rem;
+    color: var(--muted);
+    white-space: nowrap;
+    margin-top: 2px;
+    min-width: 50px;
+  }
+
+  .timeline-info { flex: 1; }
+
+  .timeline-role {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 2px;
+  }
+
+  .timeline-company {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  /* Tools Card */
+  .tools-card { grid-column: span 6; }
+
+  .tools-grid {
+    display: flex;
+    gap: 28px;
+    align-items: flex-end;
+  }
+
+  .tool-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+    cursor: default;
+  }
+
+  .tool-item:hover { opacity: 1; }
+
+  .tool-logo {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .tool-logo img,
+  .tool-logo svg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .tool-name {
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* Skills Card */
+  .skills-card { grid-column: span 6; }
+
+  /* Spotify Card */
+  .spotify-card { grid-column: span 12; }
+
+  /* ── TICKER (reused from index) ── */
+  .ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 8px;
+  }
+
+  .ticker-wrap::before,
+  .ticker-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .ticker-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, var(--card) 0%, transparent 100%);
+  }
+
+  .ticker-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, var(--card) 0%, transparent 100%);
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 10px;
+    animation: tickerScroll 25s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    white-space: nowrap;
+    background: rgba(255,255,255,0.02);
+    transition: color 0.3s ease;
+  }
+
+  .skill-pill:hover { color: #fff; }
+
+  /* ── SPOTIFY ── */
+  .spotify-switcher {
+    position: relative;
+  }
+
+  .spotify-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .spotify-tab {
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Satoshi', sans-serif;
+    transition: all 0.3s ease;
+  }
+
+  .spotify-tab.active {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
+  }
+
+  .spotify-tab:hover { color: #fff; }
+
+  .spotify-embed-wrap {
+    display: none;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .spotify-embed-wrap.active { display: block; }
+
+  .spotify-embed-wrap iframe {
+    width: 100%;
+    border: none;
+    border-radius: 12px;
+  }
+
+  /* ── SOCIAL ROW ── */
+  .social-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    padding: 60px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .social-link {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .social-link svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+
+  .social-link:hover {
+    box-shadow: 0 0 16px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  .social-label {
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-right: 8px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .footer-social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .footer-social-link svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+  }
+
+  .footer-social-link:hover {
+    box-shadow: 0 0 16px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    flex: 1;
+  }
+
+  .footer-top {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-top:hover { color: #fff; }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.2s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .intro-bento { grid-template-columns: 1fr; }
+    .intro-image { border-left: none; border-top: 1px solid var(--border); min-height: 280px; }
+    .bento-grid { grid-template-columns: 1fr; }
+    .cv-card, .exp-card, .tools-card, .skills-card, .spotify-card { grid-column: span 1; }
+    nav { padding: 0 20px; }
+  }
+
+  @media (max-width: 700px) {
+    .about-hero { padding: 70px 20px 40px; }
+    .page-container { padding: 60px 20px; }
+    .intro-text { padding: 32px; }
+    .bento-card { padding: 28px; }
+    footer { padding: 28px 20px; }
+    .social-row { padding: 40px 20px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="nav-brand">
-            <div class="profile-circle">
-                <img src="images/favour.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/80x80/111820/FFFFFF?text=FT'">
-            </div>
-            <span class="brand-name">Favour TL</span>
-        </a>
-        
-        <ul class="nav-links">
-            <li><a href="index.html#work">Work</a></li>
-            <li><a href="index.html#services">Services</a></li>
-            <li><a href="about.html" class="active">About</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="#book-a-call" class="btn-primary">Book a Call</a></li>
-        </ul>
 
-        <div class="hamburger" onclick="toggleMobileMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Work</a>
+  <a href="index.html#services" onclick="closeMobile()">Services</a>
+  <a href="about.html" onclick="closeMobile()">About</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+  <a href="#book-a-call" class="btn-primary" style="margin-top:20px;" onclick="closeMobile()">Book a Call</a>
+</div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul>
-            <li><a href="index.html#work">Work</a></li>
-            <li><a href="index.html#services">Services</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="#book-a-call" class="btn-primary">Book a Call</a></li>
-        </ul>
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="images/favour image.jpeg" alt="Favour TL" class="nav-avatar">
+    <span class="nav-name">Favour TL</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-cta">
+    <a href="#book-a-call" class="btn-primary">Book a Call</a>
+  </div>
+
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="about-hero fade-up">
+  <span class="section-label">About</span>
+  <h1>The Mind Behind<br>the Work.</h1>
+</div>
+
+<!-- ── INTRO BENTO ── -->
+<div class="page-container" style="padding-top: 0;">
+  <div class="intro-bento fade-up">
+    <div class="intro-text">
+      <h2>Boy Genius. Visual Designer. Creator.</h2>
+      <p>
+        I'm Favour Onasanya TL — a visual designer and creative strategist who goes by the name Boy Genius. TL stands for Tree of Life, because everything I create is meant to grow, breathe, and stand the test of time.
+      </p>
+      <p>
+        I work at the intersection of aesthetics and strategy — crafting brand identities, digital experiences, and visual content that don't just look good, but convert, connect, and leave a lasting impression.
+      </p>
+      <p>
+        Whether it's a brand identity built from scratch, a video that stops the scroll, or a website that turns visitors into clients — I bring the same thing every time: world class execution.
+      </p>
+    </div>
+    <div class="intro-image">
+      <img src="images/favour image.jpeg" alt="Favour Onasanya TL">
+    </div>
+  </div>
+
+  <!-- ── BENTO GRID ── -->
+  <div class="bento-grid">
+
+    <!-- CV Card -->
+    <div class="bento-card cv-card fade-up">
+      <h3>Resume</h3>
+      <p class="cv-headline">Download my full CV and creative portfolio.</p>
+      <div style="margin-top: 28px;">
+        <a href="#" class="btn-secondary">Download CV ↓</a>
+      </div>
     </div>
 
-    <!-- About Hero -->
-    <section class="about-hero">
-        <h1>The Mind Behind the Work</h1>
-    </section>
-
-    <!-- Intro Bento Card -->
-    <section style="padding: 0 5%;">
-        <div class="intro-card fade-in">
-            <div class="intro-text">
-                <h2>Visual Designer</h2>
-                <p>I'm Favour Onasanya TL — a creative professional who believes design is more than aesthetics. It's transformation. Every project is an opportunity to breathe life into ideas and create experiences that resonate with the world.</p>
-                <p style="margin-top: 1rem;">My work is rooted in the philosophy "I am Light" — bringing clarity, radiance, and vision to every brand I touch.</p>
-            </div>
-            <div class="intro-image">
-                <img src="images/favour.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/400x500/111820/FFFFFF?text=Favour+TL'">
-            </div>
+    <!-- Experience Card -->
+    <div class="bento-card exp-card fade-up fade-up-delay-1">
+      <h3>Experience</h3>
+      <div class="timeline-entry">
+        <span class="timeline-year">2024</span>
+        <div class="timeline-info">
+          <p class="timeline-role">Lead Visual Designer</p>
+          <p class="timeline-company">Freelance — Independent Studio</p>
         </div>
-    </section>
-
-    <!-- Bento Grid Section -->
-    <section class="bento-section">
-        <div class="bento-grid">
-            <!-- CV Card -->
-            <div class="bento-card cv-card fade-in">
-                <div>
-                    <h3>My CV</h3>
-                    <p>Everything you need to know about my journey, experience, and expertise.</p>
-                </div>
-                <a href="#download-cv" class="btn-secondary" style="margin-top: 1.5rem; align-self: flex-start;">
-                    📄 Download CV
-                </a>
-            </div>
-
-            <!-- Tools Card -->
-            <div class="bento-card tools-card fade-in">
-                <h3>Tools I Use</h3>
-                <div class="tools-grid">
-                    <div class="tool-item">
-                        <div class="tool-icon">🎨</div>
-                        <div class="tool-name">Figma</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="tool-icon">🖼️</div>
-                        <div class="tool-name">Adobe Photoshop</div>
-                    </div>
-                    <div class="tool-item">
-                        <div class="tool-icon">✂️</div>
-                        <div class="tool-name">CapCut</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Experience Card -->
-            <div class="bento-card experience-card fade-in">
-                <h3>Experience</h3>
-                <div class="experience-item">
-                    <div class="experience-year">2024 — Present</div>
-                    <div class="experience-role">Senior Visual Designer</div>
-                    <div class="experience-company">Freelance</div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-year">2022 — 2024</div>
-                    <div class="experience-role">Brand & Motion Designer</div>
-                    <div class="experience-company">Creative Agency Co.</div>
-                </div>
-                <div class="experience-item">
-                    <div class="experience-year">2020 — 2022</div>
-                    <div class="experience-role">Graphic Designer</div>
-                    <div class="experience-company">Digital Studio Inc.</div>
-                </div>
-            </div>
-
-            <!-- Skills Card -->
-            <div class="bento-card skills-card fade-in">
-                <h3>Skills</h3>
-                <div class="skills-ticker-wrapper">
-                    <div class="skills-ticker">
-                        <div class="skill-tag">Brand Identity</div>
-                        <div class="skill-tag">UI/UX Design</div>
-                        <div class="skill-tag">Video Production</div>
-                        <div class="skill-tag">Social Media Design</div>
-                        <div class="skill-tag">Creative Thinking</div>
-                        <div class="skill-tag">Website Copywriting</div>
-                        <!-- Duplicate -->
-                        <div class="skill-tag">Brand Identity</div>
-                        <div class="skill-tag">UI/UX Design</div>
-                        <div class="skill-tag">Video Production</div>
-                        <div class="skill-tag">Social Media Design</div>
-                        <div class="skill-tag">Creative Thinking</div>
-                        <div class="skill-tag">Website Copywriting</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Spotify Card -->
-            <div class="bento-card spotify-card fade-in">
-                <h3>Vibe While Working</h3>
-                <div class="spotify-container">
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/6KTGgGVSD60XZFBPAQrLtH?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/4KtT8dN9QaCPNwxtJwhKmB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5fZ2VfuNsBtbhoNhYjXErB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                </div>
-            </div>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2023</span>
+        <div class="timeline-info">
+          <p class="timeline-role">Creative Director</p>
+          <p class="timeline-company">Apex Creative Agency</p>
         </div>
-    </section>
-
-    <!-- Social Links -->
-    <section class="social-section fade-in">
-        <h3>Let's Connect</h3>
-        <div class="social-buttons">
-            <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="social-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-                Instagram
-            </a>
-            <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="social-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
-                LinkedIn
-            </a>
-            <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="social-btn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                WhatsApp
-            </a>
+      </div>
+      <div class="timeline-entry">
+        <span class="timeline-year">2022</span>
+        <div class="timeline-info">
+          <p class="timeline-role">Graphic Designer & Video Editor</p>
+          <p class="timeline-company">Orbit Media Group</p>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
-                </a>
-                <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" aria-label="WhatsApp">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                </a>
-            </div>
-            <a href="#" class="back-to-top">Back to Top ↑</a>
-            <div class="copyright">© 2026 Favour Onasanya TL</div>
+    <!-- Tools Card -->
+    <div class="bento-card tools-card fade-up">
+      <h3>Tools</h3>
+      <div class="tools-grid">
+
+        <!-- Figma -->
+        <div class="tool-item">
+          <div class="tool-logo">
+            <svg viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 28.5C19 24.9 21.9 22 25.5 22S32 24.9 32 28.5 29.1 35 25.5 35 19 32.1 19 28.5z" fill="#1ABCFE"/>
+              <path d="M6 42C6 38.4 8.9 35.5 12.5 35.5H19V42C19 45.6 16.1 48.5 12.5 48.5S6 45.6 6 42z" fill="#0ACF83"/>
+              <path d="M19 8.5V22H25.5C29.1 22 32 19.1 32 15.5S29.1 9 25.5 9L19 8.5z" fill="#FF7262"/>
+              <path d="M6 15.5C6 19.1 8.9 22 12.5 22H19V9H12.5C8.9 9 6 11.9 6 15.5z" fill="#F24E1E"/>
+              <path d="M6 28.5C6 32.1 8.9 35 12.5 35H19V22H12.5C8.9 22 6 24.9 6 28.5z" fill="#A259FF"/>
+            </svg>
+          </div>
+          <span class="tool-name">Figma</span>
         </div>
-    </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('active');
-        }
+        <!-- Photoshop -->
+        <div class="tool-item">
+          <div class="tool-logo">
+            <svg viewBox="0 0 240 234" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="240" height="234" rx="42" fill="#001E36"/>
+              <path d="M54 164V61h34.3c8.4 0 14.7 2.1 19 6.4 4.3 4.3 6.4 10.2 6.4 17.8 0 7.8-2.2 13.9-6.5 18.3-4.4 4.4-10.7 6.6-19.1 6.6H69.8V164H54zm15.8-67.2h14c4.8 0 8.3-1.2 10.5-3.6 2.2-2.4 3.3-5.8 3.3-10.2 0-4.2-1.1-7.5-3.3-9.8-2.2-2.3-5.7-3.4-10.5-3.4h-14v27zm75 69c-5.9 0-11.2-1.3-15.9-3.8-4.7-2.5-8.4-6.1-11.1-10.7-2.7-4.7-4-10.2-4-16.6 0-6.3 1.3-11.8 4-16.5 2.7-4.7 6.4-8.3 11.1-10.9 4.7-2.6 10-3.9 15.9-3.9 5.9 0 11.2 1.3 15.9 3.9 4.7 2.6 8.4 6.2 11 10.9 2.7 4.7 4 10.2 4 16.5 0 6.4-1.3 11.9-4 16.6-2.6 4.6-6.3 8.2-11 10.7-4.7 2.5-10 3.8-15.9 3.8zm0-12.7c4.8 0 8.7-1.8 11.7-5.4 3-3.6 4.5-8.4 4.5-14.5s-1.5-10.9-4.5-14.4c-3-3.6-6.9-5.4-11.7-5.4-4.8 0-8.8 1.8-11.8 5.4-3 3.5-4.5 8.3-4.5 14.4s1.5 10.9 4.5 14.5c3 3.6 7 5.4 11.8 5.4z" fill="#31A8FF"/>
+            </svg>
+          </div>
+          <span class="tool-name">Photoshop</span>
+        </div>
 
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        <!-- CapCut -->
+        <div class="tool-item">
+          <div class="tool-logo">
+            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="100" height="100" rx="22" fill="#000"/>
+              <path d="M50 20C33.4 20 20 33.4 20 50s13.4 30 30 30 30-13.4 30-30S66.6 20 50 20zm-6 42V38l22 12-22 12z" fill="#fff"/>
+            </svg>
+          </div>
+          <span class="tool-name">CapCut</span>
+        </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+      </div>
+    </div>
 
-        // Observe all fade-in elements
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(el => observer.observe(el));
-        });
-    </script>
+    <!-- Skills Card -->
+    <div class="bento-card skills-card fade-up fade-up-delay-1">
+      <h3>Skills</h3>
+      <div class="ticker-wrap">
+        <div class="ticker-track">
+          <span class="skill-pill">Brand Identity</span>
+          <span class="skill-pill">UI/UX Design</span>
+          <span class="skill-pill">Video Production</span>
+          <span class="skill-pill">Social Media Design</span>
+          <span class="skill-pill">Creative Thinking</span>
+          <span class="skill-pill">Website Copywriting</span>
+          <span class="skill-pill">Brand Identity</span>
+          <span class="skill-pill">UI/UX Design</span>
+          <span class="skill-pill">Video Production</span>
+          <span class="skill-pill">Social Media Design</span>
+          <span class="skill-pill">Creative Thinking</span>
+          <span class="skill-pill">Website Copywriting</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Spotify Card -->
+    <div class="bento-card spotify-card fade-up">
+      <h3>Vibe While Working</h3>
+
+      <div class="spotify-tabs">
+        <button class="spotify-tab active" onclick="switchTrack(0)">Track 1</button>
+        <button class="spotify-tab" onclick="switchTrack(1)">Track 2</button>
+        <button class="spotify-tab" onclick="switchTrack(2)">Track 3</button>
+        <button class="spotify-tab" onclick="switchTrack(3)">Track 4</button>
+      </div>
+
+      <div class="spotify-switcher">
+        <div class="spotify-embed-wrap active" id="track-0">
+          <iframe src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-embed-wrap" id="track-1">
+          <iframe src="https://open.spotify.com/embed/track/6KTGgGVSD60XZFBPAQrLtH?utm_source=generator" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-embed-wrap" id="track-2">
+          <iframe src="https://open.spotify.com/embed/track/4KtT8dN9QaCPNwxtJwhKmB?utm_source=generator" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+        <div class="spotify-embed-wrap" id="track-3">
+          <iframe src="https://open.spotify.com/embed/track/5fZ2VfuNsBtbhoNhYjXErB?utm_source=generator" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── SOCIAL ROW ── -->
+<div class="social-row fade-up">
+  <span class="social-label">Find me on</span>
+  <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+  </a>
+  <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
+  </a>
+  <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+  </a>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="footer-social-link" aria-label="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
+    </a>
+    <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="footer-social-link" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+  </div>
+  <p class="footer-copy">© 2026 Favour Onasanya TL</p>
+  <a href="#" class="footer-top">Back to Top ↑</a>
+</footer>
+
+<script>
+  // ── HAMBURGER ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  function closeMobile() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── SPOTIFY SWITCHER ──
+  function switchTrack(index) {
+    document.querySelectorAll('.spotify-embed-wrap').forEach((el, i) => {
+      el.classList.toggle('active', i === index);
+    });
+    document.querySelectorAll('.spotify-tab').forEach((tab, i) => {
+      tab.classList.toggle('active', i === index);
+    });
+  }
+
+  // ── SCROLL ANIMATIONS ──
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>

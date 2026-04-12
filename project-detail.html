@@ -1,722 +1,794 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Name — Favour TL</title>
-    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --bg-darkest: #080B0F;
-            --bg-card: #111820;
-            --border-color: #1E242C;
-            --text-white: #FFFFFF;
-            --text-muted: rgba(255, 255, 255, 0.4);
-            --glow-color: rgba(255, 255, 255, 0.15);
-            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            --transition-fast: 0.3s ease;
-        }
-
-        body {
-            font-family: 'Satoshi', sans-serif;
-            background: var(--bg-darkest);
-            color: var(--text-white);
-            line-height: 1.6;
-        }
-
-        h1, h2, h3, h4 {
-            font-weight: 700;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-darkest);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            text-decoration: none;
-            color: var(--text-white);
-        }
-
-        .profile-circle {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 2px solid var(--border-color);
-        }
-
-        .profile-circle img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .brand-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-
-        .back-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-            transition: color var(--transition-fast);
-            font-size: 0.95rem;
-        }
-
-        .back-link:hover {
-            color: var(--text-white);
-        }
-
-        /* Primary CTA Button */
-        .btn-primary {
-            position: relative;
-            padding: 1rem 2.5rem;
-            background: var(--text-white);
-            color: var(--bg-darkest);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-            transition: all var(--transition-fast);
-            animation: glow-pulse 3s ease-in-out infinite;
-            display: inline-block;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -100%;
-            width: 50%;
-            height: 200%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(255, 255, 255, 0.8), 
-                transparent
-            );
-            animation: gleam 3s linear infinite;
-            transform: skewX(-20deg);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
-        }
-
-        .btn-primary:hover::before {
-            animation: gleam 1.5s linear infinite;
-        }
-
-        @keyframes gleam {
-            0% {
-                left: -100%;
-            }
-            100% {
-                left: 200%;
-            }
-        }
-
-        @keyframes glow-pulse {
-            0%, 100% {
-                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-            }
-            50% {
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
-            }
-        }
-
-        /* Project Hero */
-        .project-hero {
-            padding: 12rem 5% 6rem;
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .project-category {
-            color: var(--text-white);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-size: 0.8rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-        }
-
-        .project-title {
-            font-size: clamp(2.5rem, 6vw, 5rem);
-            margin-bottom: 2rem;
-            letter-spacing: -0.03em;
-        }
-
-        .project-description {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto 4rem;
-        }
-
-        .hero-image-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            border-radius: 16px;
-            overflow: hidden;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-        }
-
-        .hero-image {
-            width: 100%;
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: all var(--transition);
-        }
-
-        .hero-image-wrapper:hover .hero-image {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-
-        /* Section Header */
-        .section-header {
-            display: inline-block;
-            padding: 0.5rem 1.25rem;
-            border: 1px dashed var(--border-color);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-        }
-
-        /* Project Overview */
-        .project-overview {
-            padding: 6rem 5%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .overview-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 3rem;
-            padding: 3rem;
-            background: var(--bg-card);
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-        }
-
-        .overview-item h4 {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.75rem;
-            font-weight: 700;
-        }
-
-        .overview-item p {
-            font-size: 1.1rem;
-            color: var(--text-white);
-            font-weight: 500;
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 6rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .content-section h2 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            margin-bottom: 2rem;
-        }
-
-        .content-section p {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .two-column {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 4rem;
-        }
-
-        .column h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-white);
-        }
-
-        /* Visual Showcase */
-        .visual-showcase {
-            padding: 6rem 5%;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .showcase-image-wrapper {
-            aspect-ratio: 4/3;
-            border-radius: 16px;
-            overflow: hidden;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-        }
-
-        .showcase-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: all var(--transition);
-        }
-
-        .showcase-image-wrapper:hover .showcase-image {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .full-width-image {
-            width: 100%;
-            max-width: 1600px;
-            margin: 3rem auto;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-
-        .full-width-image img {
-            width: 100%;
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: all var(--transition);
-        }
-
-        .full-width-image:hover img {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-
-        /* Results Section */
-        .results-section {
-            padding: 8rem 5%;
-            background: var(--bg-card);
-        }
-
-        .results-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .results-content h2 {
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            margin-bottom: 1rem;
-        }
-
-        .results-content > p {
-            font-size: 1.1rem;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 4rem;
-            text-align: center;
-        }
-
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 4rem;
-            margin-top: 4rem;
-        }
-
-        .result-stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: var(--text-white);
-        }
-
-        .stat-label {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-
-        /* Next Project */
-        .next-project {
-            padding: 10rem 5%;
-            text-align: center;
-        }
-
-        .next-project h3 {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 2rem;
-            font-weight: 700;
-        }
-
-        .next-project-link {
-            display: inline-block;
-            text-decoration: none;
-            transition: transform var(--transition);
-        }
-
-        .next-project-link:hover {
-            transform: translateX(10px);
-        }
-
-        .next-project-title {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            color: var(--text-white);
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .next-project-category {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            padding: 8rem 5%;
-            background: var(--bg-card);
-        }
-
-        .cta-section h2 {
-            font-size: clamp(2rem, 5vw, 4rem);
-            margin-bottom: 2.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        /* Footer */
-        footer {
-            padding: 3rem 5%;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1.25rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            transition: all var(--transition-fast);
-        }
-
-        .social-links a svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--text-white);
-        }
-
-        .social-links a:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-        }
-
-        .back-to-top {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color var(--transition-fast);
-        }
-
-        .back-to-top:hover {
-            color: var(--text-white);
-        }
-
-        .copyright {
-            width: 100%;
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
-            .two-column,
-            .showcase-grid,
-            .results-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .overview-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .project-hero {
-                padding: 10rem 5% 4rem;
-            }
-
-            .overview-grid {
-                grid-template-columns: 1fr;
-                padding: 2rem;
-            }
-
-            .stat-number {
-                font-size: 3rem;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project — Favour TL</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080B0F;
+    --card: #111820;
+    --border: #1E242C;
+    --text: #FFFFFF;
+    --muted: rgba(255,255,255,0.4);
+    --glow: rgba(255,255,255,0.15);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ── BUTTONS ── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 999px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255,255,255,0.25);
+    animation: glowPulse 3s ease-in-out infinite;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+    animation: gleam 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 0 40px rgba(255,255,255,0.5);
+    transform: translateY(-1px);
+  }
+
+  @keyframes gleam {
+    0% { left: -75%; }
+    100% { left: 125%; }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.25); }
+    50% { box-shadow: 0 0 35px rgba(255,255,255,0.45); }
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .btn-secondary:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-1px);
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .nav-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+  }
+
+  .nav-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover { color: #fff; }
+  .nav-cta { flex-shrink: 0; }
+  .nav-cta .btn-primary { padding: 10px 22px; font-size: 0.875rem; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: #fff;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu.open { display: flex; opacity: 1; }
+
+  .mobile-menu a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-menu a:hover { color: #fff; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    display: inline-block;
+    border: 1px dashed rgba(255,255,255,0.25);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  /* ── PAGE LAYOUT ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ── PROJECT HERO ── */
+  .project-hero {
+    padding: 80px 40px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .meta-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.78rem;
+    color: var(--muted);
+    background: rgba(255,255,255,0.03);
+  }
+
+  .project-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin-bottom: 20px;
+    max-width: 800px;
+  }
+
+  .project-hero p {
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 580px;
+    line-height: 1.75;
+  }
+
+  /* ── HERO IMAGE ── */
+  .hero-image-wrap {
+    max-width: 1200px;
+    margin: 0 auto 80px;
+    padding: 0 40px;
+  }
+
+  .hero-image-wrap img {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    display: block;
+    filter: grayscale(100%) opacity(60%);
+    transition: filter 0.4s ease;
+  }
+
+  .hero-image-wrap:hover img {
+    filter: grayscale(0%) opacity(100%);
+  }
+
+  /* ── OVERVIEW BENTO ── */
+  .overview-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 80px;
+  }
+
+  .overview-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .overview-card:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.15);
+  }
+
+  .overview-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .overview-value {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ── CONTENT SECTIONS ── */
+  .content-section {
+    margin-bottom: 80px;
+  }
+
+  .content-section h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .content-section p {
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.85;
+    max-width: 680px;
+    margin-bottom: 16px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* ── IMAGE GRID ── */
+  .image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 80px;
+  }
+
+  .image-grid img {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    display: block;
+    filter: grayscale(100%) opacity(60%);
+    transition: filter 0.4s ease, transform 0.3s ease;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .image-grid img:hover {
+    filter: grayscale(0%) opacity(100%);
+    transform: scale(1.02);
+  }
+
+  .image-grid img:first-child {
+    grid-column: span 2;
+    aspect-ratio: 21/9;
+  }
+
+  /* ── RESULTS ── */
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    text-align: center;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .result-card:hover {
+    box-shadow: 0 0 24px rgba(255,255,255,0.08);
+    transform: translateY(-3px);
+  }
+
+  .result-number {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+
+  .result-label {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ── NEXT PROJECT ── */
+  .next-project {
+    border-top: 1px solid var(--border);
+    padding: 60px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .next-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
+  }
+
+  .next-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .next-arrow {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .next-arrow svg { fill: #fff; width: 20px; height: 20px; }
+
+  .next-arrow:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateX(4px);
+  }
+
+  /* ── BOTTOM CTA ── */
+  .bottom-cta {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 100px 40px;
+  }
+
+  .bottom-cta h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .bottom-cta p {
+    color: var(--muted);
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .social-link svg {
+    width: 18px; height: 18px;
+    fill: #fff;
+  }
+
+  .social-link:hover {
+    box-shadow: 0 0 16px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    flex: 1;
+  }
+
+  .footer-top {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-top:hover { color: #fff; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 40px 80px;
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.2s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .overview-row { grid-template-columns: 1fr; }
+    .results-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; gap: 24px; }
+    nav { padding: 0 20px; }
+  }
+
+  @media (max-width: 700px) {
+    .project-hero { padding: 60px 20px 40px; }
+    .hero-image-wrap { padding: 0 20px; margin-bottom: 50px; }
+    .container { padding: 0 20px; }
+    .image-grid { grid-template-columns: 1fr; }
+    .image-grid img:first-child { grid-column: span 1; aspect-ratio: 16/9; }
+    footer { padding: 28px 20px; }
+    .divider { margin: 0 20px 60px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav>
-        <a href="index.html" class="nav-brand">
-            <div class="profile-circle">
-                <img src="images/favour.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/80x80/111820/FFFFFF?text=FT'">
-            </div>
-            <span class="brand-name">Favour TL</span>
-        </a>
-        <a href="index.html#work" class="back-link">
-            <span>←</span> Back to Work
-        </a>
-    </nav>
 
-    <!-- Project Hero -->
-    <section class="project-hero">
-        <div class="project-category">Graphic Design</div>
-        <h1 class="project-title">Brand Identity System</h1>
-        <p class="project-description">A complete visual identity transformation for a tech startup looking to disrupt their industry with bold, modern design that speaks to innovation and trust.</p>
-        
-        <div class="hero-image-wrapper">
-            <img src="https://placehold.co/1600x900/111820/1E242C?text=Hero+Image" alt="Project Hero" class="hero-image">
-        </div>
-    </section>
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Work</a>
+  <a href="index.html#services" onclick="closeMobile()">Services</a>
+  <a href="about.html" onclick="closeMobile()">About</a>
+  <a href="index.html#contact" onclick="closeMobile()">Contact</a>
+  <a href="#book-a-call" class="btn-primary" style="margin-top:20px;" onclick="closeMobile()">Book a Call</a>
+</div>
 
-    <!-- Project Overview -->
-    <section class="project-overview">
-        <div class="overview-grid fade-in">
-            <div class="overview-item">
-                <h4>Client</h4>
-                <p>TechFlow Inc.</p>
-            </div>
-            <div class="overview-item">
-                <h4>Timeline</h4>
-                <p>6 Weeks</p>
-            </div>
-            <div class="overview-item">
-                <h4>Deliverables</h4>
-                <p>Logo, Brand Guidelines, Marketing Assets</p>
-            </div>
-            <div class="overview-item">
-                <h4>Year</h4>
-                <p>2026</p>
-            </div>
-        </div>
-    </section>
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="images/favour image.jpeg" alt="Favour TL" class="nav-avatar">
+    <span class="nav-name">Favour TL</span>
+  </a>
 
-    <!-- Problem & Solution -->
-    <section class="content-section">
-        <div class="two-column fade-in">
-            <div class="column">
-                <h3>The Challenge</h3>
-                <p>The client needed to stand out in a crowded market. Their existing identity felt generic and failed to communicate their innovative approach to technology solutions.</p>
-                <p>The brand needed to feel premium, trustworthy, and forward-thinking while maintaining approachability for their diverse client base.</p>
-            </div>
-            <div class="column">
-                <h3>The Solution</h3>
-                <p>We developed a complete visual system built on principles of clarity, precision, and movement. The logo combines geometric strength with fluid motion.</p>
-                <p>The color palette uses deep blacks and bright whites with strategic accent colors that bring energy without overwhelming. Every element works together to tell a cohesive story.</p>
-            </div>
-        </div>
-    </section>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
 
-    <!-- Visual Showcase -->
-    <section class="visual-showcase">
-        <div style="text-align: center;">
-            <div class="section-header">VISUAL SYSTEM</div>
-        </div>
-        
-        <div class="full-width-image fade-in">
-            <img src="https://placehold.co/1600x900/111820/1E242C?text=Logo+System" alt="Logo System">
-        </div>
+  <div class="nav-cta">
+    <a href="#book-a-call" class="btn-primary">Book a Call</a>
+  </div>
 
-        <div class="showcase-grid">
-            <div class="showcase-image-wrapper fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Brand+Guidelines" alt="Brand Guidelines" class="showcase-image">
-            </div>
-            <div class="showcase-image-wrapper fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Color+Palette" alt="Color Palette" class="showcase-image">
-            </div>
-            <div class="showcase-image-wrapper fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Typography" alt="Typography" class="showcase-image">
-            </div>
-            <div class="showcase-image-wrapper fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Applications" alt="Applications" class="showcase-image">
-            </div>
-        </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-        <div class="full-width-image fade-in" style="margin-top: 3rem;">
-            <img src="https://placehold.co/1600x900/111820/1E242C?text=Marketing+Collateral" alt="Marketing Collateral">
-        </div>
-    </section>
+<!-- ── PROJECT HERO ── -->
+<div class="project-hero fade-up">
+  <div class="project-meta">
+    <span class="meta-tag">Brand Identity</span>
+    <span class="meta-tag">2024</span>
+    <span class="meta-tag">Luminary Co.</span>
+  </div>
+  <h1>Building a Brand That Commands Every Room.</h1>
+  <p>A complete visual identity system for Luminary Co. — from logo and type to colour, motion, and digital presence.</p>
+</div>
 
-    <!-- Results -->
-    <section class="results-section">
-        <div class="results-content">
-            <h2 class="fade-in" style="text-align: center;">The Impact</h2>
-            <p class="fade-in">The new identity transformed how the company presents itself and how clients perceive them. Results speak louder than words.</p>
-            
-            <div class="results-grid">
-                <div class="result-stat fade-in">
-                    <div class="stat-number">250%</div>
-                    <div class="stat-label">Increase in Brand Recognition</div>
-                </div>
-                <div class="result-stat fade-in">
-                    <div class="stat-number">180%</div>
-                    <div class="stat-label">Growth in Client Inquiries</div>
-                </div>
-                <div class="result-stat fade-in">
-                    <div class="stat-number">95%</div>
-                    <div class="stat-label">Client Satisfaction Score</div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ── HERO IMAGE ── -->
+<div class="hero-image-wrap fade-up">
+  <img src="https://placehold.co/1200x600/111820/1E242C" alt="Luminary Co. Brand Identity">
+</div>
 
-    <!-- Next Project -->
-    <section class="next-project">
-        <h3 class="fade-in">NEXT PROJECT</h3>
-        <a href="project-detail.html" class="next-project-link fade-in">
-            <div class="next-project-title">E-commerce Redesign →</div>
-            <div class="next-project-category">Web Design</div>
-        </a>
-    </section>
+<!-- ── OVERVIEW ── -->
+<div class="container">
+  <div class="overview-row fade-up">
+    <div class="overview-card">
+      <p class="overview-label">Client</p>
+      <p class="overview-value">Luminary Co.</p>
+    </div>
+    <div class="overview-card">
+      <p class="overview-label">Timeline</p>
+      <p class="overview-value">6 Weeks</p>
+    </div>
+    <div class="overview-card">
+      <p class="overview-label">Deliverables</p>
+      <p class="overview-value">Logo, Brand Guide, Social Kit, Website</p>
+    </div>
+  </div>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <h2 class="fade-in">Ready to bring your vision to life?</h2>
-        <a href="#book-a-call" class="btn-primary fade-in">Book a Call</a>
-    </section>
+  <!-- ── PROBLEM ── -->
+  <div class="content-section fade-up">
+    <span class="section-label">The Problem</span>
+    <div class="two-col">
+      <div>
+        <h2>A great product with no visual voice.</h2>
+        <p>Luminary Co. had a premium product and loyal customers — but their visual identity didn't match the quality they delivered. Inconsistent branding was eroding trust before customers even made contact.</p>
+        <p>They needed a complete identity rebuild. Something that felt elevated, confident, and ready to compete at the highest level.</p>
+      </div>
+      <div>
+        <h2>What we needed to solve.</h2>
+        <p>Create a cohesive visual identity that communicated premium quality at every touchpoint — from social media to packaging to web presence.</p>
+        <p>The new brand needed to feel timeless, modern, and instantly recognisable in a crowded market.</p>
+      </div>
+    </div>
+  </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" aria-label="Instagram">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-                </a>
-                <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" aria-label="LinkedIn">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
-                </a>
-                <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" aria-label="WhatsApp">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                </a>
-            </div>
-            <a href="#" class="back-to-top">Back to Top ↑</a>
-            <div class="copyright">© 2026 Favour Onasanya TL</div>
-        </div>
-    </footer>
+  <div class="divider"></div>
 
-    <script>
-        // Intersection Observer for scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+  <!-- ── SOLUTION ── -->
+  <div class="content-section fade-up">
+    <span class="section-label">The Solution</span>
+    <h2>A complete identity system built to last.</h2>
+    <p>We built the brand from the ground up — starting with strategic brand positioning, then moving into visual expression. Every element was designed with intention: the logo mark, the typographic system, the colour palette, the motion language, and the digital design system.</p>
+    <p>The result is a brand that speaks before a word is said. Clean. Confident. Luminous.</p>
+  </div>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
+  <!-- ── IMAGE GRID ── -->
+  <div class="image-grid">
+    <img src="https://placehold.co/1200x500/111820/1E242C" alt="Brand Identity Overview">
+    <img src="https://placehold.co/800x600/111820/1E242C" alt="Logo System">
+    <img src="https://placehold.co/800x600/111820/1E242C" alt="Typography">
+    <img src="https://placehold.co/800x600/111820/1E242C" alt="Colour Palette">
+    <img src="https://placehold.co/800x600/111820/1E242C" alt="Brand Applications">
+  </div>
 
-        // Observe all fade-in elements
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            fadeElements.forEach(el => observer.observe(el));
-        });
-    </script>
+  <!-- ── RESULTS ── -->
+  <div class="content-section fade-up">
+    <span class="section-label">Results & Impact</span>
+    <h2>Numbers that speak.</h2>
+    <p>Within 60 days of the new brand launch, Luminary Co. saw measurable results across every metric that matters.</p>
+
+    <div class="results-grid">
+      <div class="result-card fade-up">
+        <p class="result-number">3×</p>
+        <p class="result-label">Increase in website conversion rate within 30 days</p>
+      </div>
+      <div class="result-card fade-up fade-up-delay-1">
+        <p class="result-number">+180%</p>
+        <p class="result-label">Growth in social media engagement after rebrand</p>
+      </div>
+      <div class="result-card fade-up fade-up-delay-2">
+        <p class="result-number">12</p>
+        <p class="result-label">New enterprise partnerships secured in first quarter</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ── NEXT PROJECT ── -->
+  <div class="next-project fade-up">
+    <div>
+      <p class="next-label">Next Project</p>
+      <p class="next-title">Apex App — UI/UX Design</p>
+    </div>
+    <a href="project-detail.html" class="next-arrow" aria-label="Next project">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- ── BOTTOM CTA ── -->
+<div class="bottom-cta fade-up" id="book-a-call">
+  <h2>Ready to bring your<br>vision to life?</h2>
+  <p>Let's build something world class together.</p>
+  <a href="#book-a-call" class="btn-primary">Book a Call</a>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
+    </a>
+    <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+  </div>
+
+  <p class="footer-copy">© 2026 Favour Onasanya TL</p>
+  <a href="#" class="footer-top">Back to Top ↑</a>
+</footer>
+
+<script>
+  // ── HAMBURGER ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+
+  function closeMobile() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── SCROLL ANIMATIONS ──
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  fadeEls.forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>

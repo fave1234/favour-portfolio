@@ -1,864 +1,1098 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favour TL | World Class Design.</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        dark: '#080B0F',
-                        panel: '#111820',
-                        border: '#1E242C',
-                    },
-                    fontFamily: {
-                        sans: ['Satoshi', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Favour TL — World Class Design. Every Time.</title>
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <style>
-        /* BASE & TYPOGRAPHY */
-        body {
-            background-color: #080B0F;
-            color: #FFFFFF;
-            font-family: 'Satoshi', sans-serif;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+  :root {
+    --bg: #080B0F;
+    --card: #111820;
+    --border: #1E242C;
+    --text: #FFFFFF;
+    --muted: rgba(255,255,255,0.4);
+    --glow: rgba(255,255,255,0.15);
+  }
 
-        /* CUSTOM BUTTONS */
-        .btn-primary {
-            background-color: #ffffff;
-            color: #000000;
-            position: relative;
-            overflow: hidden;
-            border-radius: 9999px;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-            animation: breathing-glow 3s infinite alternate ease-in-out;
-            transition: all 0.3s ease;
-            z-index: 1;
-            font-weight: 500;
-        }
-        
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
-            transform: skewX(-20deg);
-            animation: slow-gleam 4s infinite linear;
-            z-index: -1;
-        }
+  html { scroll-behavior: smooth; }
 
-        .btn-primary:hover {
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
 
-        .btn-primary:hover::before {
-            animation: slow-gleam 2s infinite linear;
-        }
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-        .btn-secondary {
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-            border-radius: 9999px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
+  /* ══════════════════════════════════════════
+     BUTTONS
+  ══════════════════════════════════════════ */
 
-        .btn-secondary:hover {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 999px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255,255,255,0.25);
+    animation: glowPulse 3s ease-in-out infinite;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    white-space: nowrap;
+  }
 
-        /* KEYFRAMES */
-        @keyframes breathing-glow {
-            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
-            100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.25); }
-        }
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+    animation: gleam 3s ease-in-out infinite;
+    pointer-events: none;
+  }
 
-        @keyframes slow-gleam {
-            0% { left: -150%; }
-            100% { left: 250%; }
-        }
+  .btn-primary:hover {
+    box-shadow: 0 0 40px rgba(255,255,255,0.5);
+    transform: translateY(-1px);
+  }
 
-        @keyframes bg-shift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+  .btn-primary:hover::before {
+    animation-duration: 1.5s;
+  }
 
-        @keyframes ticker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+  @keyframes gleam {
+    0% { left: -75%; }
+    100% { left: 125%; }
+  }
 
-        /* VISUAL EFFECTS */
-        .bg-anim {
-            background: radial-gradient(circle at 50% 50%, rgba(17, 24, 32, 0.8) 0%, rgba(8, 11, 15, 1) 100%);
-            background-size: 200% 200%;
-            animation: bg-shift 15s ease infinite;
-        }
+  @keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255,255,255,0.25); }
+    50% { box-shadow: 0 0 35px rgba(255,255,255,0.45); }
+  }
 
-        .img-interactive {
-            filter: grayscale(100%) opacity(60%);
-            transition: all 0.4s ease;
-        }
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    font-family: 'Satoshi', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+    white-space: nowrap;
+  }
 
-        .img-interactive:hover, .group:hover .img-interactive {
-            filter: grayscale(0%) opacity(100%);
-        }
+  .btn-secondary:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-1px);
+  }
 
-        .logo-interactive {
-            opacity: 0.3;
-            transition: opacity 0.3s ease;
-            filter: brightness(0) invert(1);
-        }
+  /* ══════════════════════════════════════════
+     NAVIGATION
+  ══════════════════════════════════════════ */
 
-        .logo-interactive:hover {
-            opacity: 1;
-        }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-        /* TICKER MASKS */
-        .ticker-mask {
-            -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-            mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
 
-        .ticker-content {
-            display: flex;
-            width: max-content;
-            animation: ticker 30s linear infinite;
-        }
+  .nav-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+  }
 
-        .ticker-content:hover {
-            animation-play-state: paused;
-        }
+  .nav-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+  }
 
-        /* ACCORDION SERVICES */
-        .services-container {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .service-card {
-            flex: 1;
-            transition: flex 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
-        }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-        @media (min-width: 768px) {
-            .services-container:hover .service-card {
-                flex: 0.8;
-            }
-            .services-container .service-card:hover {
-                flex: 1.6;
-                box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
-                transform: translateY(-4px);
-            }
-        }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
 
-        /* BENTO HOVER */
-        .bento-card {
-            transition: all 0.3s ease;
-        }
-        .bento-card:hover {
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
-            transform: translateY(-2px);
-        }
+  .nav-links a:hover { color: #fff; }
 
-        /* SECTION TITLES */
-        .section-title {
-            display: inline-block;
-            border: 1px dashed #1E242C;
-            padding: 0.25rem 1rem;
-            border-radius: 0.25rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            font-size: 0.75rem;
-            color: rgba(255, 255, 255, 0.6);
-            margin-bottom: 2rem;
-        }
+  .nav-cta { flex-shrink: 0; }
 
-        /* SCROLL REVEAL */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+  .nav-cta .btn-primary { padding: 10px 22px; font-size: 0.875rem; }
 
-        /* MOBILE MENU */
-        #mobile-menu {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        
-        /* HIDE SCROLLBAR */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #080B0F;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1E242C;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #333;
-        }
+  /* Mobile nav */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
 
-        /* VIEW TRANSITIONS */
-        .view-section {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .view-section.active {
-            display: block;
-            opacity: 1;
-        }
-    </style>
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2.5px;
+    background: #fff;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger.active span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .mobile-menu.open { display: flex; opacity: 1; }
+
+  .mobile-menu a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: 700;
+    transition: color 0.3s ease;
+  }
+
+  .mobile-menu a:hover { color: #fff; }
+
+  /* ══════════════════════════════════════════
+     SECTION LABELS
+  ══════════════════════════════════════════ */
+
+  .section-label {
+    display: inline-block;
+    border: 1px dashed rgba(255,255,255,0.25);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+
+  /* ══════════════════════════════════════════
+     HERO
+  ══════════════════════════════════════════ */
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 40%, rgba(255,255,255,0.04) 0%, transparent 70%);
+    animation: heroBg 8s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+
+  @keyframes heroBg {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .hero-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 0 30px rgba(255,255,255,0.1);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(255,255,255,0.8);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--muted);
+    max-width: 500px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.7;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ── TICKER ── */
+  .ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 60px 0 0;
+  }
+
+  .ticker-wrap::before,
+  .ticker-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 160px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .ticker-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+  }
+
+  .ticker-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+  }
+
+  .ticker-track {
+    display: flex;
+    gap: 12px;
+    animation: tickerScroll 30s linear infinite;
+    width: max-content;
+  }
+
+  @keyframes tickerScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .skill-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    white-space: nowrap;
+    background: rgba(255,255,255,0.02);
+    transition: color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .skill-pill:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  /* ══════════════════════════════════════════
+     SECTIONS
+  ══════════════════════════════════════════ */
+
+  section {
+    padding: 100px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  section.full-width {
+    max-width: none;
+    padding: 100px 40px;
+  }
+
+  /* ══════════════════════════════════════════
+     SERVICES
+  ══════════════════════════════════════════ */
+
+  .services-row {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .service-card {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    cursor: default;
+    transition: flex 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  .services-row:hover .service-card { flex: 0.7; }
+  .services-row:hover .service-card:hover {
+    flex: 1.6;
+    box-shadow: 0 0 40px rgba(255,255,255,0.08);
+    transform: translateY(-4px);
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    transition: background 0.3s ease;
+  }
+
+  .service-card:hover .service-icon {
+    background: rgba(255,255,255,0.12);
+  }
+
+  .service-icon svg {
+    width: 24px; height: 24px;
+    fill: #fff;
+  }
+
+  .service-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    transition: color 0.3s ease;
+  }
+
+  .service-card:hover p { color: rgba(255,255,255,0.7); }
+
+  /* ══════════════════════════════════════════
+     WORK GRID
+  ══════════════════════════════════════════ */
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .work-grid .project-card:nth-child(1),
+  .work-grid .project-card:nth-child(6) {
+    grid-column: span 2;
+  }
+
+  .project-card {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    cursor: pointer;
+    aspect-ratio: 16/9;
+    display: block;
+    text-decoration: none;
+  }
+
+  .project-card:nth-child(1),
+  .project-card:nth-child(6) { aspect-ratio: 21/9; }
+
+  .project-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) opacity(60%);
+    transition: filter 0.4s ease, transform 0.4s ease;
+    display: block;
+  }
+
+  .project-card:hover img {
+    filter: grayscale(0%) opacity(100%);
+    transform: scale(1.03);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8,11,15,0.9) 0%, transparent 60%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 28px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .project-card:hover .project-overlay { opacity: 1; }
+
+  .project-overlay h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .project-overlay span {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ══════════════════════════════════════════
+     LOGO TICKER
+  ══════════════════════════════════════════ */
+
+  .logo-ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+  }
+
+  .logo-ticker-wrap::before,
+  .logo-ticker-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 160px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .logo-ticker-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+  }
+
+  .logo-ticker-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+  }
+
+  .logo-ticker-track {
+    display: flex;
+    gap: 24px;
+    animation: tickerScroll 25s linear infinite;
+    width: max-content;
+  }
+
+  .logo-box {
+    width: 140px;
+    height: 60px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    transition: color 0.3s ease, border-color 0.3s ease;
+    cursor: default;
+    flex-shrink: 0;
+  }
+
+  .logo-box:hover {
+    color: #fff;
+    border-color: rgba(255,255,255,0.3);
+  }
+
+  /* ══════════════════════════════════════════
+     TESTIMONIALS
+  ══════════════════════════════════════════ */
+
+  .testimonials-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .testimonial-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    cursor: default;
+  }
+
+  .testimonial-card:hover {
+    box-shadow: 0 0 30px rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.2);
+  }
+
+  .testimonial-card:hover .testimonial-text { color: rgba(255,255,255,0.85); }
+
+  .testimonial-name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 14px;
+    color: #fff;
+  }
+
+  .testimonial-text {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.75;
+    transition: color 0.3s ease;
+  }
+
+  .quote-mark {
+    font-size: 3rem;
+    line-height: 1;
+    color: rgba(255,255,255,0.08);
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* ══════════════════════════════════════════
+     CTA SECTION
+  ══════════════════════════════════════════ */
+
+  .cta-section {
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 100px 40px;
+  }
+
+  .cta-section h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-section p {
+    color: var(--muted);
+    margin-bottom: 40px;
+    font-size: 1.05rem;
+  }
+
+  /* ══════════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════════ */
+
+  footer {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 36px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .social-link svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+    transition: filter 0.3s ease;
+  }
+
+  .social-link:hover {
+    box-shadow: 0 0 16px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  .footer-copy {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    flex: 1;
+  }
+
+  .footer-top {
+    font-size: 0.85rem;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-top:hover { color: #fff; }
+
+  /* ══════════════════════════════════════════
+     SCROLL ANIMATIONS
+  ══════════════════════════════════════════ */
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .fade-up-delay-1 { transition-delay: 0.1s; }
+  .fade-up-delay-2 { transition-delay: 0.2s; }
+  .fade-up-delay-3 { transition-delay: 0.3s; }
+
+  /* ══════════════════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════════════════ */
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .services-row { flex-direction: column; }
+    .services-row:hover .service-card { flex: 1; }
+    .services-row:hover .service-card:hover { flex: 1; transform: translateY(-4px); }
+    .testimonials-row { grid-template-columns: 1fr; }
+    nav { padding: 0 20px; }
+  }
+
+  @media (max-width: 700px) {
+    .work-grid { grid-template-columns: 1fr; }
+    .work-grid .project-card:nth-child(1),
+    .work-grid .project-card:nth-child(6) { grid-column: span 1; aspect-ratio: 16/9; }
+    section { padding: 70px 20px; }
+    .hero { padding: 80px 20px 0; }
+    footer { padding: 28px 20px; }
+  }
+</style>
 </head>
-<body class="antialiased selection:bg-white selection:text-black">
+<body>
 
-    <!-- NAVIGATION -->
-    <nav class="fixed top-0 left-0 w-full z-50 bg-[#080B0F]/90 backdrop-blur-md border-b border-border">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            
-            <!-- Left: Logo & Image -->
-            <a href="#" onclick="switchView('home'); return false;" class="flex items-center gap-3 group">
-                <div class="w-8 h-8 rounded-full overflow-hidden border border-border group-hover:border-white/40 transition-colors">
-                    <img src="images/favour.jpeg" onerror="this.src='https://placehold.co/100x100/111820/ffffff?text=FT'" alt="Favour TL" class="w-full h-full object-cover img-interactive">
-                </div>
-                <span class="font-bold text-lg tracking-wide group-hover:text-white transition-colors">Favour TL</span>
-            </a>
+<!-- ══ MOBILE MENU ══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Work</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="about.html" onclick="closeMobile()">About</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="#book-a-call" class="btn-primary" style="margin-top:20px;" onclick="closeMobile()">Book a Call</a>
+</div>
 
-            <!-- Center: Desktop Links -->
-            <div class="hidden md:flex items-center gap-8 text-white/40 text-sm font-medium">
-                <a href="#" onclick="switchView('home'); return false;" class="nav-link hover:text-white transition-colors hover:shadow-[0_0_10px_rgba(255,255,255,0.2)] rounded-full px-2">Work</a>
-                <a href="#services" onclick="switchView('home'); setTimeout(()=>document.getElementById('services').scrollIntoView(), 100); return false;" class="nav-link hover:text-white transition-colors hover:shadow-[0_0_10px_rgba(255,255,255,0.2)] rounded-full px-2">Services</a>
-                <a href="#" onclick="switchView('about'); return false;" class="nav-link hover:text-white transition-colors hover:shadow-[0_0_10px_rgba(255,255,255,0.2)] rounded-full px-2">About</a>
-                <a href="#book-a-call" class="nav-link hover:text-white transition-colors hover:shadow-[0_0_10px_rgba(255,255,255,0.2)] rounded-full px-2">Contact</a>
-            </div>
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="images/favour image.jpeg" alt="Favour TL" class="nav-avatar">
+    <span class="nav-name">Favour TL</span>
+  </a>
 
-            <!-- Right: Primary CTA -->
-            <div class="hidden md:block">
-                <a href="#book-a-call" class="btn-primary px-6 py-2.5 text-sm inline-block">Book a Call</a>
-            </div>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 
-            <!-- Mobile Menu Toggle (Veggie Burger) -->
-            <button id="menu-btn" class="md:hidden flex flex-col justify-center items-center gap-1.5 w-8 h-8 z-50 relative group">
-                <span class="w-6 h-[2px] bg-white rounded-full transition-all duration-300 group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
-                <span class="w-6 h-[2px] bg-white rounded-full transition-all duration-300 group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
-                <span class="w-6 h-[2px] bg-white rounded-full transition-all duration-300 group-hover:shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
-            </button>
-        </div>
+  <div class="nav-cta">
+    <a href="#book-a-call" class="btn-primary">Book a Call</a>
+  </div>
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-[#080B0F] z-40 flex flex-col justify-center items-center gap-8 opacity-0 invisible">
-            <a href="#" onclick="switchView('home'); toggleMenu(); return false;" class="text-3xl font-bold text-white/60 hover:text-white transition-colors">Work</a>
-            <a href="#" onclick="switchView('home'); setTimeout(()=>document.getElementById('services').scrollIntoView(), 100); toggleMenu(); return false;" class="text-3xl font-bold text-white/60 hover:text-white transition-colors">Services</a>
-            <a href="#" onclick="switchView('about'); toggleMenu(); return false;" class="text-3xl font-bold text-white/60 hover:text-white transition-colors">About</a>
-            <a href="#book-a-call" onclick="toggleMenu(); return false;" class="text-3xl font-bold text-white/60 hover:text-white transition-colors">Contact</a>
-            <a href="#book-a-call" onclick="toggleMenu(); return false;" class="btn-primary px-8 py-4 text-lg mt-4">Book a Call</a>
-        </div>
-    </nav>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-    <!-- ==========================================
-         VIEW: HOME 
-         ========================================== -->
-    <main id="view-home" class="view-section active pt-20">
-        
-        <!-- HERO SECTION -->
-        <section class="relative min-h-[90vh] flex flex-col justify-center items-center text-center px-6 bg-anim overflow-hidden">
-            <div class="z-10 flex flex-col items-center max-w-4xl reveal">
-                
-                <div class="mb-8 flex flex-col items-center gap-4">
-                    <div class="w-20 h-20 rounded-full overflow-hidden border-2 border-border/50">
-                        <img src="images/favour.jpeg" onerror="this.src='https://placehold.co/200x200/111820/ffffff?text=FT'" alt="Favour TL" class="w-full h-full object-cover img-interactive">
-                    </div>
-                    <span class="border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-medium tracking-wide text-white/80">
-                        Visual Designer
-                    </span>
-                </div>
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
 
-                <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-6 tracking-tight">
-                    World Class Design.<br/>Every Time.
-                </h1>
-                
-                <p class="text-lg md:text-xl text-white/40 max-w-2xl mb-10 leading-relaxed font-light">
-                    Favour brings brands to life through design, vision, and creative excellence. Turning complex ideas into luminous digital experiences.
-                </p>
+  <img src="images/favour image.jpeg" alt="Favour TL" class="hero-avatar fade-up">
 
-                <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                    <a href="#work" class="btn-secondary px-8 py-3.5 text-center">See My Work</a>
-                    <a href="#book-a-call" class="btn-primary px-8 py-3.5 text-center">Book a Call</a>
-                </div>
-            </div>
+  <div class="hero-badge fade-up fade-up-delay-1">Visual Designer</div>
 
-            <!-- Skills Ticker (Bottom of Hero) -->
-            <div class="absolute bottom-10 w-full overflow-hidden ticker-mask z-10">
-                <div class="ticker-content gap-4 px-4">
-                    <!-- Duplicated set for seamless loop -->
-                    <div class="flex gap-4">
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Brand Identity</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">UI/UX Design</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Video Production</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Social Media Design</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Creative Thinking</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Website Copywriting</span>
-                    </div>
-                    <div class="flex gap-4">
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Brand Identity</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">UI/UX Design</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Video Production</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Social Media Design</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Creative Thinking</span>
-                        <span class="border border-border px-6 py-2 rounded-full text-sm text-white/40 whitespace-nowrap bg-dark/50 backdrop-blur-sm">Website Copywriting</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <h1 class="fade-up fade-up-delay-1">World Class Design.<br>Every Time.</h1>
 
-        <!-- SERVICES SECTION -->
-        <section id="services" class="py-24 px-6 max-w-7xl mx-auto reveal">
-            <div class="section-title">Services</div>
-            
-            <div class="services-container flex-col md:flex-row h-auto md:h-[400px]">
-                <!-- Service 1 -->
-                <div class="service-card bento-card bg-panel border border-border rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group cursor-crosshair">
-                    <div class="absolute top-8 left-8 text-white/20 group-hover:text-white/80 transition-colors">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
-                    </div>
-                    <div class="z-10">
-                        <h3 class="text-2xl font-bold mb-3">Graphic Design</h3>
-                        <p class="text-white/40 text-sm group-hover:text-white/80 transition-colors">Crafting luminous visual identities, social media assets, and marketing materials that command attention and breathe life into your brand.</p>
-                    </div>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="service-card bento-card bg-panel border border-border rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group cursor-crosshair">
-                    <div class="absolute top-8 left-8 text-white/20 group-hover:text-white/80 transition-colors">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div class="z-10">
-                        <h3 class="text-2xl font-bold mb-3">Video Editing</h3>
-                        <p class="text-white/40 text-sm group-hover:text-white/80 transition-colors">Transforming raw footage into compelling, high-retention stories. Seamless cuts, perfect pacing, and dynamic visual effects.</p>
-                    </div>
-                </div>
+  <p class="hero-sub fade-up fade-up-delay-2">
+    Favour brings brands to life through design, vision, and creative excellence.
+  </p>
 
-                <!-- Service 3 -->
-                <div class="service-card bento-card bg-panel border border-border rounded-3xl p-8 flex flex-col justify-end relative overflow-hidden group cursor-crosshair">
-                    <div class="absolute top-8 left-8 text-white/20 group-hover:text-white/80 transition-colors">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                    </div>
-                    <div class="z-10">
-                        <h3 class="text-2xl font-bold mb-3">Web Design</h3>
-                        <p class="text-white/40 text-sm group-hover:text-white/80 transition-colors">Building digital homes that feel alive. Clean, functional, and radiant UI/UX design optimized for conversion and elegance.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="hero-ctas fade-up fade-up-delay-3">
+    <a href="#work" class="btn-secondary">See My Work</a>
+    <a href="#book-a-call" class="btn-primary">Book a Call</a>
+  </div>
 
-        <!-- WORK SECTION -->
-        <section id="work" class="py-24 px-6 max-w-7xl mx-auto reveal">
-            <div class="section-title">The Work Speaks</div>
+  <div class="ticker-wrap" style="margin-top: 80px;">
+    <div class="ticker-track" id="skillsTicker">
+      <span class="skill-pill">Brand Identity</span>
+      <span class="skill-pill">UI/UX Design</span>
+      <span class="skill-pill">Video Production</span>
+      <span class="skill-pill">Social Media Design</span>
+      <span class="skill-pill">Creative Thinking</span>
+      <span class="skill-pill">Website Copywriting</span>
+      <span class="skill-pill">Brand Identity</span>
+      <span class="skill-pill">UI/UX Design</span>
+      <span class="skill-pill">Video Production</span>
+      <span class="skill-pill">Social Media Design</span>
+      <span class="skill-pill">Creative Thinking</span>
+      <span class="skill-pill">Website Copywriting</span>
+      <span class="skill-pill">Brand Identity</span>
+      <span class="skill-pill">UI/UX Design</span>
+      <span class="skill-pill">Video Production</span>
+      <span class="skill-pill">Social Media Design</span>
+      <span class="skill-pill">Creative Thinking</span>
+      <span class="skill-pill">Website Copywriting</span>
+    </div>
+  </div>
+</section>
 
-            <!-- Bento Grid 6 Items -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
-                <!-- Project 1 (Large) -->
-                <a href="#" onclick="switchView('project'); return false;" class="group bento-card bg-panel border border-border rounded-3xl overflow-hidden relative md:col-span-2 aspect-[16/9] md:aspect-[21/9] block">
-                    <img src="https://placehold.co/1200x600/111820/1E242C?text=Premium+Brand+Identity" alt="Project" class="w-full h-full object-cover img-interactive absolute inset-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-white/60 text-sm mb-2">Brand Identity</span>
-                        <h3 class="text-3xl font-bold text-white">Luminous Aesthetics</h3>
-                    </div>
-                </a>
+<!-- ══ SERVICES ══ -->
+<section id="services">
+  <div class="fade-up">
+    <span class="section-label">Services</span>
+  </div>
+  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom: 40px; line-height:1.15;">
+    What I bring to the table.
+  </h2>
 
-                <!-- Project 2 (Medium) -->
-                <a href="#" onclick="switchView('project'); return false;" class="group bento-card bg-panel border border-border rounded-3xl overflow-hidden relative aspect-square block">
-                    <img src="https://placehold.co/800x800/111820/1E242C?text=Web+Design" alt="Project" class="w-full h-full object-cover img-interactive absolute inset-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-white/60 text-sm mb-2">UI/UX Design</span>
-                        <h3 class="text-2xl font-bold text-white">Tech Platform Reimagined</h3>
-                    </div>
-                </a>
+  <div class="services-row fade-up">
 
-                <!-- Project 3 (Medium) -->
-                <a href="#" onclick="switchView('project'); return false;" class="group bento-card bg-panel border border-border rounded-3xl overflow-hidden relative aspect-square block">
-                    <img src="https://placehold.co/800x800/111820/1E242C?text=Video+Campaign" alt="Project" class="w-full h-full object-cover img-interactive absolute inset-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-white/60 text-sm mb-2">Video Production</span>
-                        <h3 class="text-2xl font-bold text-white">Cinematic Launch Reel</h3>
-                    </div>
-                </a>
+    <!-- Graphic Design -->
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+        </svg>
+      </div>
+      <h3>Graphic Design</h3>
+      <p>Logos, brand identities, social media graphics, and print materials that communicate with precision and power. Design that people remember.</p>
+    </div>
 
-                <!-- Project 4 (Medium) -->
-                <a href="#" onclick="switchView('project'); return false;" class="group bento-card bg-panel border border-border rounded-3xl overflow-hidden relative aspect-square block">
-                    <img src="https://placehold.co/800x800/111820/1E242C?text=Social+Media" alt="Project" class="w-full h-full object-cover img-interactive absolute inset-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-white/60 text-sm mb-2">Social Design</span>
-                        <h3 class="text-2xl font-bold text-white">Instagram Overhaul</h3>
-                    </div>
-                </a>
+    <!-- Video Editing -->
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+        </svg>
+      </div>
+      <h3>Video Editing</h3>
+      <p>Cinematic cuts, motion graphics, and story-driven content. Transforming raw footage into compelling video that moves audiences to act.</p>
+    </div>
 
-                <!-- Project 5 (Medium) -->
-                <a href="#" onclick="switchView('project'); return false;" class="group bento-card bg-panel border border-border rounded-3xl overflow-hidden relative aspect-square block">
-                    <img src="https://placehold.co/800x800/111820/1E242C?text=Packaging" alt="Project" class="w-full h-full object-cover img-interactive absolute inset-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-white/60 text-sm mb-2">Graphic Design</span>
-                        <h3 class="text-2xl font-bold text-white">Minimalist Packaging</h3>
-                    </div>
-                </a>
+    <!-- Web Design -->
+    <div class="service-card">
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
+        </svg>
+      </div>
+      <h3>Web Design</h3>
+      <p>Beautiful, fast, conversion-focused websites. From landing pages to full digital experiences — crafted with intention and built to perform.</p>
+    </div>
 
-                <!-- Project 6 (Large) -->
-                <a href="#" onclick="switchView('project'); return false;" class="group bento-card bg-panel border border-border rounded-3xl overflow-hidden relative md:col-span-2 aspect-[16/9] md:aspect-[21/9] block">
-                    <img src="https://placehold.co/1200x600/111820/1E242C?text=Full+Stack+Creative" alt="Project" class="w-full h-full object-cover img-interactive absolute inset-0">
-                    <div class="absolute inset-0 bg-gradient-to-t from-dark/90 via-dark/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
-                        <span class="text-white/60 text-sm mb-2">Web Design + Brand</span>
-                        <h3 class="text-3xl font-bold text-white">End-to-End Excellence</h3>
-                    </div>
-                </a>
+  </div>
+</section>
 
-            </div>
-        </section>
+<!-- ══ WORK ══ -->
+<section id="work">
+  <div class="fade-up">
+    <span class="section-label">The Work Speaks</span>
+  </div>
+  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom: 40px; line-height:1.15;">
+    Selected projects.
+  </h2>
 
-        <!-- CLIENT LOGOS TICKER -->
-        <section class="py-20 reveal">
-            <div class="max-w-7xl mx-auto px-6 mb-8">
-                <div class="section-title">Brands I've Worked With</div>
-            </div>
-            
-            <div class="w-full overflow-hidden ticker-mask">
-                <div class="ticker-content items-center gap-24 px-12">
-                    <!-- Duplicated for loop -->
-                    <div class="flex items-center gap-24">
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">ACME CORP</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">GLOBAL TECH</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">LUMINOUS</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">NEXUS STUDIOS</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">ELEVATE INC</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">ZENITH MEDIA</h3>
-                    </div>
-                    <div class="flex items-center gap-24">
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">ACME CORP</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">GLOBAL TECH</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">LUMINOUS</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">NEXUS STUDIOS</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">ELEVATE INC</h3>
-                        <h3 class="text-2xl font-bold logo-interactive whitespace-nowrap">ZENITH MEDIA</h3>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="work-grid">
+    <a href="project-detail.html" class="project-card fade-up">
+      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Brand Identity — Luminary Co.">
+      <div class="project-overlay">
+        <h4>Luminary Co.</h4>
+        <span>Brand Identity</span>
+      </div>
+    </a>
 
-        <!-- TESTIMONIALS -->
-        <section class="py-24 px-6 max-w-7xl mx-auto reveal">
-            <div class="section-title">What Clients Say</div>
+    <a href="project-detail.html" class="project-card fade-up fade-up-delay-1">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="UI/UX — Apex App">
+      <div class="project-overlay">
+        <h4>Apex App</h4>
+        <span>UI/UX Design</span>
+      </div>
+    </a>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Testimonial 1 -->
-                <div class="bento-card bg-panel border border-border rounded-3xl p-8 group">
-                    <div class="flex mb-4 text-white/20 group-hover:text-white transition-colors">
-                        ★★★★★
-                    </div>
-                    <p class="text-white/40 group-hover:text-white transition-colors text-sm leading-relaxed mb-6">"Favour understood our vision immediately. The design wasn't just beautiful; it felt alive. He brought a level of radiance to our brand that we didn't know was missing."</p>
-                    <h4 class="font-bold text-white">Sarah Jenkins</h4>
-                    <span class="text-xs text-white/40">CEO, Luminous</span>
-                </div>
+    <a href="project-detail.html" class="project-card fade-up fade-up-delay-2">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="Video — Nova Campaign">
+      <div class="project-overlay">
+        <h4>Nova Campaign</h4>
+        <span>Video Editing</span>
+      </div>
+    </a>
 
-                <!-- Testimonial 2 -->
-                <div class="bento-card bg-panel border border-border rounded-3xl p-8 group">
-                    <div class="flex mb-4 text-white/20 group-hover:text-white transition-colors">
-                        ★★★★★
-                    </div>
-                    <p class="text-white/40 group-hover:text-white transition-colors text-sm leading-relaxed mb-6">"Boy Genius is the right name. His video editing pacing is unmatched. He turned our boring corporate footage into a cinematic masterpiece that doubled our engagement."</p>
-                    <h4 class="font-bold text-white">Marcus Cole</h4>
-                    <span class="text-xs text-white/40">Marketing Director</span>
-                </div>
+    <a href="project-detail.html" class="project-card fade-up fade-up-delay-1">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="Social — Orbit Brand">
+      <div class="project-overlay">
+        <h4>Orbit Brand</h4>
+        <span>Social Media Design</span>
+      </div>
+    </a>
 
-                <!-- Testimonial 3 -->
-                <div class="bento-card bg-panel border border-border rounded-3xl p-8 group">
-                    <div class="flex mb-4 text-white/20 group-hover:text-white transition-colors">
-                        ★★★★★
-                    </div>
-                    <p class="text-white/40 group-hover:text-white transition-colors text-sm leading-relaxed mb-6">"World class every single time. Favour redesigned our entire web presence. Clean, dark, confident. We've seen a 40% increase in discovery calls booked since launch."</p>
-                    <h4 class="font-bold text-white">Elena Rostova</h4>
-                    <span class="text-xs text-white/40">Founder, Nexus</span>
-                </div>
-            </div>
-        </section>
-    </main>
+    <a href="project-detail.html" class="project-card fade-up fade-up-delay-2">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="Web — Zenith Studio">
+      <div class="project-overlay">
+        <h4>Zenith Studio</h4>
+        <span>Web Design</span>
+      </div>
+    </a>
 
-    <!-- ==========================================
-         VIEW: ABOUT 
-         ========================================== -->
-    <main id="view-about" class="view-section pt-32 pb-24 px-6 max-w-7xl mx-auto">
-        <div class="text-center mb-16 reveal">
-            <h1 class="text-5xl md:text-6xl font-bold tracking-tight mb-4">The Mind Behind the Work</h1>
-            <p class="text-white/40">I am Light. Translating vision into visual excellence.</p>
-        </div>
+    <a href="project-detail.html" class="project-card fade-up">
+      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Identity — Pulse Media">
+      <div class="project-overlay">
+        <h4>Pulse Media</h4>
+        <span>Brand Identity</span>
+      </div>
+    </a>
+  </div>
+</section>
 
-        <!-- Intro Bento -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 reveal">
-            <div class="md:col-span-2 bento-card bg-panel border border-border rounded-3xl p-10 flex flex-col justify-center">
-                <div class="section-title mb-6">Who I Am</div>
-                <h2 class="text-2xl font-bold mb-4">Favour Onasanya TL</h2>
-                <p class="text-white/60 leading-relaxed mb-4">
-                    Known to many as "Boy Genius," I am a multidisciplinary Visual Designer obsessed with the interplay of light, darkness, and clean aesthetics. My approach to design strips away the unnecessary, leaving only what is confident and impactful.
-                </p>
-                <p class="text-white/60 leading-relaxed">
-                    Whether I am shaping a brand identity, cutting a dynamic video sequence, or architecting a seamless web experience, the goal remains the same: World Class Design. Every Time.
-                </p>
-            </div>
-            
-            <div class="bento-card border border-border rounded-3xl overflow-hidden aspect-square md:aspect-auto">
-                <img src="images/favour.jpeg" onerror="this.src='https://placehold.co/600x800/111820/1E242C?text=Favour'" alt="Favour Portrait" class="w-full h-full object-cover img-interactive">
-            </div>
-        </div>
+<!-- ══ LOGOS ══ -->
+<section id="contact" style="padding-top:0;">
+  <div class="fade-up">
+    <span class="section-label">Brands I've Worked With</span>
+  </div>
 
-        <!-- Complex Bento Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
-            
-            <!-- Experience -->
-            <div class="bento-card bg-panel border border-border rounded-3xl p-8">
-                <div class="section-title mb-6">Experience</div>
-                <div class="space-y-6">
-                    <div class="group">
-                        <h4 class="font-bold text-white transition-colors">Senior Visual Designer</h4>
-                        <div class="flex justify-between text-sm text-white/40 group-hover:text-white/80 transition-colors mt-1">
-                            <span>Nexus Studios</span>
-                            <span>2024 - Pres</span>
-                        </div>
-                    </div>
-                    <div class="w-full h-px bg-border/50"></div>
-                    <div class="group">
-                        <h4 class="font-bold text-white transition-colors">Lead Video Editor</h4>
-                        <div class="flex justify-between text-sm text-white/40 group-hover:text-white/80 transition-colors mt-1">
-                            <span>Elevate Media</span>
-                            <span>2022 - 2024</span>
-                        </div>
-                    </div>
-                    <div class="w-full h-px bg-border/50"></div>
-                    <div class="group">
-                        <h4 class="font-bold text-white transition-colors">Freelance Web Designer</h4>
-                        <div class="flex justify-between text-sm text-white/40 group-hover:text-white/80 transition-colors mt-1">
-                            <span>Independent</span>
-                            <span>2020 - 2022</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="logo-ticker-wrap fade-up">
+    <div class="logo-ticker-track">
+      <div class="logo-box">Client 1</div>
+      <div class="logo-box">Client 2</div>
+      <div class="logo-box">Client 3</div>
+      <div class="logo-box">Client 4</div>
+      <div class="logo-box">Client 5</div>
+      <div class="logo-box">Client 6</div>
+      <div class="logo-box">Client 1</div>
+      <div class="logo-box">Client 2</div>
+      <div class="logo-box">Client 3</div>
+      <div class="logo-box">Client 4</div>
+      <div class="logo-box">Client 5</div>
+      <div class="logo-box">Client 6</div>
+    </div>
+  </div>
+</section>
 
-            <div class="flex flex-col gap-6">
-                <!-- CV Card -->
-                <div class="bento-card bg-panel border border-border rounded-3xl p-8 flex flex-col justify-center items-center text-center flex-1">
-                    <svg class="w-8 h-8 text-white/40 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    <h3 class="font-bold mb-4">Full Resume</h3>
-                    <a href="#" class="btn-secondary px-6 py-2 text-sm w-full">Download My CV</a>
-                </div>
+<!-- ══ TESTIMONIALS ══ -->
+<section>
+  <div class="fade-up">
+    <span class="section-label">What Clients Say</span>
+  </div>
+  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom: 40px; line-height:1.15;">
+    The results speak.
+  </h2>
 
-                <!-- Tools Card -->
-                <div class="bento-card bg-panel border border-border rounded-3xl p-8 flex-1">
-                    <div class="section-title mb-4">Arsenal</div>
-                    <div class="flex justify-between items-center h-full pb-4">
-                        <div class="flex flex-col items-center gap-2 group">
-                            <!-- Figma SVG -->
-                            <svg class="w-8 h-8 opacity-40 group-hover:opacity-100 transition-opacity" viewBox="0 0 38 57" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 28.5C19 33.7467 14.7467 38 9.5 38C4.25329 38 0 33.7467 0 28.5C0 23.2533 4.25329 19 9.5 19H19V28.5Z" fill="#fff"/><path d="M0 47.5C0 52.7467 4.25329 57 9.5 57C14.7467 57 19 52.7467 19 47.5V38H9.5C4.25329 38 0 42.2533 0 47.5Z" fill="#fff"/><path d="M19 0L9.5 0C4.25329 0 0 4.2533 0 9.5C0 14.7467 4.25329 19 9.5 19H19V0Z" fill="#fff"/><path d="M38 9.5C38 4.2533 33.7467 0 28.5 0H19V19H28.5C33.7467 19 38 14.7467 38 9.5Z" fill="#fff"/><path d="M38 28.5C38 23.2533 33.7467 19 28.5 19C23.2533 19 19 23.2533 19 28.5C19 33.7467 23.2533 38 28.5 38C33.7467 38 38 33.7467 38 28.5Z" fill="#fff"/></svg>
-                            <span class="text-[10px] text-white/40 uppercase tracking-wider">Figma</span>
-                        </div>
-                        <div class="flex flex-col items-center gap-2 group">
-                            <!-- PS Style SVG placeholder -->
-                            <div class="w-8 h-8 bg-white/40 group-hover:bg-white transition-colors rounded flex items-center justify-center font-bold text-dark text-xs">Ps</div>
-                            <span class="text-[10px] text-white/40 uppercase tracking-wider">Photoshop</span>
-                        </div>
-                        <div class="flex flex-col items-center gap-2 group">
-                            <!-- CapCut Style SVG placeholder -->
-                            <div class="w-8 h-8 border-2 border-white/40 group-hover:border-white transition-colors rounded-full flex items-center justify-center text-white/40 group-hover:text-white">
-                                <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                            <span class="text-[10px] text-white/40 uppercase tracking-wider">CapCut</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div class="testimonials-row">
+    <div class="testimonial-card fade-up">
+      <span class="quote-mark">"</span>
+      <p class="testimonial-name">Sarah Okonkwo</p>
+      <p class="testimonial-text">Favour completely transformed our brand. The attention to detail and quality of work is unlike anything I've seen. Our visual identity now commands the room.</p>
+    </div>
 
-            <!-- Skills & Spotify -->
-            <div class="flex flex-col gap-6">
-                <!-- Skills Card -->
-                <div class="bento-card bg-panel border border-border rounded-3xl p-8 flex-1 overflow-hidden relative">
-                    <div class="section-title mb-6">Expertise</div>
-                    <div class="absolute w-full left-0 top-20 ticker-mask">
-                        <div class="ticker-content gap-3 px-4">
-                            <div class="flex gap-3">
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Brand Identity</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">UI/UX Design</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Video</span>
-                            </div>
-                            <div class="flex gap-3">
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Brand Identity</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">UI/UX Design</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Video</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="absolute w-full left-0 top-32 ticker-mask">
-                        <div class="ticker-content gap-3 px-4" style="animation-direction: reverse; animation-duration: 25s;">
-                            <div class="flex gap-3">
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Creative Thinking</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Copywriting</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Social Design</span>
-                            </div>
-                            <div class="flex gap-3">
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Creative Thinking</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Copywriting</span>
-                                <span class="bg-dark border border-border px-4 py-1.5 rounded-full text-xs text-white/60">Social Design</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="testimonial-card fade-up fade-up-delay-1">
+      <span class="quote-mark">"</span>
+      <p class="testimonial-name">James Adeyemi</p>
+      <p class="testimonial-text">Working with Favour was a game-changer. He understood our vision immediately and delivered something beyond what we imagined. World class, truly.</p>
+    </div>
 
-                <!-- Spotify Card -->
-                <div class="bento-card bg-panel border border-border rounded-3xl p-6 flex-1 h-[180px] flex flex-col">
-                    <div class="section-title mb-2">Vibe While Working</div>
-                    <div class="flex-1 w-full rounded-xl overflow-hidden relative" id="spotify-container">
-                        <!-- Iframes stacked, JS handles fade cross-fading -->
-                        <iframe class="spotify-embed absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-100 z-10" style="border-radius:12px" src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        <iframe class="spotify-embed absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0 z-0" style="border-radius:12px" src="https://open.spotify.com/embed/track/6KTGgGVSD60XZFBPAQrLtH?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        <iframe class="spotify-embed absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0 z-0" style="border-radius:12px" src="https://open.spotify.com/embed/track/4KtT8dN9QaCPNwxtJwhKmB?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                        <iframe class="spotify-embed absolute inset-0 w-full h-full transition-opacity duration-1000 opacity-0 z-0" style="border-radius:12px" src="https://open.spotify.com/embed/track/5fZ2VfuNsBtbhoNhYjXErB?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    </div>
-                </div>
-            </div>
+    <div class="testimonial-card fade-up fade-up-delay-2">
+      <span class="quote-mark">"</span>
+      <p class="testimonial-name">Amara Nwosu</p>
+      <p class="testimonial-text">The website he built for us tripled our conversion rate in the first month. Favour doesn't just design — he solves problems beautifully.</p>
+    </div>
+  </div>
+</section>
 
-        </div>
-    </main>
+<!-- ══ CTA SECTION ══ -->
+<div class="cta-section fade-up" id="book-a-call">
+  <h2>Ready to bring your<br>vision to life?</h2>
+  <p>Let's build something world class together.</p>
+  <a href="#book-a-call" class="btn-primary">Book a Call</a>
+</div>
 
-    <!-- ==========================================
-         VIEW: PROJECT DETAIL 
-         ========================================== -->
-    <main id="view-project" class="view-section pt-24 pb-24 px-6 max-w-5xl mx-auto">
-        
-        <!-- Back Button -->
-        <a href="#" onclick="switchView('home'); return false;" class="inline-flex items-center gap-2 text-white/40 hover:text-white transition-colors mb-8 reveal">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-            <span class="text-sm font-medium">Back to Work</span>
-        </a>
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-socials">
+    <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
+    </a>
+    <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+    </a>
+  </div>
 
-        <!-- Hero -->
-        <div class="reveal">
-            <div class="section-title mb-4">Brand Identity</div>
-            <h1 class="text-4xl md:text-6xl font-bold mb-10">Luminous Aesthetics</h1>
-            
-            <div class="w-full aspect-[21/9] rounded-3xl overflow-hidden border border-border mb-12">
-                <img src="https://placehold.co/1200x600/111820/1E242C?text=Main+Project+Hero" alt="Project Hero" class="w-full h-full object-cover img-interactive">
-            </div>
-        </div>
+  <p class="footer-copy">© 2026 Favour Onasanya TL</p>
 
-        <!-- Meta Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 reveal">
-            <div class="border-t border-border pt-4">
-                <span class="text-xs text-white/40 uppercase tracking-widest block mb-2">Client</span>
-                <span class="font-bold">Luminous Inc.</span>
-            </div>
-            <div class="border-t border-border pt-4">
-                <span class="text-xs text-white/40 uppercase tracking-widest block mb-2">Timeline</span>
-                <span class="font-bold">4 Weeks</span>
-            </div>
-            <div class="border-t border-border pt-4">
-                <span class="text-xs text-white/40 uppercase tracking-widest block mb-2">Deliverables</span>
-                <span class="font-bold">Logo, Web UI, Social Kit</span>
-            </div>
-        </div>
+  <a href="#home" class="footer-top">Back to Top ↑</a>
+</footer>
 
-        <!-- Content -->
-        <div class="prose prose-invert max-w-none mb-16 reveal">
-            <h3 class="text-2xl font-bold mb-4">The Challenge</h3>
-            <p class="text-white/60 leading-relaxed mb-8">
-                Luminous Inc. was entering a saturated market with a revolutionary tech product, but their visual identity felt heavy and outdated. They needed a brand system that communicated clarity, speed, and cutting-edge innovation without relying on cliché tech tropes. They needed to feel like light.
-            </p>
-            
-            <h3 class="text-2xl font-bold mb-4">The Solution</h3>
-            <p class="text-white/60 leading-relaxed mb-8">
-                I stripped away all non-essential elements, creating a stark monochromatic palette relying purely on black, deep charcoal, and pure white. The brand was injected with subtle glow effects and typography that commands authority. The result is a confident, radiant presence that instantly positions them as a premium market leader.
-            </p>
-        </div>
+<script>
+  // ── HAMBURGER ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
 
-        <!-- Visual Showcase -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24 reveal">
-            <div class="aspect-square rounded-3xl overflow-hidden border border-border">
-                <img src="https://placehold.co/800x800/111820/1E242C?text=Detail+1" alt="Detail 1" class="w-full h-full object-cover img-interactive">
-            </div>
-            <div class="aspect-square rounded-3xl overflow-hidden border border-border">
-                <img src="https://placehold.co/800x800/111820/1E242C?text=Detail+2" alt="Detail 2" class="w-full h-full object-cover img-interactive">
-            </div>
-            <div class="md:col-span-2 aspect-[21/9] rounded-3xl overflow-hidden border border-border">
-                <img src="https://placehold.co/1200x600/111820/1E242C?text=Detail+3" alt="Detail 3" class="w-full h-full object-cover img-interactive">
-            </div>
-        </div>
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
 
-        <!-- Next Project Nav -->
-        <div class="border-t border-border pt-12 flex justify-between items-center reveal">
-            <a href="#" onclick="window.scrollTo(0,0); return false;" class="group">
-                <span class="text-xs text-white/40 uppercase tracking-widest block mb-2">Previous</span>
-                <span class="text-xl font-bold group-hover:text-white/60 transition-colors">Tech Platform</span>
-            </a>
-            <a href="#" onclick="window.scrollTo(0,0); return false;" class="group text-right">
-                <span class="text-xs text-white/40 uppercase tracking-widest block mb-2">Next</span>
-                <span class="text-xl font-bold group-hover:text-white/60 transition-colors">Cinematic Reel</span>
-            </a>
-        </div>
-    </main>
+  function closeMobile() {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
-    <!-- ==========================================
-         SHARED SECTIONS (FOOTER CTA + FOOTER)
-         ========================================== -->
-    
-    <!-- BIG CTA -->
-    <section id="book-a-call" class="w-full bg-panel py-32 px-6 text-center border-t border-border reveal">
-        <h2 class="text-4xl md:text-6xl font-bold mb-10 tracking-tight">Ready to bring your<br/>vision to life?</h2>
-        <a href="mailto:contact@favourTL.com" class="btn-primary px-10 py-4 text-lg inline-block">Book a Call</a>
-    </section>
+  // ── SCROLL ANIMATIONS ──
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
 
-    <!-- FOOTER -->
-    <footer class="bg-dark border-t border-border py-12 px-6">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            
-            <!-- Socials -->
-            <div class="flex items-center gap-6">
-                <!-- Instagram -->
-                <a href="https://www.instagram.com/favour_onasanya/" target="_blank" class="w-6 h-6 text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-md transition-shadow">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-                </a>
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" class="w-6 h-6 text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-sm transition-shadow">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
-                </a>
-                <!-- WhatsApp -->
-                <a href="https://wa.link/fq0u0v" target="_blank" class="w-6 h-6 text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] rounded-full transition-shadow">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-                </a>
-            </div>
+  fadeEls.forEach(el => observer.observe(el));
+</script>
 
-            <!-- Copyright -->
-            <div class="text-white/40 text-sm">
-                &copy; 2026 Favour Onasanya TL
-            </div>
-
-            <!-- Back to top -->
-            <button onclick="window.scrollTo(0,0)" class="text-white/40 hover:text-white transition-colors text-sm font-medium">
-                Back to Top
-            </button>
-        </div>
-    </footer>
-
-    <!-- INTERACTION LOGIC -->
-    <script>
-        // --- Single Page Routing Logic ---
-        function switchView(viewId) {
-            // Hide all views
-            document.querySelectorAll('.view-section').forEach(view => {
-                view.classList.remove('active');
-            });
-            // Show requested view
-            const target = document.getElementById('view-' + viewId);
-            if(target) {
-                target.classList.add('active');
-                window.scrollTo(0, 0);
-            }
-            
-            // Re-trigger scroll animations for newly active view
-            setTimeout(() => initScrollAnimations(), 50);
-        }
-
-        // --- Mobile Menu Toggle ---
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const lines = menuBtn.querySelectorAll('span');
-        let menuOpen = false;
-
-        function toggleMenu() {
-            menuOpen = !menuOpen;
-            if(menuOpen) {
-                mobileMenu.classList.remove('opacity-0', 'invisible');
-                mobileMenu.classList.add('opacity-100', 'visible');
-                // Animate Veggie Burger to X
-                lines[0].style.transform = 'translateY(8px) rotate(45deg)';
-                lines[1].style.opacity = '0';
-                lines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
-                document.body.style.overflow = 'hidden';
-            } else {
-                mobileMenu.classList.remove('opacity-100', 'visible');
-                mobileMenu.classList.add('opacity-0', 'invisible');
-                // Reset Veggie Burger
-                lines[0].style.transform = 'none';
-                lines[1].style.opacity = '1';
-                lines[2].style.transform = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-        menuBtn.addEventListener('click', toggleMenu);
-
-        // --- Intersection Observer (Scroll Reveal) ---
-        function initScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
-            document.querySelectorAll('.reveal').forEach(el => {
-                observer.observe(el);
-            });
-        }
-        
-        // --- Spotify Playlist Auto-Cycler ---
-        function initSpotifyCycler() {
-            const iframes = document.querySelectorAll('.spotify-embed');
-            if(iframes.length === 0) return;
-            
-            let currentIndex = 0;
-            setInterval(() => {
-                // Fade out current
-                iframes[currentIndex].classList.remove('opacity-100', 'z-10');
-                iframes[currentIndex].classList.add('opacity-0', 'z-0');
-                
-                // Advance index
-                currentIndex = (currentIndex + 1) % iframes.length;
-                
-                // Fade in next
-                iframes[currentIndex].classList.remove('opacity-0', 'z-0');
-                iframes[currentIndex].classList.add('opacity-100', 'z-10');
-            }, 8000); // cycle every 8 seconds
-        }
-
-        // Init on load
-        window.addEventListener('DOMContentLoaded', () => {
-            initScrollAnimations();
-            initSpotifyCycler();
-        });
-    </script>
 </body>
 </html>
