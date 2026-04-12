@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Favour TL — World Class Design. Every Time.</title>
+<link rel="icon" type="image/jpeg" href="images/favour.jpeg">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
 <style>
@@ -29,7 +30,6 @@
     line-height: 1.6;
   }
 
-  /* ── SCROLLBAR ── */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -77,9 +77,7 @@
     transform: translateY(-1px);
   }
 
-  .btn-primary:hover::before {
-    animation-duration: 1.5s;
-  }
+  .btn-primary:hover::before { animation-duration: 1.5s; }
 
   @keyframes gleam {
     0% { left: -75%; }
@@ -126,7 +124,9 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--bg);
+    background: rgba(8, 11, 15, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 0 40px;
     height: 70px;
@@ -178,7 +178,6 @@
   .nav-links a:hover { color: #fff; }
 
   .nav-cta { flex-shrink: 0; }
-
   .nav-cta .btn-primary { padding: 10px 22px; font-size: 0.875rem; }
 
   /* Mobile nav */
@@ -190,6 +189,8 @@
     padding: 4px;
     background: none;
     border: none;
+    z-index: 1001;
+    position: relative;
   }
 
   .hamburger span {
@@ -230,6 +231,16 @@
   }
 
   .mobile-menu a:hover { color: #fff; }
+
+  /* Mobile CTA fix */
+  .mobile-menu .btn-primary {
+    background: #fff !important;
+    color: #000 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-size: 1.1rem !important;
+    padding: 16px 40px !important;
+  }
 
   /* ══════════════════════════════════════════
      SECTION LABELS
@@ -416,11 +427,6 @@
     margin: 0 auto;
   }
 
-  section.full-width {
-    max-width: none;
-    padding: 100px 40px;
-  }
-
   /* ══════════════════════════════════════════
      SERVICES
   ══════════════════════════════════════════ */
@@ -463,14 +469,8 @@
     transition: background 0.3s ease;
   }
 
-  .service-card:hover .service-icon {
-    background: rgba(255,255,255,0.12);
-  }
-
-  .service-icon svg {
-    width: 24px; height: 24px;
-    fill: #fff;
-  }
+  .service-card:hover .service-icon { background: rgba(255,255,255,0.12); }
+  .service-icon svg { width: 24px; height: 24px; fill: #fff; }
 
   .service-card h3 {
     font-size: 1.25rem;
@@ -501,9 +501,7 @@
   }
 
   .work-grid .project-card:nth-child(1),
-  .work-grid .project-card:nth-child(6) {
-    grid-column: span 2;
-  }
+  .work-grid .project-card:nth-child(6) { grid-column: span 2; }
 
   .project-card {
     position: relative;
@@ -729,8 +727,7 @@
   }
 
   .social-link svg {
-    width: 18px;
-    height: 18px;
+    width: 18px; height: 18px;
     fill: #fff;
     transition: filter 0.3s ease;
   }
@@ -766,11 +763,7 @@
     transition: opacity 0.7s ease, transform 0.7s ease;
   }
 
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
   .fade-up-delay-1 { transition-delay: 0.1s; }
   .fade-up-delay-2 { transition-delay: 0.2s; }
   .fade-up-delay-3 { transition-delay: 0.3s; }
@@ -807,13 +800,13 @@
   <a href="#services" onclick="closeMobile()">Services</a>
   <a href="about.html" onclick="closeMobile()">About</a>
   <a href="#contact" onclick="closeMobile()">Contact</a>
-  <a href="#book-a-call" class="btn-primary" style="margin-top:20px;" onclick="closeMobile()">Book a Call</a>
+  <a href="https://calendly.com" target="_blank" class="btn-primary" style="margin-top:20px;" onclick="closeMobile()">Book a Call</a>
 </div>
 
 <!-- ══ NAV ══ -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="images/favour.jpeg" alt="Favour TL" class="nav-avatar">
+    <img src="images/favour image.jpeg" alt="Favour TL" class="nav-avatar">
     <span class="nav-name">Favour TL</span>
   </a>
 
@@ -825,7 +818,7 @@
   </ul>
 
   <div class="nav-cta">
-    <a href="#book-a-call" class="btn-primary">Book a Call</a>
+    <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Call</a>
   </div>
 
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -837,8 +830,7 @@
 <section class="hero" id="home">
   <div class="hero-bg"></div>
 
-  <img src="images/favour.jpeg" alt="Favour TL" class="hero-avatar fade-up">
-
+  <img src="images/favour image.jpeg" alt="Favour TL" class="hero-avatar fade-up">
   <div class="hero-badge fade-up fade-up-delay-1">Visual Designer</div>
 
   <h1 class="fade-up fade-up-delay-1">World Class Design.<br>Every Time.</h1>
@@ -849,11 +841,11 @@
 
   <div class="hero-ctas fade-up fade-up-delay-3">
     <a href="#work" class="btn-secondary">See My Work</a>
-    <a href="#book-a-call" class="btn-primary">Book a Call</a>
+    <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Call</a>
   </div>
 
   <div class="ticker-wrap" style="margin-top: 80px;">
-    <div class="ticker-track" id="skillsTicker">
+    <div class="ticker-track">
       <span class="skill-pill">Brand Identity</span>
       <span class="skill-pill">UI/UX Design</span>
       <span class="skill-pill">Video Production</span>
@@ -881,45 +873,34 @@
   <div class="fade-up">
     <span class="section-label">Services</span>
   </div>
-  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom: 40px; line-height:1.15;">
+  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:40px; line-height:1.15;">
     What I bring to the table.
   </h2>
 
   <div class="services-row fade-up">
-
-    <!-- Graphic Design -->
     <div class="service-card">
       <div class="service-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
-        </svg>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
       </div>
       <h3>Graphic Design</h3>
       <p>Logos, brand identities, social media graphics, and print materials that communicate with precision and power. Design that people remember.</p>
     </div>
 
-    <!-- Video Editing -->
     <div class="service-card">
       <div class="service-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
-        </svg>
+        <svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
       </div>
       <h3>Video Editing</h3>
       <p>Cinematic cuts, motion graphics, and story-driven content. Transforming raw footage into compelling video that moves audiences to act.</p>
     </div>
 
-    <!-- Web Design -->
     <div class="service-card">
       <div class="service-icon">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/>
-        </svg>
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
       </div>
       <h3>Web Design</h3>
       <p>Beautiful, fast, conversion-focused websites. From landing pages to full digital experiences — crafted with intention and built to perform.</p>
     </div>
-
   </div>
 </section>
 
@@ -928,53 +909,48 @@
   <div class="fade-up">
     <span class="section-label">The Work Speaks</span>
   </div>
-  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom: 40px; line-height:1.15;">
+  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:40px; line-height:1.15;">
     Selected projects.
   </h2>
 
   <div class="work-grid">
     <a href="project-detail.html" class="project-card fade-up">
-      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Brand Identity — Luminary Co.">
+      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Luminary Co.">
       <div class="project-overlay">
         <h4>Luminary Co.</h4>
         <span>Brand Identity</span>
       </div>
     </a>
-
     <a href="project-detail.html" class="project-card fade-up fade-up-delay-1">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="UI/UX — Apex App">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="Apex App">
       <div class="project-overlay">
         <h4>Apex App</h4>
         <span>UI/UX Design</span>
       </div>
     </a>
-
     <a href="project-detail.html" class="project-card fade-up fade-up-delay-2">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="Video — Nova Campaign">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="Nova Campaign">
       <div class="project-overlay">
         <h4>Nova Campaign</h4>
         <span>Video Editing</span>
       </div>
     </a>
-
     <a href="project-detail.html" class="project-card fade-up fade-up-delay-1">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="Social — Orbit Brand">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="Orbit Brand">
       <div class="project-overlay">
         <h4>Orbit Brand</h4>
         <span>Social Media Design</span>
       </div>
     </a>
-
     <a href="project-detail.html" class="project-card fade-up fade-up-delay-2">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="Web — Zenith Studio">
+      <img src="https://placehold.co/800x600/111820/1E242C" alt="Zenith Studio">
       <div class="project-overlay">
         <h4>Zenith Studio</h4>
         <span>Web Design</span>
       </div>
     </a>
-
     <a href="project-detail.html" class="project-card fade-up">
-      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Identity — Pulse Media">
+      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Pulse Media">
       <div class="project-overlay">
         <h4>Pulse Media</h4>
         <span>Brand Identity</span>
@@ -1012,7 +988,7 @@
   <div class="fade-up">
     <span class="section-label">What Clients Say</span>
   </div>
-  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom: 40px; line-height:1.15;">
+  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:40px; line-height:1.15;">
     The results speak.
   </h2>
 
@@ -1022,13 +998,11 @@
       <p class="testimonial-name">Sarah Okonkwo</p>
       <p class="testimonial-text">Favour completely transformed our brand. The attention to detail and quality of work is unlike anything I've seen. Our visual identity now commands the room.</p>
     </div>
-
     <div class="testimonial-card fade-up fade-up-delay-1">
       <span class="quote-mark">"</span>
       <p class="testimonial-name">James Adeyemi</p>
       <p class="testimonial-text">Working with Favour was a game-changer. He understood our vision immediately and delivered something beyond what we imagined. World class, truly.</p>
     </div>
-
     <div class="testimonial-card fade-up fade-up-delay-2">
       <span class="quote-mark">"</span>
       <p class="testimonial-name">Amara Nwosu</p>
@@ -1038,10 +1012,10 @@
 </section>
 
 <!-- ══ CTA SECTION ══ -->
-<div class="cta-section fade-up" id="book-a-call">
+<div class="cta-section fade-up">
   <h2>Ready to bring your<br>vision to life?</h2>
   <p>Let's build something world class together.</p>
-  <a href="#book-a-call" class="btn-primary">Book a Call</a>
+  <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Call</a>
 </div>
 
 <!-- ══ FOOTER ══ -->
@@ -1059,12 +1033,10 @@
   </div>
 
   <p class="footer-copy">© 2026 Favour Onasanya TL</p>
-
   <a href="#home" class="footer-top">Back to Top ↑</a>
 </footer>
 
 <script>
-  // ── HAMBURGER ──
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
 
@@ -1080,7 +1052,6 @@
     document.body.style.overflow = '';
   }
 
-  // ── SCROLL ANIMATIONS ──
   const fadeEls = document.querySelectorAll('.fade-up');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1093,6 +1064,5 @@
 
   fadeEls.forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Favour TL</title>
+<link rel="icon" type="image/jpeg" href="images/favour.jpeg">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
 <style>
@@ -115,7 +116,9 @@
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: var(--bg);
+    background: rgba(8, 11, 15, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
     padding: 0 40px;
     height: 70px;
@@ -164,7 +167,9 @@
     transition: color 0.3s ease;
   }
 
-  .nav-links a:hover, .nav-links a.active { color: #fff; }
+  .nav-links a:hover,
+  .nav-links a.active { color: #fff; }
+
   .nav-cta { flex-shrink: 0; }
   .nav-cta .btn-primary { padding: 10px 22px; font-size: 0.875rem; }
 
@@ -176,6 +181,8 @@
     padding: 4px;
     background: none;
     border: none;
+    z-index: 1001;
+    position: relative;
   }
 
   .hamburger span {
@@ -216,6 +223,16 @@
   }
 
   .mobile-menu a:hover { color: #fff; }
+
+  /* Mobile CTA fix */
+  .mobile-menu .btn-primary {
+    background: #fff !important;
+    color: #000 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-size: 1.1rem !important;
+    padding: 16px 40px !important;
+  }
 
   /* ── SECTION LABEL ── */
   .section-label {
@@ -286,6 +303,8 @@
     margin-bottom: 16px;
   }
 
+  .intro-text p:last-child { margin-bottom: 0; }
+
   .intro-image {
     position: relative;
     overflow: hidden;
@@ -302,9 +321,7 @@
     display: block;
   }
 
-  .intro-image:hover img {
-    filter: grayscale(0%) opacity(100%);
-  }
+  .intro-image:hover img { filter: grayscale(0%) opacity(100%); }
 
   /* ── BENTO GRID ── */
   .bento-grid {
@@ -329,7 +346,6 @@
   }
 
   .bento-card h3 {
-    font-size: 1rem;
     font-weight: 700;
     margin-bottom: 24px;
     color: var(--muted);
@@ -338,7 +354,7 @@
     font-size: 0.8rem;
   }
 
-  /* CV Card */
+  /* Card column spans */
   .cv-card {
     grid-column: span 4;
     display: flex;
@@ -354,9 +370,36 @@
     line-height: 1.3;
   }
 
-  /* Experience Card */
   .exp-card { grid-column: span 8; }
 
+  /* Education section inside exp card */
+  .edu-entry {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .edu-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .edu-degree {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 3px;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  /* Timeline */
   .timeline-entry {
     display: flex;
     align-items: flex-start;
@@ -365,15 +408,16 @@
     border-bottom: 1px solid var(--border);
   }
 
-  .timeline-entry:last-child { border-bottom: none; padding-bottom: 0; }
+  .timeline-entry:last-of-type { border-bottom: none; padding-bottom: 0; }
   .timeline-entry:first-of-type { padding-top: 0; }
 
   .timeline-year {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--muted);
     white-space: nowrap;
     margin-top: 2px;
-    min-width: 50px;
+    min-width: 80px;
+    font-weight: 500;
   }
 
   .timeline-info { flex: 1; }
@@ -389,13 +433,14 @@
     color: var(--muted);
   }
 
-  /* Tools Card */
+  /* Tools card */
   .tools-card { grid-column: span 6; }
 
   .tools-grid {
     display: flex;
-    gap: 28px;
+    gap: 24px;
     align-items: flex-end;
+    flex-wrap: wrap;
   }
 
   .tool-item {
@@ -411,34 +456,70 @@
   .tool-item:hover { opacity: 1; }
 
   .tool-logo {
-    width: 52px;
-    height: 52px;
+    width: 48px;
+    height: 48px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .tool-logo img,
-  .tool-logo svg {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
+  .tool-logo svg { width: 100%; height: 100%; object-fit: contain; }
 
   .tool-name {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
     color: var(--muted);
     font-weight: 500;
     text-align: center;
+    white-space: nowrap;
   }
 
-  /* Skills Card */
+  /* Skills card */
   .skills-card { grid-column: span 6; }
 
-  /* Spotify Card */
+  /* Connect card */
+  .connect-card {
+    grid-column: span 6;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .connect-icons {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  .connect-link {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .connect-link svg {
+    width: 20px;
+    height: 20px;
+    fill: #fff;
+  }
+
+  .connect-link:hover {
+    box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+  }
+
+  /* Spotify card */
   .spotify-card { grid-column: span 12; }
 
-  /* ── TICKER (reused from index) ── */
+  /* ── TICKER ── */
   .ticker-wrap {
     width: 100%;
     overflow: hidden;
@@ -494,14 +575,11 @@
   .skill-pill:hover { color: #fff; }
 
   /* ── SPOTIFY ── */
-  .spotify-switcher {
-    position: relative;
-  }
-
   .spotify-tabs {
     display: flex;
     gap: 8px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
   }
 
   .spotify-tab {
@@ -537,45 +615,6 @@
     width: 100%;
     border: none;
     border-radius: 12px;
-  }
-
-  /* ── SOCIAL ROW ── */
-  .social-row {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-    padding: 60px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .social-link {
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
-    text-decoration: none;
-  }
-
-  .social-link svg {
-    width: 20px;
-    height: 20px;
-    fill: #fff;
-  }
-
-  .social-link:hover {
-    box-shadow: 0 0 16px rgba(255,255,255,0.3);
-    border-color: rgba(255,255,255,0.4);
-  }
-
-  .social-label {
-    font-size: 0.875rem;
-    color: var(--muted);
-    margin-right: 8px;
   }
 
   /* ── FOOTER ── */
@@ -653,7 +692,8 @@
     .intro-bento { grid-template-columns: 1fr; }
     .intro-image { border-left: none; border-top: 1px solid var(--border); min-height: 280px; }
     .bento-grid { grid-template-columns: 1fr; }
-    .cv-card, .exp-card, .tools-card, .skills-card, .spotify-card { grid-column: span 1; }
+    .cv-card, .exp-card, .tools-card, .skills-card,
+    .connect-card, .spotify-card { grid-column: span 1; }
     nav { padding: 0 20px; }
   }
 
@@ -663,7 +703,7 @@
     .intro-text { padding: 32px; }
     .bento-card { padding: 28px; }
     footer { padding: 28px 20px; }
-    .social-row { padding: 40px 20px; }
+    .tools-grid { gap: 16px; }
   }
 </style>
 </head>
@@ -675,13 +715,13 @@
   <a href="index.html#services" onclick="closeMobile()">Services</a>
   <a href="about.html" onclick="closeMobile()">About</a>
   <a href="index.html#contact" onclick="closeMobile()">Contact</a>
-  <a href="#book-a-call" class="btn-primary" style="margin-top:20px;" onclick="closeMobile()">Book a Call</a>
+  <a href="https://calendly.com" target="_blank" class="btn-primary" style="margin-top:20px;" onclick="closeMobile()">Book a Call</a>
 </div>
 
 <!-- ── NAV ── -->
 <nav>
   <a href="index.html" class="nav-brand">
-    <img src="images/favour.jpeg" alt="Favour TL" class="nav-avatar">
+    <img src="images/favour image.jpeg" alt="Favour TL" class="nav-avatar">
     <span class="nav-name">Favour TL</span>
   </a>
 
@@ -693,7 +733,7 @@
   </ul>
 
   <div class="nav-cta">
-    <a href="#book-a-call" class="btn-primary">Book a Call</a>
+    <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Call</a>
   </div>
 
   <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -707,27 +747,26 @@
   <h1>The Mind Behind<br>the Work.</h1>
 </div>
 
-<!-- ── INTRO BENTO ── -->
+<!-- ── MAIN CONTENT ── -->
 <div class="page-container" style="padding-top: 0;">
+
+  <!-- INTRO BENTO -->
   <div class="intro-bento fade-up">
     <div class="intro-text">
-      <h2>Boy Genius. Visual Designer. Creator.</h2>
+      <h2>Boy Genius. UI Designer. Creator.</h2>
       <p>
-        I'm Favour Onasanya TL — a visual designer and creative strategist who goes by the name Boy Genius. TL stands for Tree of Life, because everything I create is meant to grow, breathe, and stand the test of time.
+        Favour Onasanya TL is a UI and Visual Designer with 3+ years of experience delivering intuitive, responsive web and mobile interfaces. He blends brand storytelling with practical usability — crafting design systems, landing pages, and digital experiences that convert and connect.
       </p>
       <p>
-        I work at the intersection of aesthetics and strategy — crafting brand identities, digital experiences, and visual content that don't just look good, but convert, connect, and leave a lasting impression.
-      </p>
-      <p>
-        Whether it's a brand identity built from scratch, a video that stops the scroll, or a website that turns visitors into clients — I bring the same thing every time: world class execution.
+        TL stands for Tree of Life. Everything created under this name is built to grow, breathe, and stand the test of time. World class execution, every single time.
       </p>
     </div>
     <div class="intro-image">
-      <img src="images/favour.jpeg" alt="Favour Onasanya TL">
+      <img src="images/favour image.jpeg" alt="Favour Onasanya TL">
     </div>
   </div>
 
-  <!-- ── BENTO GRID ── -->
+  <!-- BENTO GRID -->
   <div class="bento-grid">
 
     <!-- CV Card -->
@@ -742,26 +781,36 @@
     <!-- Experience Card -->
     <div class="bento-card exp-card fade-up fade-up-delay-1">
       <h3>Experience</h3>
+
       <div class="timeline-entry">
-        <span class="timeline-year">2024</span>
+        <span class="timeline-year">2023–2025</span>
         <div class="timeline-info">
-          <p class="timeline-role">Lead Visual Designer</p>
-          <p class="timeline-company">Freelance — Independent Studio</p>
+          <p class="timeline-role">UI Designer</p>
+          <p class="timeline-company">Frootify</p>
         </div>
       </div>
+
       <div class="timeline-entry">
-        <span class="timeline-year">2023</span>
+        <span class="timeline-year">2022–Present</span>
         <div class="timeline-info">
-          <p class="timeline-role">Creative Director</p>
-          <p class="timeline-company">Apex Creative Agency</p>
+          <p class="timeline-role">Freelance UI & Visual Designer</p>
+          <p class="timeline-company">Independent Studio</p>
         </div>
       </div>
+
       <div class="timeline-entry">
-        <span class="timeline-year">2022</span>
+        <span class="timeline-year">2020–2022</span>
         <div class="timeline-info">
-          <p class="timeline-role">Graphic Designer & Video Editor</p>
-          <p class="timeline-company">Orbit Media Group</p>
+          <p class="timeline-role">Creative Growth Period</p>
+          <p class="timeline-company">UI skill-building · Figma · Mobile-first design</p>
         </div>
+      </div>
+
+      <!-- Education -->
+      <div class="edu-entry">
+        <p class="edu-label">Education</p>
+        <p class="edu-degree">B.Sc. Communication & Visual Design — In Progress</p>
+        <p class="edu-school">Olabisi Onabanjo University</p>
       </div>
     </div>
 
@@ -795,15 +844,41 @@
           <span class="tool-name">Photoshop</span>
         </div>
 
-        <!-- CapCut -->
+        <!-- CapCut — updated SVG -->
         <div class="tool-item">
           <div class="tool-logo">
-            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="100" height="100" rx="22" fill="#000"/>
-              <path d="M50 20C33.4 20 20 33.4 20 50s13.4 30 30 30 30-13.4 30-30S66.6 20 50 20zm-6 42V38l22 12-22 12z" fill="#fff"/>
+            <svg viewBox="0 0 2000 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="1998" height="1998" rx="317" fill="#05050A"/>
+              <path d="M1179.76 544.784C1197.97 544.784 1272.41 543.293 1282.85 545.141C1291.95 546.751 1300.16 550.452 1308.81 553.343C1339.79 563.7 1367.49 587.983 1382.89 616.665C1389.13 628.278 1395.45 639.313 1398.75 653.887L1284.27 713.785C1285.61 708.445 1284.65 704.353 1283.92 700.236C1280.35 679.93 1260.74 670.079 1242.11 668.004C1230.65 666.728 1062.49 666.359 1051.56 667.575C1031.47 669.817 938.032 668.148 910.64 668.148C838.314 668.148 766.109 668.86 693.783 668.86C659.181 668.86 624.58 668.86 589.975 668.86C581.21 668.86 572.486 667.682 563.668 668.148C559.547 668.366 555.401 669.629 551.511 670.93C541.157 674.39 532.461 685.46 529.113 695.529C527.134 701.487 527.268 707.917 526.199 713.997C525.977 715.254 525.419 716.389 524.422 717.208C518.98 721.672 410.116 794.171 404.047 797.216C404.047 779.729 401.903 685.916 403.125 678.986C409.296 643.899 421.64 620.163 443.864 592.919C446.766 589.362 449.873 585.526 453.464 582.578C470.112 568.917 490.3 553.994 512.122 550.133C520.398 548.667 655.456 549.064 675.296 549.064C689.319 549.064 703.274 549.089 717.247 548.351C757.646 546.219 813.359 550.483 853.761 548.351C880.477 546.941 907.386 549.048 934.104 547.638C957.984 546.376 982.034 548.185 1005.92 546.926C1028.38 545.738 1051 547.398 1073.46 546.21C1108.16 544.381 1143.2 545.497 1179.76 544.784Z" fill="white" fill-opacity="0.996"/>
+              <path d="M1097.03 1021.22C1103.42 1021.22 1130.37 1035.92 1136.35 1039.15C1165.84 1055.04 1197.85 1068.07 1227.36 1083.98C1237.19 1089.28 1247.68 1093.34 1257.51 1098.64C1306.07 1124.81 1357.27 1146.06 1405.83 1172.22C1426.11 1183.15 1447.7 1191.62 1467.97 1202.54C1479.29 1208.64 1589.44 1263.47 1594.75 1264.6V1406.22L965.496 1098.07C963.701 1095.61 963.411 1092.81 964.075 1089.53L1097.03 1021.22Z" fill="white" fill-opacity="0.996"/>
+              <path d="M524.901 737.216C532.09 737.216 593.195 768.533 602.693 773.645C620.185 783.062 638.865 790.266 656.357 799.683C699.827 823.081 745.699 842.026 789.166 865.424C799.922 871.21 836.755 889.572 847.317 894.094C851.08 895.71 866.437 901.689 866.746 905.693C867.049 909.623 839.445 921.647 834.718 924.189C825.538 929.133 731.222 976.722 729.169 977.193C725.138 978.125 671.031 950.314 663.474 946.246C645.514 936.578 626.347 929.161 608.387 919.495C566.144 896.758 521.45 878.555 479.206 855.818C461.272 846.165 442.264 838.508 424.332 828.854C421.293 827.22 407.749 821.93 407.749 818.68C407.749 814.535 430.56 800.799 435.006 797.833C450.504 787.509 512.851 743.95 524.901 737.216Z" fill="white" fill-opacity="0.996"/>
+              <path d="M1596.04 582.216H1597.46C1597.46 619.788 1597.46 655.936 1597.46 692.086C1597.46 697.561 1598.56 728.359 1596.47 730.912C1593.74 734.251 1527.98 765.177 1518.05 770.523C1500.83 779.798 1482.95 787.844 1465.73 797.119C1462.26 798.986 1458.25 799.94 1454.78 801.814C1410.01 825.924 1363.04 845.967 1318.27 870.081C1289.83 885.403 1259.99 898.139 1231.54 913.461C1208.69 925.769 1184.72 935.998 1161.87 948.306C1104.16 979.387 1043.54 1004.98 985.835 1036.06C971.844 1043.6 957.17 1049.86 943.179 1057.39C924.99 1067.19 905.913 1075.33 887.724 1085.13C851.966 1104.39 814.425 1120.34 778.668 1139.6C740.46 1160.18 700.563 1177.62 662.355 1198.2C658.877 1200.07 654.872 1201.02 651.406 1202.89C637.883 1210.17 623.696 1216.23 610.172 1223.51C597.098 1230.56 538.055 1261.34 527.561 1263.19C523.273 1263.95 499.536 1245.42 494.929 1241.65C486.296 1234.58 418.576 1185.28 408.762 1179.57C407.568 1174.79 406.973 1171.92 409.616 1168.69C414.481 1162.74 460.431 1142.08 471.112 1136.33C488.699 1126.85 507.271 1119.2 524.859 1109.73C526.788 1108.69 529.032 1108.36 530.974 1107.31C573.003 1084.68 617.222 1066.22 659.226 1043.6C667.657 1039.06 676.677 1035.62 685.107 1031.08C692.718 1026.98 700.672 1023.52 708.283 1019.42C710.225 1018.37 712.531 1018.12 714.467 1017.07C739.023 1003.85 764.773 992.824 789.33 979.596C794.987 976.547 801.198 974.518 806.821 971.487C832.318 957.755 859.097 946.395 884.598 932.662C888.871 930.358 893.671 929.033 897.891 926.757C923.847 912.778 951.065 901.128 977.021 887.149C981.294 884.845 986.093 883.52 990.313 881.245C1015.8 867.518 1042.53 856.077 1068.02 842.347C1072.46 839.956 1077.43 838.597 1081.81 836.231C1125.09 812.924 1170.52 793.814 1213.77 770.523C1228.87 762.386 1244.87 755.902 1259.98 747.765C1261.92 746.721 1264.22 746.462 1266.16 745.421C1278.88 738.572 1292.05 732.57 1304.77 725.721C1320.34 717.332 1336.82 710.642 1352.4 702.256C1354.5 701.121 1356.98 700.828 1359.08 699.693C1400.49 677.394 1443.98 659.109 1485.35 636.832C1494.39 631.959 1504.03 628.19 1513.07 623.32C1524.93 616.932 1590.25 586.562 1596.04 582.216Z" fill="white" fill-opacity="0.996"/>
+              <path d="M404.211 1203.22C436.67 1224.84 468.412 1245.76 500.067 1266.85C508.07 1272.19 517.057 1276.81 524.511 1282.91C529.249 1286.78 524.119 1320.09 553.004 1329.71C555.858 1330.66 559.312 1331.61 562.312 1331.77C572.769 1332.32 583.155 1331.06 593.578 1331.06C631.712 1331.06 669.847 1331.06 707.978 1331.06C719.161 1331.06 730.238 1331.19 741.377 1331.77C752.439 1332.35 763.694 1331.77 774.774 1331.77C800.118 1331.77 825.459 1331.77 850.803 1331.77C917.402 1331.77 983.899 1332.48 1050.47 1332.48C1094.53 1332.48 1138.58 1332.48 1182.64 1332.48C1201.97 1332.48 1221.61 1333.5 1240.91 1332.48C1265.88 1331.17 1284.6 1314.04 1284.6 1287.02C1290.83 1288.58 1360.03 1326.44 1370.59 1332.13C1374.44 1334.2 1396.43 1344.45 1397.51 1346.83C1399.22 1350.59 1391.06 1367.77 1388.92 1371.76C1375.67 1396.35 1358.28 1420.87 1333 1434.48C1317.19 1442.99 1300.35 1451.14 1282.47 1454.29C1269.65 1456.56 1147.64 1453.94 1123.66 1453.94C1090.23 1453.94 1056.8 1454.27 1023.47 1452.52C983.052 1450.39 930.305 1454.64 889.884 1452.52C855.444 1450.71 820.665 1451.81 786.141 1451.81C749.149 1451.81 712.264 1451.1 675.292 1451.1C660.072 1451.1 515.381 1449.92 512.786 1449.46C495.074 1446.34 476.138 1435.89 462.335 1424.6C430.739 1398.76 410.435 1361.69 403.358 1321.62C401.598 1311.64 404.211 1224.13 404.211 1203.22Z" fill="white" fill-opacity="0.996"/>
             </svg>
           </div>
           <span class="tool-name">CapCut</span>
+        </div>
+
+        <!-- Trello -->
+        <div class="tool-item">
+          <div class="tool-logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="24" height="24" rx="4" fill="#0052CC"/>
+              <rect x="3" y="3" width="7.5" height="14" rx="1.5" fill="white"/>
+              <rect x="13.5" y="3" width="7.5" height="9" rx="1.5" fill="white"/>
+            </svg>
+          </div>
+          <span class="tool-name">Trello</span>
+        </div>
+
+        <!-- Slack -->
+        <div class="tool-item">
+          <div class="tool-logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.042 15.165a2.528 2.528 0 0 1-2.52 2.523A2.528 2.528 0 0 1 0 15.165a2.527 2.527 0 0 1 2.522-2.52h2.52v2.52zM6.313 15.165a2.527 2.527 0 0 1 2.521-2.52 2.527 2.527 0 0 1 2.521 2.52v6.313A2.528 2.528 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313zM8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.528 2.528 0 0 1 8.834 0a2.528 2.528 0 0 1 2.521 2.522v2.52H8.834zM8.834 6.313a2.528 2.528 0 0 1 2.521 2.521 2.528 2.528 0 0 1-2.521 2.521H2.522A2.528 2.528 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312zM18.956 8.834a2.528 2.528 0 0 1 2.522-2.521A2.528 2.528 0 0 1 24 8.834a2.528 2.528 0 0 1-2.522 2.521h-2.522V8.834zM17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.527 2.527 0 0 1-2.52-2.521V2.522A2.527 2.527 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312zM15.165 18.956a2.528 2.528 0 0 1 2.523 2.522A2.528 2.528 0 0 1 15.165 24a2.527 2.527 0 0 1-2.52-2.522v-2.522h2.52zM15.165 17.688a2.527 2.527 0 0 1-2.52-2.523 2.526 2.526 0 0 1 2.52-2.52h6.313A2.527 2.527 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z" fill="#E01E5A"/>
+            </svg>
+          </div>
+          <span class="tool-name">Slack</span>
         </div>
 
       </div>
@@ -830,18 +905,44 @@
       </div>
     </div>
 
+    <!-- Let's Connect Card -->
+    <div class="bento-card connect-card fade-up fade-up-delay-2">
+      <h3>Let's Connect</h3>
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 24px;">
+        Whether you have a project in mind or just want to say hello — I'm always open to a conversation.
+      </p>
+      <div class="connect-icons">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="connect-link" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+          </svg>
+        </a>
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="connect-link" aria-label="LinkedIn">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/>
+          </svg>
+        </a>
+        <!-- WhatsApp -->
+        <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="connect-link" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
     <!-- Spotify Card -->
     <div class="bento-card spotify-card fade-up">
       <h3>Vibe While Working</h3>
-
       <div class="spotify-tabs">
         <button class="spotify-tab active" onclick="switchTrack(0)">Track 1</button>
         <button class="spotify-tab" onclick="switchTrack(1)">Track 2</button>
         <button class="spotify-tab" onclick="switchTrack(2)">Track 3</button>
         <button class="spotify-tab" onclick="switchTrack(3)">Track 4</button>
       </div>
-
-      <div class="spotify-switcher">
+      <div>
         <div class="spotify-embed-wrap active" id="track-0">
           <iframe src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" height="152" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
         </div>
@@ -858,20 +959,6 @@
     </div>
 
   </div>
-</div>
-
-<!-- ── SOCIAL ROW ── -->
-<div class="social-row fade-up">
-  <span class="social-label">Find me on</span>
-  <a href="https://www.instagram.com/favour_onasanya/" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224.3 141a115 115 0 1 0 -.6 230 115 115 0 1 0 .6-230zm-.6 40.4a74.6 74.6 0 1 1 .6 149.2 74.6 74.6 0 1 1 -.6-149.2zm93.4-45.1a26.8 26.8 0 1 1 53.6 0 26.8 26.8 0 1 1 -53.6 0zm129.7 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM399 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>
-  </a>
-  <a href="https://www.linkedin.com/in/favour-onasanya-tl-05808222a/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M100.3 448l-92.9 0 0-299.1 92.9 0 0 299.1zM53.8 108.1C24.1 108.1 0 83.5 0 53.8 0 39.5 5.7 25.9 15.8 15.8s23.8-15.8 38-15.8 27.9 5.7 38 15.8 15.8 23.8 15.8 38c0 29.7-24.1 54.3-53.8 54.3zM447.9 448l-92.7 0 0-145.6c0-34.7-.7-79.2-48.3-79.2-48.3 0-55.7 37.7-55.7 76.7l0 148.1-92.8 0 0-299.1 89.1 0 0 40.8 1.3 0c12.4-23.5 42.7-48.3 87.9-48.3 94 0 111.3 61.9 111.3 142.3l0 164.3-.1 0z"/></svg>
-  </a>
-  <a href="https://wa.link/fq0u0v" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M380.9 97.1c-41.9-42-97.7-65.1-157-65.1-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480 117.7 449.1c32.4 17.7 68.9 27 106.1 27l.1 0c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1s56.2 81.2 56.1 130.5c0 101.8-84.9 184.6-186.6 184.6zM325.1 300.5c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8s-14.3 18-17.6 21.8c-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7s-12.5-30.1-17.1-41.2c-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2s-9.7 1.4-14.8 6.9c-5.1 5.6-19.4 19-19.4 46.3s19.9 53.7 22.6 57.4c2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4s4.6-24.1 3.2-26.4c-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
-  </a>
 </div>
 
 <!-- ── FOOTER ── -->
@@ -931,6 +1018,5 @@
 
   fadeEls.forEach(el => observer.observe(el));
 </script>
-
 </body>
 </html>
