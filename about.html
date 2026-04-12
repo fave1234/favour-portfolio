@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About — Favour Onasanya TL</title>
+    <title>About — Favour TL</title>
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap">
     
     <style>
@@ -17,10 +17,9 @@
             --bg-darkest: #080B0F;
             --bg-card: #111820;
             --border-color: #1E242C;
-            --accent-purple: #7C3AED;
-            --accent-orange: #FF6B00;
             --text-white: #FFFFFF;
             --text-muted: rgba(255, 255, 255, 0.4);
+            --glow-color: rgba(255, 255, 255, 0.15);
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-fast: 0.3s ease;
         }
@@ -31,22 +30,6 @@
             color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
         }
 
         h1, h2, h3, h4 {
@@ -72,7 +55,7 @@
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
-            color: var(--accent-purple);
+            color: var(--text-white);
         }
 
         .profile-circle {
@@ -114,22 +97,85 @@
             color: var(--text-white);
         }
 
-        .cta-button {
-            padding: 0.7rem 1.6rem;
+        /* Primary CTA Button */
+        .btn-primary {
+            position: relative;
+            padding: 0.75rem 1.75rem;
             background: var(--text-white);
             color: var(--bg-darkest);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all var(--transition-fast);
             border: none;
             cursor: pointer;
+            overflow: hidden;
+            transition: all var(--transition-fast);
+            animation: glow-pulse 3s ease-in-out infinite;
         }
 
-        .cta-button:hover {
-            background: var(--accent-orange);
-            color: var(--bg-darkest);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8), 
+                transparent
+            );
+            animation: gleam 3s linear infinite;
+            transform: skewX(-20deg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            animation: gleam 1.5s linear infinite;
+        }
+
+        @keyframes gleam {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 200%;
+            }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        /* Secondary Button */
+        .btn-secondary {
+            padding: 0.75rem 1.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* Mobile Menu */
@@ -186,35 +232,68 @@
 
         /* About Hero */
         .about-hero {
-            padding: 12rem 5% 6rem;
+            padding: 12rem 5% 4rem;
             text-align: center;
             max-width: 900px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .about-hero h1 {
             font-size: clamp(2.5rem, 6vw, 5rem);
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             letter-spacing: -0.03em;
         }
 
-        .about-hero p {
-            font-size: 1.15rem;
+        /* Intro Bento Card */
+        .intro-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 3rem;
+            margin: 0 auto 4rem;
+            max-width: 1200px;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .intro-text h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text p {
             color: var(--text-muted);
             line-height: 1.8;
-            max-width: 700px;
-            margin: 0 auto;
+            font-size: 1.05rem;
+        }
+
+        .intro-image {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all var(--transition);
+        }
+
+        .intro-image:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
         }
 
         /* Bento Grid Section */
         .bento-section {
-            padding: 4rem 5%;
+            padding: 2rem 5% 6rem;
             max-width: 1400px;
             margin: 0 auto;
-            position: relative;
-            z-index: 1;
         }
 
         .bento-grid {
@@ -232,9 +311,8 @@
         }
 
         .bento-card:hover {
-            border-color: var(--accent-purple);
+            box-shadow: 0 0 30px var(--glow-color);
             transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
         }
 
         .bento-card h3 {
@@ -253,27 +331,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), var(--bg-card));
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.9rem 2rem;
-            background: var(--text-white);
-            color: var(--bg-darkest);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all var(--transition-fast);
-            align-self: flex-start;
-            margin-top: 1.5rem;
-        }
-
-        .download-btn:hover {
-            background: var(--accent-orange);
         }
 
         /* Experience Card */
@@ -296,7 +353,7 @@
 
         .experience-year {
             font-size: 0.8rem;
-            color: var(--accent-purple);
+            color: var(--text-white);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.1em;
@@ -342,13 +399,9 @@
         }
 
         .tool-icon {
+            width: 48px;
+            height: 48px;
             font-size: 3rem;
-            filter: grayscale(100%);
-            transition: filter var(--transition);
-        }
-
-        .tool-item:hover .tool-icon {
-            filter: grayscale(0%);
         }
 
         .tool-name {
@@ -368,10 +421,15 @@
         }
 
         .skills-ticker-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
             margin-top: 1.5rem;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+        }
+
+        .skills-ticker {
+            display: flex;
+            animation: scroll 40s linear infinite;
         }
 
         .skill-tag {
@@ -381,32 +439,47 @@
             font-size: 0.85rem;
             font-weight: 500;
             color: var(--text-muted);
-            transition: all var(--transition-fast);
             white-space: nowrap;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
         }
 
-        .skill-tag:hover {
-            border-color: var(--accent-purple);
-            color: var(--text-white);
-            background: rgba(124, 58, 237, 0.1);
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
         }
 
         /* Spotify Card */
         .spotify-card {
             grid-column: span 4;
             overflow: hidden;
-            position: relative;
         }
 
-        .spotify-ticker {
+        .spotify-container {
             display: flex;
             gap: 1.5rem;
-            animation: spotifyScroll 60s linear infinite;
             margin-top: 1.5rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border-color) transparent;
         }
 
-        .spotify-ticker:hover {
-            animation-play-state: paused;
+        .spotify-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .spotify-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .spotify-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 10px;
         }
 
         .spotify-embed {
@@ -415,23 +488,12 @@
             overflow: hidden;
         }
 
-        @keyframes spotifyScroll {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(-320px * 4 - 6rem));
-            }
-        }
-
         /* Social Section */
         .social-section {
             padding: 4rem 5%;
             max-width: 1400px;
             margin: 0 auto;
             text-align: center;
-            position: relative;
-            z-index: 1;
         }
 
         .social-section h3 {
@@ -451,7 +513,9 @@
             align-items: center;
             gap: 0.75rem;
             padding: 1rem 2rem;
-            border: 2px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50px;
             color: var(--text-white);
             text-decoration: none;
@@ -467,17 +531,14 @@
         }
 
         .social-btn:hover {
-            background: var(--accent-purple);
-            border-color: var(--accent-purple);
-            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* Footer */
         footer {
             padding: 3rem 5%;
             border-top: 1px solid var(--border-color);
-            position: relative;
-            z-index: 1;
         }
 
         .footer-content {
@@ -513,8 +574,7 @@
         }
 
         .social-links a:hover {
-            background: var(--accent-purple);
-            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .back-to-top {
@@ -552,6 +612,10 @@
 
         /* Mobile Responsive */
         @media (max-width: 1024px) {
+            .intro-card {
+                grid-template-columns: 1fr;
+            }
+
             .bento-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -578,6 +642,10 @@
                 padding: 10rem 5% 4rem;
             }
 
+            .intro-card {
+                padding: 2rem;
+            }
+
             .bento-grid {
                 grid-template-columns: 1fr;
             }
@@ -602,9 +670,9 @@
     <nav>
         <a href="index.html" class="nav-brand">
             <div class="profile-circle">
-                <img src="https://i.ibb.co/RTNrcK5/profile.jpg" alt="Favour Onasanya TL" onerror="this.src='https://placehold.co/80x80/111820/7C3AED?text=F'">
+                <img src="images/favour image.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/80x80/111820/FFFFFF?text=FT'">
             </div>
-            <span class="brand-name">Favour</span>
+            <span class="brand-name">Favour TL</span>
         </a>
         
         <ul class="nav-links">
@@ -612,7 +680,7 @@
             <li><a href="index.html#services">Services</a></li>
             <li><a href="about.html" class="active">About</a></li>
             <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
+            <li><a href="#book-a-call" class="btn-primary">Book a Call</a></li>
         </ul>
 
         <div class="hamburger" onclick="toggleMobileMenu()">
@@ -629,14 +697,27 @@
             <li><a href="index.html#services">Services</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="index.html#contact">Contact</a></li>
-            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
+            <li><a href="#book-a-call" class="btn-primary">Book a Call</a></li>
         </ul>
     </div>
 
     <!-- About Hero -->
     <section class="about-hero">
         <h1>The Mind Behind the Work</h1>
-        <p>I'm Favour Onasanya TL — a creative professional who believes design is more than aesthetics. It's transformation. Every project is an opportunity to breathe life into ideas and create experiences that resonate with the world.</p>
+    </section>
+
+    <!-- Intro Bento Card -->
+    <section style="padding: 0 5%;">
+        <div class="intro-card fade-in">
+            <div class="intro-text">
+                <h2>Visual Designer</h2>
+                <p>I'm Favour Onasanya TL — a creative professional who believes design is more than aesthetics. It's transformation. Every project is an opportunity to breathe life into ideas and create experiences that resonate with the world.</p>
+                <p style="margin-top: 1rem;">My work is rooted in the philosophy "I am Light" — bringing clarity, radiance, and vision to every brand I touch.</p>
+            </div>
+            <div class="intro-image">
+                <img src="images/favour image.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/400x500/111820/FFFFFF?text=Favour+TL'">
+            </div>
+        </div>
     </section>
 
     <!-- Bento Grid Section -->
@@ -646,11 +727,10 @@
             <div class="bento-card cv-card fade-in">
                 <div>
                     <h3>My CV</h3>
-                    <p>Everything you need to know about my journey, experience, and expertise — packaged in one comprehensive document.</p>
+                    <p>Everything you need to know about my journey, experience, and expertise.</p>
                 </div>
-                <a href="#download-cv" class="download-btn">
-                    <span>📄</span>
-                    Download CV
+                <a href="#download-cv" class="btn-secondary" style="margin-top: 1.5rem; align-self: flex-start;">
+                    📄 Download CV
                 </a>
             </div>
 
@@ -664,7 +744,7 @@
                     </div>
                     <div class="tool-item">
                         <div class="tool-icon">🖼️</div>
-                        <div class="tool-name">Photoshop</div>
+                        <div class="tool-name">Adobe Photoshop</div>
                     </div>
                     <div class="tool-item">
                         <div class="tool-icon">✂️</div>
@@ -678,7 +758,7 @@
                 <h3>Experience</h3>
                 <div class="experience-item">
                     <div class="experience-year">2024 — Present</div>
-                    <div class="experience-role">Senior Creative Designer</div>
+                    <div class="experience-role">Senior Visual Designer</div>
                     <div class="experience-company">Freelance</div>
                 </div>
                 <div class="experience-item">
@@ -697,25 +777,28 @@
             <div class="bento-card skills-card fade-in">
                 <h3>Skills</h3>
                 <div class="skills-ticker-wrapper">
-                    <div class="skill-tag">Brand Identity</div>
-                    <div class="skill-tag">UI/UX Design</div>
-                    <div class="skill-tag">Video Production</div>
-                    <div class="skill-tag">Social Media Design</div>
-                    <div class="skill-tag">Creative Thinking</div>
-                    <div class="skill-tag">Website Copywriting</div>
+                    <div class="skills-ticker">
+                        <div class="skill-tag">Brand Identity</div>
+                        <div class="skill-tag">UI/UX Design</div>
+                        <div class="skill-tag">Video Production</div>
+                        <div class="skill-tag">Social Media Design</div>
+                        <div class="skill-tag">Creative Thinking</div>
+                        <div class="skill-tag">Website Copywriting</div>
+                        <!-- Duplicate -->
+                        <div class="skill-tag">Brand Identity</div>
+                        <div class="skill-tag">UI/UX Design</div>
+                        <div class="skill-tag">Video Production</div>
+                        <div class="skill-tag">Social Media Design</div>
+                        <div class="skill-tag">Creative Thinking</div>
+                        <div class="skill-tag">Website Copywriting</div>
+                    </div>
                 </div>
             </div>
 
             <!-- Spotify Card -->
             <div class="bento-card spotify-card fade-in">
                 <h3>Vibe While Working</h3>
-                <div class="spotify-ticker">
-                    <!-- First Set -->
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/6KTGgGVSD60XZFBPAQrLtH?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/4KtT8dN9QaCPNwxtJwhKmB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5fZ2VfuNsBtbhoNhYjXErB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                    <!-- Duplicate Set for Seamless Loop -->
+                <div class="spotify-container">
                     <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5LM1BZyM5lDigG2wmaS3Oz?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                     <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/6KTGgGVSD60XZFBPAQrLtH?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                     <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/4KtT8dN9QaCPNwxtJwhKmB?utm_source=generator&theme=0" width="300" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
@@ -759,7 +842,7 @@
                 </a>
             </div>
             <a href="#" class="back-to-top">Back to Top ↑</a>
-            <div class="copyright">© 2026 Favour Onasanya TL. All rights reserved.</div>
+            <div class="copyright">© 2026 Favour Onasanya TL</div>
         </div>
     </footer>
 

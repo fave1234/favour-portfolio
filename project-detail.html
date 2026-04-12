@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favour Onasanya TL — World Class Design. Every Time.</title>
+    <title>Project Name — Favour TL</title>
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap">
     
     <style>
@@ -17,10 +17,9 @@
             --bg-darkest: #080B0F;
             --bg-card: #111820;
             --border-color: #1E242C;
-            --accent-purple: #7C3AED;
-            --accent-orange: #FF6B00;
             --text-white: #FFFFFF;
             --text-muted: rgba(255, 255, 255, 0.4);
+            --glow-color: rgba(255, 255, 255, 0.15);
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-fast: 0.3s ease;
         }
@@ -30,23 +29,6 @@
             background: var(--bg-darkest);
             color: var(--text-white);
             line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
         }
 
         h1, h2, h3, h4 {
@@ -72,7 +54,7 @@
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
-            color: var(--accent-purple);
+            color: var(--text-white);
         }
 
         .profile-circle {
@@ -94,279 +76,136 @@
             font-weight: 700;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            align-items: center;
-        }
-
-        .nav-links a {
+        .back-link {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-weight: 500;
             transition: color var(--transition-fast);
+            font-size: 0.95rem;
         }
 
-        .nav-links a:hover {
+        .back-link:hover {
             color: var(--text-white);
         }
 
-        .cta-button {
-            padding: 0.7rem 1.6rem;
-            background: var(--text-white);
-            color: var(--bg-darkest);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all var(--transition-fast);
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background: var(--accent-orange);
-            color: var(--bg-darkest);
-        }
-
-        /* Mobile Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .hamburger span {
-            width: 26px;
-            height: 2.5px;
-            background: var(--text-white);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(8, 11, 15, 0.98);
-            backdrop-filter: blur(20px);
-            padding: 6rem 5% 2rem;
-            z-index: 999;
-        }
-
-        .mobile-menu.active {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .mobile-menu ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .mobile-menu a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 5%;
+        /* Primary CTA Button */
+        .btn-primary {
             position: relative;
-            overflow: hidden;
-        }
-
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
-
-        .gradient-mesh {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at 30% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
-            animation: meshMove 20s ease-in-out infinite;
-        }
-
-        @keyframes meshMove {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(30px, -30px); }
-            50% { transform: translate(-20px, 20px); }
-            75% { transform: translate(20px, 30px); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-profile {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid var(--border-color);
-            margin: 0 auto 2rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.1s;
-        }
-
-        .hero-profile img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-badge {
-            display: inline-block;
-            padding: 0.5rem 1.25rem;
-            background: rgba(124, 58, 237, 0.1);
-            border: 1px solid var(--accent-purple);
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--accent-purple);
-            margin-bottom: 1.5rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.2s;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            margin-bottom: 1rem;
-            letter-spacing: -0.03em;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.3s;
-        }
-
-        .hero-tagline {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            color: var(--text-muted);
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.4s;
-        }
-
-        .hero-ctas {
-            display: flex;
-            gap: 1.25rem;
-            opacity: 0;
-            animation: fadeInUp 1s forwards 0.5s;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 4rem;
-        }
-
-        .btn-primary, .btn-secondary {
             padding: 1rem 2.5rem;
+            background: var(--text-white);
+            color: var(--bg-darkest);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
-            transition: all var(--transition-fast);
-            display: inline-block;
+            border: none;
             cursor: pointer;
+            overflow: hidden;
+            transition: all var(--transition-fast);
+            animation: glow-pulse 3s ease-in-out infinite;
+            display: inline-block;
         }
 
-        .btn-primary {
-            background: var(--text-white);
-            color: var(--bg-darkest);
-            border: 2px solid var(--text-white);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8), 
+                transparent
+            );
+            animation: gleam 3s linear infinite;
+            transform: skewX(-20deg);
         }
 
         .btn-primary:hover {
-            background: var(--accent-orange);
-            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
         }
 
-        .btn-secondary {
-            border: 2px solid var(--text-muted);
-            color: var(--text-white);
-            background: transparent;
+        .btn-primary:hover::before {
+            animation: gleam 1.5s linear infinite;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--text-white);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Skills Ticker */
-        .skills-ticker {
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .ticker-wrapper {
-            display: flex;
-            animation: scroll 40s linear infinite;
-        }
-
-        .ticker-item {
-            padding: 0.65rem 1.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            margin-right: 1rem;
-            white-space: nowrap;
-            font-weight: 500;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-            color: var(--text-muted);
-        }
-
-        @keyframes scroll {
+        @keyframes gleam {
             0% {
-                transform: translateX(0);
+                left: -100%;
             }
             100% {
-                transform: translateX(-50%);
+                left: 200%;
             }
         }
 
-        /* Section Styles */
-        section {
-            padding: 6rem 5%;
-            position: relative;
-            z-index: 1;
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            }
         }
 
+        /* Project Hero */
+        .project-hero {
+            padding: 12rem 5% 6rem;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .project-category {
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .project-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+        }
+
+        .project-description {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .hero-image-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-image {
+            width: 100%;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all var(--transition);
+        }
+
+        .hero-image-wrapper:hover .hero-image {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* Section Header */
         .section-header {
             display: inline-block;
             padding: 0.5rem 1.25rem;
@@ -380,91 +219,92 @@
             margin-bottom: 3rem;
         }
 
-        .section-title {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        /* Services Section */
-        .services-flex {
-            display: flex;
-            gap: 1.5rem;
+        /* Project Overview */
+        .project-overview {
+            padding: 6rem 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
-        .service-card {
-            flex: 1;
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 3rem;
+            padding: 3rem;
             background: var(--bg-card);
-            padding: 3rem 2rem;
             border-radius: 16px;
             border: 1px solid var(--border-color);
-            transition: all var(--transition);
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
         }
 
-        .service-card:hover {
-            flex: 1.3;
-            transform: translateY(-8px);
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
-        }
-
-        .service-card:hover ~ .service-card:not(:hover) {
-            flex: 0.85;
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: block;
-        }
-
-        .service-card h3 {
-            font-size: 1.75rem;
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
+        .overview-item h4 {
+            font-size: 0.8rem;
             color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
         }
 
-        .service-card:hover p {
+        .overview-item p {
+            font-size: 1.1rem;
+            color: var(--text-white);
+            font-weight: 500;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 2rem;
+        }
+
+        .content-section p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+
+        .column h3 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
             color: var(--text-white);
         }
 
-        /* Work Bento Grid */
-        .work-bento {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            max-width: 1400px;
+        /* Visual Showcase */
+        .visual-showcase {
+            padding: 6rem 5%;
+            max-width: 1600px;
             margin: 0 auto;
         }
 
-        .work-item {
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .showcase-image-wrapper {
             aspect-ratio: 4/3;
             border-radius: 16px;
             overflow: hidden;
-            position: relative;
-            cursor: pointer;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
         }
 
-        .work-item:nth-child(1) {
-            grid-column: span 2;
-        }
-
-        .work-item:nth-child(6) {
-            grid-column: span 2;
-        }
-
-        .work-image {
+        .showcase-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -473,118 +313,116 @@
             transition: all var(--transition);
         }
 
-        .work-item:hover .work-image {
+        .showcase-image-wrapper:hover .showcase-image {
             filter: grayscale(0%);
             opacity: 1;
             transform: scale(1.05);
         }
 
-        .work-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 2rem;
-            background: linear-gradient(to top, rgba(8, 11, 15, 0.95), transparent);
-            opacity: 0;
-            transition: opacity var(--transition);
-        }
-
-        .work-item:hover .work-overlay {
-            opacity: 1;
-        }
-
-        .work-category {
-            font-size: 0.8rem;
-            color: var(--accent-purple);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .work-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        /* Logo Ticker */
-        .logo-ticker-section {
-            padding: 5rem 5%;
-            overflow: hidden;
-        }
-
-        .logo-ticker-wrapper {
-            display: flex;
-            animation: scroll 50s linear infinite;
-        }
-
-        .logo-item {
-            padding: 2rem 3rem;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            margin-right: 1.5rem;
-            flex-shrink: 0;
-            opacity: 0.3;
-            transition: opacity var(--transition-fast);
-        }
-
-        .logo-item:hover {
-            opacity: 1;
-        }
-
-        .logo-placeholder {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-white);
-            white-space: nowrap;
-        }
-
-        /* Testimonials */
-        .testimonials-flex {
-            display: flex;
-            gap: 1.5rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .testimonial-card {
-            flex: 1;
-            background: var(--bg-card);
-            padding: 2.5rem;
+        .full-width-image {
+            width: 100%;
+            max-width: 1600px;
+            margin: 3rem auto;
             border-radius: 16px;
+            overflow: hidden;
             border: 1px solid var(--border-color);
+        }
+
+        .full-width-image img {
+            width: 100%;
+            filter: grayscale(100%);
+            opacity: 0.6;
             transition: all var(--transition);
         }
 
-        .testimonial-card:hover {
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+        .full-width-image:hover img {
+            filter: grayscale(0%);
+            opacity: 1;
         }
 
-        .testimonial-card:hover .testimonial-quote,
-        .testimonial-card:hover .testimonial-role {
+        /* Results Section */
+        .results-section {
+            padding: 8rem 5%;
+            background: var(--bg-card);
+        }
+
+        .results-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .results-content h2 {
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            margin-bottom: 1rem;
+        }
+
+        .results-content > p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            text-align: center;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .result-stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             color: var(--text-white);
         }
 
-        .testimonial-author {
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-muted);
         }
 
-        .testimonial-role {
+        /* Next Project */
+        .next-project {
+            padding: 10rem 5%;
+            text-align: center;
+        }
+
+        .next-project h3 {
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 2rem;
+            font-weight: 700;
         }
 
-        .testimonial-quote {
-            font-size: 1rem;
-            line-height: 1.8;
+        .next-project-link {
+            display: inline-block;
+            text-decoration: none;
+            transition: transform var(--transition);
+        }
+
+        .next-project-link:hover {
+            transform: translateX(10px);
+        }
+
+        .next-project-title {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: var(--text-white);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .next-project-category {
+            font-size: 1.15rem;
             color: var(--text-muted);
-            font-style: italic;
+            font-weight: 500;
         }
 
         /* CTA Section */
@@ -592,34 +430,18 @@
             text-align: center;
             padding: 8rem 5%;
             background: var(--bg-card);
-            position: relative;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.15), transparent 70%);
-            pointer-events: none;
         }
 
         .cta-section h2 {
             font-size: clamp(2rem, 5vw, 4rem);
             margin-bottom: 2.5rem;
             letter-spacing: -0.02em;
-            position: relative;
         }
 
         /* Footer */
         footer {
             padding: 3rem 5%;
             border-top: 1px solid var(--border-color);
-            position: relative;
-            z-index: 1;
         }
 
         .footer-content {
@@ -655,8 +477,7 @@
         }
 
         .social-links a:hover {
-            background: var(--accent-purple);
-            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .back-to-top {
@@ -680,7 +501,7 @@
             font-size: 0.85rem;
         }
 
-        /* Scroll Animations */
+        /* Animations */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
@@ -694,46 +515,29 @@
 
         /* Mobile Responsive */
         @media (max-width: 1024px) {
-            .services-flex,
-            .testimonials-flex {
-                flex-direction: column;
-            }
-
-            .service-card:hover {
-                flex: 1;
-            }
-
-            .work-bento {
+            .two-column,
+            .showcase-grid,
+            .results-grid {
                 grid-template-columns: 1fr;
             }
 
-            .work-item:nth-child(1),
-            .work-item:nth-child(6) {
-                grid-column: span 1;
+            .overview-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .project-hero {
+                padding: 10rem 5% 4rem;
             }
 
-            .hamburger {
-                display: flex;
+            .overview-grid {
+                grid-template-columns: 1fr;
+                padding: 2rem;
             }
 
-            section {
-                padding: 4rem 5%;
-            }
-
-            .hero-ctas {
-                flex-direction: column;
-                width: 100%;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-                text-align: center;
+            .stat-number {
+                font-size: 3rem;
             }
 
             .footer-content {
@@ -748,196 +552,128 @@
     <nav>
         <a href="index.html" class="nav-brand">
             <div class="profile-circle">
-                <img src="https://i.ibb.co/RTNrcK5/profile.jpg" alt="Favour Onasanya TL" onerror="this.src='https://placehold.co/80x80/111820/7C3AED?text=F'">
+                <img src="images/favour image.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/80x80/111820/FFFFFF?text=FT'">
             </div>
-            <span class="brand-name">Favour</span>
+            <span class="brand-name">Favour TL</span>
         </a>
-        
-        <ul class="nav-links">
-            <li><a href="#work">Work</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
-        </ul>
-
-        <div class="hamburger" onclick="toggleMobileMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+        <a href="index.html#work" class="back-link">
+            <span>←</span> Back to Work
+        </a>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul>
-            <li><a href="#work" onclick="toggleMobileMenu()">Work</a></li>
-            <li><a href="#services" onclick="toggleMobileMenu()">Services</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
-            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
-        </ul>
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <div class="gradient-mesh"></div>
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-category">Graphic Design</div>
+        <h1 class="project-title">Brand Identity System</h1>
+        <p class="project-description">A complete visual identity transformation for a tech startup looking to disrupt their industry with bold, modern design that speaks to innovation and trust.</p>
+        
+        <div class="hero-image-wrapper">
+            <img src="https://placehold.co/1600x900/111820/1E242C?text=Hero+Image" alt="Project Hero" class="hero-image">
         </div>
-        <div class="hero-content">
-            <div class="hero-profile">
-                <img src="https://i.ibb.co/RTNrcK5/profile.jpg" alt="Favour Onasanya TL" onerror="this.src='https://placehold.co/240x240/111820/7C3AED?text=F'">
+    </section>
+
+    <!-- Project Overview -->
+    <section class="project-overview">
+        <div class="overview-grid fade-in">
+            <div class="overview-item">
+                <h4>Client</h4>
+                <p>TechFlow Inc.</p>
             </div>
-            <div class="hero-badge">Creative Designer & Motion Artist</div>
-            <h1>Favour Onasanya</h1>
-            <p class="hero-tagline">World Class Design. Every Time.</p>
-            <div class="hero-ctas">
-                <a href="#work" class="btn-secondary">See My Work</a>
-                <a href="#book-a-call" class="btn-primary">Book a Call</a>
+            <div class="overview-item">
+                <h4>Timeline</h4>
+                <p>6 Weeks</p>
             </div>
-            <div class="skills-ticker">
-                <div class="ticker-wrapper">
-                    <div class="ticker-item">Brand Identity</div>
-                    <div class="ticker-item">UI/UX Design</div>
-                    <div class="ticker-item">Video Production</div>
-                    <div class="ticker-item">Social Media Design</div>
-                    <div class="ticker-item">Creative Thinking</div>
-                    <div class="ticker-item">Website Copywriting</div>
-                    <!-- Duplicate for seamless loop -->
-                    <div class="ticker-item">Brand Identity</div>
-                    <div class="ticker-item">UI/UX Design</div>
-                    <div class="ticker-item">Video Production</div>
-                    <div class="ticker-item">Social Media Design</div>
-                    <div class="ticker-item">Creative Thinking</div>
-                    <div class="ticker-item">Website Copywriting</div>
+            <div class="overview-item">
+                <h4>Deliverables</h4>
+                <p>Logo, Brand Guidelines, Marketing Assets</p>
+            </div>
+            <div class="overview-item">
+                <h4>Year</h4>
+                <p>2026</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem & Solution -->
+    <section class="content-section">
+        <div class="two-column fade-in">
+            <div class="column">
+                <h3>The Challenge</h3>
+                <p>The client needed to stand out in a crowded market. Their existing identity felt generic and failed to communicate their innovative approach to technology solutions.</p>
+                <p>The brand needed to feel premium, trustworthy, and forward-thinking while maintaining approachability for their diverse client base.</p>
+            </div>
+            <div class="column">
+                <h3>The Solution</h3>
+                <p>We developed a complete visual system built on principles of clarity, precision, and movement. The logo combines geometric strength with fluid motion.</p>
+                <p>The color palette uses deep blacks and bright whites with strategic accent colors that bring energy without overwhelming. Every element works together to tell a cohesive story.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Showcase -->
+    <section class="visual-showcase">
+        <div style="text-align: center;">
+            <div class="section-header">VISUAL SYSTEM</div>
+        </div>
+        
+        <div class="full-width-image fade-in">
+            <img src="https://placehold.co/1600x900/111820/1E242C?text=Logo+System" alt="Logo System">
+        </div>
+
+        <div class="showcase-grid">
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/111820/1E242C?text=Brand+Guidelines" alt="Brand Guidelines" class="showcase-image">
+            </div>
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/111820/1E242C?text=Color+Palette" alt="Color Palette" class="showcase-image">
+            </div>
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/111820/1E242C?text=Typography" alt="Typography" class="showcase-image">
+            </div>
+            <div class="showcase-image-wrapper fade-in">
+                <img src="https://placehold.co/800x600/111820/1E242C?text=Applications" alt="Applications" class="showcase-image">
+            </div>
+        </div>
+
+        <div class="full-width-image fade-in" style="margin-top: 3rem;">
+            <img src="https://placehold.co/1600x900/111820/1E242C?text=Marketing+Collateral" alt="Marketing Collateral">
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results-section">
+        <div class="results-content">
+            <h2 class="fade-in" style="text-align: center;">The Impact</h2>
+            <p class="fade-in">The new identity transformed how the company presents itself and how clients perceive them. Results speak louder than words.</p>
+            
+            <div class="results-grid">
+                <div class="result-stat fade-in">
+                    <div class="stat-number">250%</div>
+                    <div class="stat-label">Increase in Brand Recognition</div>
+                </div>
+                <div class="result-stat fade-in">
+                    <div class="stat-number">180%</div>
+                    <div class="stat-label">Growth in Client Inquiries</div>
+                </div>
+                <div class="result-stat fade-in">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Client Satisfaction Score</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services">
-        <div class="section-title">
-            <div class="section-header">SERVICES</div>
-        </div>
-        <div class="services-flex">
-            <div class="service-card fade-in">
-                <span class="service-icon">🎨</span>
-                <h3>Graphic Design</h3>
-                <p>Visual identities that command attention. From brand systems to marketing collateral, every pixel serves a purpose.</p>
-            </div>
-            <div class="service-card fade-in">
-                <span class="service-icon">🎬</span>
-                <h3>Video Editing</h3>
-                <p>Motion that moves people. Cinematic storytelling and content that stops the scroll.</p>
-            </div>
-            <div class="service-card fade-in">
-                <span class="service-icon">💻</span>
-                <h3>Web Design</h3>
-                <p>Digital experiences that convert. Interfaces that feel intuitive and drive results.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Work Section -->
-    <section id="work">
-        <div class="section-title">
-            <div class="section-header">THE WORK SPEAKS</div>
-        </div>
-        <div class="work-bento">
-            <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/1200x900/111820/1E242C?text=Featured+Project" alt="Project 1" class="work-image">
-                <div class="work-overlay">
-                    <div class="work-category">Graphic Design</div>
-                    <div class="work-title">Brand Identity System</div>
-                </div>
-            </a>
-            <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Project+2" alt="Project 2" class="work-image">
-                <div class="work-overlay">
-                    <div class="work-category">Video Editing</div>
-                    <div class="work-title">Commercial Campaign</div>
-                </div>
-            </a>
-            <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Project+3" alt="Project 3" class="work-image">
-                <div class="work-overlay">
-                    <div class="work-category">Web Design</div>
-                    <div class="work-title">SaaS Platform</div>
-                </div>
-            </a>
-            <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Project+4" alt="Project 4" class="work-image">
-                <div class="work-overlay">
-                    <div class="work-category">Graphic Design</div>
-                    <div class="work-title">Marketing Suite</div>
-                </div>
-            </a>
-            <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/800x600/111820/1E242C?text=Project+5" alt="Project 5" class="work-image">
-                <div class="work-overlay">
-                    <div class="work-category">Video Editing</div>
-                    <div class="work-title">Product Launch</div>
-                </div>
-            </a>
-            <a href="project-detail.html" class="work-item fade-in">
-                <img src="https://placehold.co/1200x600/111820/1E242C?text=Featured+Project" alt="Project 6" class="work-image">
-                <div class="work-overlay">
-                    <div class="work-category">Web Design</div>
-                    <div class="work-title">E-commerce Experience</div>
-                </div>
-            </a>
-        </div>
-    </section>
-
-    <!-- Logo Ticker -->
-    <section class="logo-ticker-section">
-        <div class="section-title">
-            <div class="section-header">BRANDS I'VE WORKED WITH</div>
-        </div>
-        <div class="logo-ticker-wrapper">
-            <div class="logo-item"><div class="logo-placeholder">Client 1</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 2</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 3</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 4</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 5</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 6</div></div>
-            <!-- Duplicate -->
-            <div class="logo-item"><div class="logo-placeholder">Client 1</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 2</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 3</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 4</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 5</div></div>
-            <div class="logo-item"><div class="logo-placeholder">Client 6</div></div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials">
-        <div class="section-title">
-            <div class="section-header">WHAT CLIENTS SAY</div>
-        </div>
-        <div class="testimonials-flex">
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-author">Sarah Mitchell</div>
-                <div class="testimonial-role">CEO, TechFlow</div>
-                <p class="testimonial-quote">"Working with Favour was transformative. He took our vision and elevated it beyond what we imagined. True world-class work."</p>
-            </div>
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-author">James Rodriguez</div>
-                <div class="testimonial-role">Creative Director, Pulse Media</div>
-                <p class="testimonial-quote">"The attention to detail is unmatched. Every frame, every transition, every element was intentional. This is the standard."</p>
-            </div>
-            <div class="testimonial-card fade-in">
-                <div class="testimonial-author">Emily Chen</div>
-                <div class="testimonial-role">Founder, Bloom Collective</div>
-                <p class="testimonial-quote">"Favour doesn't just design—he creates experiences. Our conversion rate doubled after the website redesign."</p>
-            </div>
-        </div>
+    <!-- Next Project -->
+    <section class="next-project">
+        <h3 class="fade-in">NEXT PROJECT</h3>
+        <a href="project-detail.html" class="next-project-link fade-in">
+            <div class="next-project-title">E-commerce Redesign →</div>
+            <div class="next-project-category">Web Design</div>
+        </a>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section" id="contact">
+    <section class="cta-section">
         <h2 class="fade-in">Ready to bring your vision to life?</h2>
         <a href="#book-a-call" class="btn-primary fade-in">Book a Call</a>
     </section>
@@ -957,17 +693,11 @@
                 </a>
             </div>
             <a href="#" class="back-to-top">Back to Top ↑</a>
-            <div class="copyright">© 2026 Favour Onasanya TL. All rights reserved.</div>
+            <div class="copyright">© 2026 Favour Onasanya TL</div>
         </div>
     </footer>
 
     <script>
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            const mobileMenu = document.getElementById('mobileMenu');
-            mobileMenu.classList.toggle('active');
-        }
-
         // Intersection Observer for scroll animations
         const observerOptions = {
             threshold: 0.1,
@@ -986,23 +716,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(el => observer.observe(el));
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#book-a-call' && href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                }
-            });
         });
     </script>
 </body>

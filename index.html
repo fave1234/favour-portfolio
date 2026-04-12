@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Favour Onasanya TL — World Class Design. Every Time.</title>
+    <title>Favour TL — World Class Design. Every Time.</title>
     <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap">
     
     <style>
@@ -17,10 +17,9 @@
             --bg-darkest: #080B0F;
             --bg-card: #111820;
             --border-color: #1E242C;
-            --accent-purple: #7C3AED;
-            --accent-orange: #FF6B00;
             --text-white: #FFFFFF;
             --text-muted: rgba(255, 255, 255, 0.4);
+            --glow-color: rgba(255, 255, 255, 0.15);
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-fast: 0.3s ease;
         }
@@ -31,22 +30,6 @@
             color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 40px 40px;
-            pointer-events: none;
-            z-index: 0;
         }
 
         h1, h2, h3, h4 {
@@ -72,7 +55,7 @@
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
-            color: var(--accent-purple);
+            color: var(--text-white);
         }
 
         .profile-circle {
@@ -113,22 +96,85 @@
             color: var(--text-white);
         }
 
-        .cta-button {
-            padding: 0.7rem 1.6rem;
+        /* Primary CTA Button */
+        .btn-primary {
+            position: relative;
+            padding: 0.75rem 1.75rem;
             background: var(--text-white);
             color: var(--bg-darkest);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             font-size: 0.9rem;
-            transition: all var(--transition-fast);
             border: none;
             cursor: pointer;
+            overflow: hidden;
+            transition: all var(--transition-fast);
+            animation: glow-pulse 3s ease-in-out infinite;
         }
 
-        .cta-button:hover {
-            background: var(--accent-orange);
-            color: var(--bg-darkest);
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8), 
+                transparent
+            );
+            animation: gleam 3s linear infinite;
+            transform: skewX(-20deg);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-primary:hover::before {
+            animation: gleam 1.5s linear infinite;
+        }
+
+        @keyframes gleam {
+            0% {
+                left: -100%;
+            }
+            100% {
+                left: 200%;
+            }
+        }
+
+        @keyframes glow-pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        /* Secondary Button */
+        .btn-secondary {
+            padding: 0.75rem 1.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* Mobile Menu */
@@ -203,22 +249,14 @@
             width: 100%;
             height: 100%;
             z-index: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 50%, rgba(255, 255, 255, 0.015) 0%, transparent 50%);
+            animation: gradientMove 20s ease-in-out infinite;
         }
 
-        .gradient-mesh {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at 30% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
-                        radial-gradient(ellipse at 70% 50%, rgba(124, 58, 237, 0.05) 0%, transparent 50%);
-            animation: meshMove 20s ease-in-out infinite;
-        }
-
-        @keyframes meshMove {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(30px, -30px); }
-            50% { transform: translate(-20px, 20px); }
-            75% { transform: translate(20px, 30px); }
+        @keyframes gradientMove {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.5; }
         }
 
         .hero-content {
@@ -227,12 +265,12 @@
         }
 
         .hero-profile {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             overflow: hidden;
-            border: 3px solid var(--border-color);
-            margin: 0 auto 2rem;
+            border: 2px solid var(--border-color);
+            margin: 0 auto 1.5rem;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.1s;
         }
@@ -246,29 +284,30 @@
         .hero-badge {
             display: inline-block;
             padding: 0.5rem 1.25rem;
-            background: rgba(124, 58, 237, 0.1);
-            border: 1px solid var(--accent-purple);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
             border-radius: 50px;
             font-size: 0.85rem;
             font-weight: 500;
-            color: var(--accent-purple);
-            margin-bottom: 1.5rem;
+            color: var(--text-white);
+            margin-bottom: 2rem;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.2s;
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            margin-bottom: 1rem;
+            font-size: clamp(2.5rem, 7vw, 5.5rem);
+            margin-bottom: 1.5rem;
             letter-spacing: -0.03em;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.3s;
         }
 
         .hero-tagline {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-size: clamp(1rem, 2vw, 1.3rem);
             color: var(--text-muted);
-            margin-bottom: 3rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
             opacity: 0;
             animation: fadeInUp 1s forwards 0.4s;
         }
@@ -281,38 +320,6 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-bottom: 4rem;
-        }
-
-        .btn-primary, .btn-secondary {
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all var(--transition-fast);
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        .btn-primary {
-            background: var(--text-white);
-            color: var(--bg-darkest);
-            border: 2px solid var(--text-white);
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-orange);
-            border-color: var(--accent-orange);
-        }
-
-        .btn-secondary {
-            border: 2px solid var(--text-muted);
-            color: var(--text-white);
-            background: transparent;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-white);
         }
 
         @keyframes fadeInUp {
@@ -332,6 +339,8 @@
             overflow: hidden;
             position: relative;
             padding: 2rem 0;
+            -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
         }
 
         .ticker-wrapper {
@@ -364,7 +373,6 @@
         section {
             padding: 6rem 5%;
             position: relative;
-            z-index: 1;
         }
 
         .section-header {
@@ -402,17 +410,15 @@
             transition: all var(--transition);
             cursor: pointer;
             position: relative;
-            overflow: hidden;
         }
 
         .service-card:hover {
             flex: 1.3;
             transform: translateY(-8px);
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 0 30px var(--glow-color);
         }
 
-        .service-card:hover ~ .service-card:not(:hover) {
+        .services-flex:has(.service-card:hover) .service-card:not(:hover) {
             flex: 0.85;
         }
 
@@ -496,7 +502,7 @@
 
         .work-category {
             font-size: 0.8rem;
-            color: var(--accent-purple);
+            color: var(--text-white);
             text-transform: uppercase;
             letter-spacing: 0.1em;
             margin-bottom: 0.5rem;
@@ -517,6 +523,8 @@
         .logo-ticker-wrapper {
             display: flex;
             animation: scroll 50s linear infinite;
+            -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
         }
 
         .logo-item {
@@ -559,8 +567,7 @@
         }
 
         .testimonial-card:hover {
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+            box-shadow: 0 0 30px var(--glow-color);
         }
 
         .testimonial-card:hover .testimonial-quote,
@@ -592,34 +599,18 @@
             text-align: center;
             padding: 8rem 5%;
             background: var(--bg-card);
-            position: relative;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60%;
-            height: 100%;
-            background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.15), transparent 70%);
-            pointer-events: none;
         }
 
         .cta-section h2 {
             font-size: clamp(2rem, 5vw, 4rem);
             margin-bottom: 2.5rem;
             letter-spacing: -0.02em;
-            position: relative;
         }
 
         /* Footer */
         footer {
             padding: 3rem 5%;
             border-top: 1px solid var(--border-color);
-            position: relative;
-            z-index: 1;
         }
 
         .footer-content {
@@ -655,8 +646,7 @@
         }
 
         .social-links a:hover {
-            background: var(--accent-purple);
-            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .back-to-top {
@@ -748,9 +738,9 @@
     <nav>
         <a href="index.html" class="nav-brand">
             <div class="profile-circle">
-                <img src="Favour image.jpeg" alt="Favour Onasanya TL" onerror="this.src='https://placehold.co/80x80/111820/7C3AED?text=F'">
+                <img src="images/favour image.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/80x80/111820/FFFFFF?text=FT'">
             </div>
-            <span class="brand-name">Favour</span>
+            <span class="brand-name">Favour TL</span>
         </a>
         
         <ul class="nav-links">
@@ -758,7 +748,7 @@
             <li><a href="#services">Services</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
+            <li><a href="#book-a-call" class="btn-primary">Book a Call</a></li>
         </ul>
 
         <div class="hamburger" onclick="toggleMobileMenu()">
@@ -775,22 +765,20 @@
             <li><a href="#services" onclick="toggleMobileMenu()">Services</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="#contact" onclick="toggleMobileMenu()">Contact</a></li>
-            <li><a href="#book-a-call" class="cta-button">Book a Call</a></li>
+            <li><a href="#book-a-call" class="btn-primary">Book a Call</a></li>
         </ul>
     </div>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-background">
-            <div class="gradient-mesh"></div>
-        </div>
+        <div class="hero-background"></div>
         <div class="hero-content">
             <div class="hero-profile">
-                <img src="Favour image.jpeg" alt="Favour Onasanya TL" onerror="this.src='https://placehold.co/240x240/111820/7C3AED?text=F'">
+                <img src="images/favour image.jpeg" alt="Favour TL" onerror="this.src='https://placehold.co/200x200/111820/FFFFFF?text=FT'">
             </div>
-            <div class="hero-badge">Creative Designer & Motion Artist</div>
-            <h1>Favour Onasanya</h1>
-            <p class="hero-tagline">World Class Design. Every Time.</p>
+            <div class="hero-badge">Visual Designer</div>
+            <h1>World Class Design.<br>Every Time.</h1>
+            <p class="hero-tagline">Favour brings brands to life through design, vision, and creative excellence.</p>
             <div class="hero-ctas">
                 <a href="#work" class="btn-secondary">See My Work</a>
                 <a href="#book-a-call" class="btn-primary">Book a Call</a>
@@ -824,17 +812,17 @@
             <div class="service-card fade-in">
                 <span class="service-icon">🎨</span>
                 <h3>Graphic Design</h3>
-                <p>Visual identities that command attention. From brand systems to marketing collateral, every pixel serves a purpose.</p>
+                <p>Visual identities that command attention. Every pixel serves a purpose.</p>
             </div>
             <div class="service-card fade-in">
                 <span class="service-icon">🎬</span>
                 <h3>Video Editing</h3>
-                <p>Motion that moves people. Cinematic storytelling and content that stops the scroll.</p>
+                <p>Motion that moves people. Content that stops the scroll.</p>
             </div>
             <div class="service-card fade-in">
                 <span class="service-icon">💻</span>
                 <h3>Web Design</h3>
-                <p>Digital experiences that convert. Interfaces that feel intuitive and drive results.</p>
+                <p>Digital experiences that convert. Interfaces that drive results.</p>
             </div>
         </div>
     </section>
@@ -921,17 +909,17 @@
             <div class="testimonial-card fade-in">
                 <div class="testimonial-author">Sarah Mitchell</div>
                 <div class="testimonial-role">CEO, TechFlow</div>
-                <p class="testimonial-quote">"Working with Favour was transformative. He took our vision and elevated it beyond what we imagined. True world-class work."</p>
+                <p class="testimonial-quote">"Working with Favour was transformative. He took our vision and elevated it beyond what we imagined."</p>
             </div>
             <div class="testimonial-card fade-in">
                 <div class="testimonial-author">James Rodriguez</div>
                 <div class="testimonial-role">Creative Director, Pulse Media</div>
-                <p class="testimonial-quote">"The attention to detail is unmatched. Every frame, every transition, every element was intentional. This is the standard."</p>
+                <p class="testimonial-quote">"The attention to detail is unmatched. Every element was intentional. This is the standard."</p>
             </div>
             <div class="testimonial-card fade-in">
                 <div class="testimonial-author">Emily Chen</div>
                 <div class="testimonial-role">Founder, Bloom Collective</div>
-                <p class="testimonial-quote">"Favour doesn't just design—he creates experiences. Our conversion rate doubled after the website redesign."</p>
+                <p class="testimonial-quote">"Favour doesn't just design—he creates experiences. Our conversion rate doubled."</p>
             </div>
         </div>
     </section>
@@ -957,7 +945,7 @@
                 </a>
             </div>
             <a href="#" class="back-to-top">Back to Top ↑</a>
-            <div class="copyright">© 2026 Favour Onasanya TL. All rights reserved.</div>
+            <div class="copyright">© 2026 Favour Onasanya TL</div>
         </div>
     </footer>
 
