@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Favour TL — World Class Design. Every Time.</title>
+<title>Favour TL — Brand Designer | Brand Identity &amp; Visual Systems</title>
 <link rel="icon" type="image/jpeg" href="images/favour.jpeg">
 <link rel="preconnect" href="https://api.fontshare.com">
 <link href="https://api.fontshare.com/v2/css?f[]=satoshi@700,500,400&display=swap" rel="stylesheet">
@@ -790,6 +790,42 @@
     .hero { padding: 80px 20px 0; }
     footer { padding: 28px 20px; }
   }
+
+  /* Brand-focused homepage */
+  .hero { padding-top: 140px; }
+  .hero h1 { max-width: 1040px; }
+  .hero-sub { max-width: 650px; color: rgba(255,255,255,.65); }
+  .hero-pillars { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:40px; position:relative; z-index:1; }
+  .hero-pillars span { border:1px solid #343b43; padding:8px 15px; border-radius:999px; font-size:.75rem; color:#c9cdd1; }
+  .ticker-wrap { margin-top: 40px; padding: 25px 0; }
+  .ticker-copy { display:flex; gap:12px; }
+  .work-heading { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:42px; }
+  .work-heading h2 { font-size:clamp(2.5rem,5vw,4.5rem); line-height:1.05; letter-spacing:-.05em; }
+  .work-heading p { max-width:330px; color:#a5a9ad; }
+  .case-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:56px 24px; }
+  .case-art { min-height:360px; aspect-ratio: 1.35; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between; padding:30px; text-decoration:none; transition:transform .3s ease; }
+  a.case-art:hover { transform:translateY(-4px); }
+  .janna-art { background:#a53b23; color:#f7e9ce; }
+  .art-eyebrow,.art-bottom,.upcoming-art > span,.upcoming-art small { font-size:.7rem; text-transform:uppercase; letter-spacing:.15em; font-weight:700; }
+  .art-mark { align-self:center; font-family:Georgia,serif; font-weight:700; font-size:clamp(3.5rem,7vw,6.5rem); line-height:.82; letter-spacing:-.07em; transform:rotate(-7deg); }
+  .art-mark em { font-weight:400; }
+  .art-bottom { display:flex; justify-content:space-between; gap:20px; }
+  .upcoming-art { color:#d5d8d7; background:#202c2d; }
+  .upcoming-art strong { font-size:clamp(2.4rem,5vw,4.5rem); line-height:1; letter-spacing:-.06em; }
+  .upcoming-art strong span { color:#c49371; }
+  .art-three { background:#d7d1c3; color:#343a38; }
+  .art-four { background:#343145; color:#e4def0; }
+  .case-info { display:flex; justify-content:space-between; gap:20px; padding-top:22px; }
+  .case-info h3 { font-size:1.65rem; letter-spacing:-.03em; margin:5px 0; }
+  .case-scope { color:#a4a9ad; font-size:.72rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+  .case-summary { color:#a4a9ad; max-width:470px; font-size:.95rem; }
+  .case-link { flex-shrink:0; align-self:end; color:#fff; text-decoration:none; border-bottom:1px solid #777; padding-bottom:4px; font-size:.85rem; }
+  .case-link:hover,.archive-prompt a:hover { color:#e8a78b; }
+  .archive-prompt { margin-top:70px; padding:26px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; gap:20px; color:#a4a9ad; }
+  .archive-prompt a { color:#fff; text-decoration:none; font-weight:700; }
+  @media (max-width:700px) { .hero { padding-top:120px; } .case-grid { grid-template-columns:1fr; gap:40px; } .case-art { min-height:280px; } .work-heading,.archive-prompt,.case-info { align-items:flex-start; flex-direction:column; } .case-link { align-self:flex-start; } }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration:.01ms !important; animation-iteration-count:1 !important; scroll-behavior:auto !important; transition-duration:.01ms !important; } }
+
 </style>
 </head>
 <body>
@@ -831,12 +867,12 @@
   <div class="hero-bg"></div>
 
   <img src="images/favour.jpeg" alt="Favour TL" class="hero-avatar fade-up">
-  <div class="hero-badge fade-up fade-up-delay-1">Visual Designer</div>
+  <div class="hero-badge fade-up fade-up-delay-1">Brand Designer</div>
 
-  <h1 class="fade-up fade-up-delay-1">World Class Design.<br>Every Time.</h1>
+  <h1 class="fade-up fade-up-delay-1">Building brand identities and visual systems that demand attention.</h1>
 
   <p class="hero-sub fade-up fade-up-delay-2">
-    Favour brings brands to life through design, vision, and creative excellence.
+    I help businesses build cohesive brand identities, visual systems, and digital experiences that drive growth. Based in Nigeria — working globally.
   </p>
 
   <div class="hero-ctas fade-up fade-up-delay-3">
@@ -844,26 +880,27 @@
     <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Call</a>
   </div>
 
-  <div class="ticker-wrap" style="margin-top: 80px;">
+  <div class="hero-pillars fade-up" aria-label="Areas of focus">
+    <span>Brand Identity</span><span>Visual Systems</span><span>UI Design</span><span>Art Direction</span>
+  </div>
+  <div class="ticker-wrap" aria-label="Brand design skills">
     <div class="ticker-track">
       <span class="skill-pill">Brand Identity</span>
-      <span class="skill-pill">UI/UX Design</span>
-      <span class="skill-pill">Video Production</span>
-      <span class="skill-pill">Social Media Design</span>
-      <span class="skill-pill">Creative Thinking</span>
-      <span class="skill-pill">Website Copywriting</span>
+      <span class="skill-pill">Visual Systems</span>
+      <span class="skill-pill">Creative Direction</span>
+      <span class="skill-pill">UI Design</span>
+      <span class="skill-pill">Brand Guidelines</span>
+      <span class="skill-pill">Packaging Design</span>
+      <span class="skill-pill">AI-Assisted Workflows</span>
+      <div class="ticker-copy" aria-hidden="true">
       <span class="skill-pill">Brand Identity</span>
-      <span class="skill-pill">UI/UX Design</span>
-      <span class="skill-pill">Video Production</span>
-      <span class="skill-pill">Social Media Design</span>
-      <span class="skill-pill">Creative Thinking</span>
-      <span class="skill-pill">Website Copywriting</span>
-      <span class="skill-pill">Brand Identity</span>
-      <span class="skill-pill">UI/UX Design</span>
-      <span class="skill-pill">Video Production</span>
-      <span class="skill-pill">Social Media Design</span>
-      <span class="skill-pill">Creative Thinking</span>
-      <span class="skill-pill">Website Copywriting</span>
+      <span class="skill-pill">Visual Systems</span>
+      <span class="skill-pill">Creative Direction</span>
+      <span class="skill-pill">UI Design</span>
+      <span class="skill-pill">Brand Guidelines</span>
+      <span class="skill-pill">Packaging Design</span>
+      <span class="skill-pill">AI-Assisted Workflows</span>
+      </div>
     </div>
   </div>
 </section>
@@ -882,105 +919,47 @@
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
       </div>
-      <h3>Graphic Design</h3>
-      <p>Logos, brand identities, social media graphics, and print materials that communicate with precision and power. Design that people remember.</p>
+      <h3>Brand Identity</h3>
+      <p>Distinctive identities grounded in strategy, built to communicate clearly and grow with your business.</p>
     </div>
 
     <div class="service-card">
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
       </div>
-      <h3>Video Editing</h3>
-      <p>Cinematic cuts, motion graphics, and story-driven content. Transforming raw footage into compelling video that moves audiences to act.</p>
+      <h3>Visual Systems</h3>
+      <p>Flexible guidelines, packaging, and creative direction that bring every brand touchpoint together.</p>
     </div>
 
     <div class="service-card">
       <div class="service-icon">
         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-5 14H4v-4h11v4zm0-5H4V9h11v4zm5 5h-4V9h4v9z"/></svg>
       </div>
-      <h3>Web Design</h3>
+      <h3>UI &amp; Digital Design</h3>
       <p>Beautiful, fast, conversion-focused websites. From landing pages to full digital experiences — crafted with intention and built to perform.</p>
     </div>
   </div>
 </section>
 
-<!-- ══ WORK ══ -->
+<!-- ══ SELECTED CASE STUDIES ══ -->
 <section id="work">
-  <div class="fade-up">
-    <span class="section-label">The Work Speaks</span>
+  <span class="section-label fade-up">The Work</span>
+  <div class="work-heading fade-up">
+    <h2>Selected Case Studies</h2>
+    <p>Strategic identity systems, digital experiences, and creative direction.</p>
   </div>
-  <h2 class="fade-up" style="font-size: clamp(1.8rem,4vw,2.8rem); font-weight:700; letter-spacing:-0.02em; margin-bottom:40px; line-height:1.15;">
-    Selected projects.
-  </h2>
-
-  <div class="work-grid">
-    <a href="project-detail.html" class="project-card fade-up">
-      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Luminary Co.">
-      <div class="project-overlay">
-        <h4>Luminary Co.</h4>
-        <span>Brand Identity</span>
-      </div>
-    </a>
-    <a href="project-detail.html" class="project-card fade-up fade-up-delay-1">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="Apex App">
-      <div class="project-overlay">
-        <h4>Apex App</h4>
-        <span>UI/UX Design</span>
-      </div>
-    </a>
-    <a href="project-detail.html" class="project-card fade-up fade-up-delay-2">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="Nova Campaign">
-      <div class="project-overlay">
-        <h4>Nova Campaign</h4>
-        <span>Video Editing</span>
-      </div>
-    </a>
-    <a href="project-detail.html" class="project-card fade-up fade-up-delay-1">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="Orbit Brand">
-      <div class="project-overlay">
-        <h4>Orbit Brand</h4>
-        <span>Social Media Design</span>
-      </div>
-    </a>
-    <a href="project-detail.html" class="project-card fade-up fade-up-delay-2">
-      <img src="https://placehold.co/800x600/111820/1E242C" alt="Zenith Studio">
-      <div class="project-overlay">
-        <h4>Zenith Studio</h4>
-        <span>Web Design</span>
-      </div>
-    </a>
-    <a href="project-detail.html" class="project-card fade-up">
-      <img src="https://placehold.co/1200x500/111820/1E242C" alt="Pulse Media">
-      <div class="project-overlay">
-        <h4>Pulse Media</h4>
-        <span>Brand Identity</span>
-      </div>
-    </a>
+  <div class="case-grid">
+    <article class="case-card case-featured fade-up">
+      <a class="case-art janna-art" href="/work/jannas-bowls" aria-label="View Janna's Bowls case study">
+        <span class="art-eyebrow">A brand made to grow</span><span class="art-mark">Janna’s<br><em>Bowls.</em></span><span class="art-bottom">Lagos, Nigeria <span>Brand identity / 01</span></span>
+      </a>
+      <div class="case-info"><div><p class="case-scope">Brand Identity, Naming Strategy &amp; Packaging System</p><h3>Janna's Bowls</h3><p class="case-summary">Rebranding a fast-growing culinary brand with a modern, scalable visual identity and brand architecture built for future sub-brands.</p></div><a class="case-link" href="/work/jannas-bowls">View Case Study <span aria-hidden="true">↗</span></a></div>
+    </article>
+    <article class="case-card upcoming fade-up"><div class="case-art upcoming-art art-two"><span>02 / IN PROGRESS</span><strong>More stories<br>to come<span>.</span></strong><small>IDENTITY &amp; STRATEGY</small></div><div class="case-info"><div><p class="case-scope">Case Study 02</p><h3>Coming soon</h3><p class="case-summary">A new identity story is in the works.</p></div></div></article>
+    <article class="case-card upcoming fade-up"><div class="case-art upcoming-art art-three"><span>03 / IN PROGRESS</span><strong>Ideas made<br>visible<span>.</span></strong><small>VISUAL SYSTEMS</small></div><div class="case-info"><div><p class="case-scope">Case Study 03</p><h3>Coming soon</h3><p class="case-summary">More visual systems, coming soon.</p></div></div></article>
+    <article class="case-card upcoming fade-up"><div class="case-art upcoming-art art-four"><span>04 / IN PROGRESS</span><strong>Built for<br>what’s next<span>.</span></strong><small>DIGITAL EXPERIENCES</small></div><div class="case-info"><div><p class="case-scope">Case Study 04</p><h3>Coming soon</h3><p class="case-summary">A digital experience in the making.</p></div></div></article>
   </div>
-</section>
-
-<!-- ══ LOGOS ══ -->
-<section id="contact" style="padding-top:0;">
-  <div class="fade-up">
-    <span class="section-label">Brands I've Worked With</span>
-  </div>
-
-  <div class="logo-ticker-wrap fade-up">
-    <div class="logo-ticker-track">
-      <div class="logo-box">Client 1</div>
-      <div class="logo-box">Client 2</div>
-      <div class="logo-box">Client 3</div>
-      <div class="logo-box">Client 4</div>
-      <div class="logo-box">Client 5</div>
-      <div class="logo-box">Client 6</div>
-      <div class="logo-box">Client 1</div>
-      <div class="logo-box">Client 2</div>
-      <div class="logo-box">Client 3</div>
-      <div class="logo-box">Client 4</div>
-      <div class="logo-box">Client 5</div>
-      <div class="logo-box">Client 6</div>
-    </div>
-  </div>
+  <div class="archive-prompt fade-up"><p>Looking for standalone visual designs and social campaigns?</p><a href="/archive">Browse the Visual Archive <span aria-hidden="true">↗</span></a></div>
 </section>
 
 <!-- ══ TESTIMONIALS ══ -->
@@ -1012,7 +991,7 @@
 </section>
 
 <!-- ══ CTA SECTION ══ -->
-<div class="cta-section fade-up">
+<div class="cta-section fade-up" id="contact">
   <h2>Ready to bring your<br>vision to life?</h2>
   <p>Let's build something world class together.</p>
   <a href="https://calendly.com" target="_blank" class="btn-primary">Book a Call</a>
